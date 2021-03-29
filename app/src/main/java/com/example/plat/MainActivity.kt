@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //네비게이션 버튼 클릭 리스너
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.action_main -> {
