@@ -2,6 +2,7 @@
 <!--
 프로필화면
 기본 틀만 만들어놓음
+리스트 추가함
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +11,6 @@
     android:paddingBottom="56dp"
     tools:context=".ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,77 +58,20 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="7"
             android:orientation="vertical"
             android:background="@drawable/edge">
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/profile_listveiw"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:background="@drawable/edge">
+                android:layout_height="match_parent"/>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="1.5dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Image"
-                        android:gravity="center" />
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:padding="1.5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="title"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="15dp"
-                        android:text="게시글 예시 1"
-                        android:layout_gravity="center"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="like"
-                        android:layout_gravity="bottom|right"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="share"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginRight="90dp"/>
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:text="추가 게시물 영역"
-                android:gravity="center" />
-
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 
