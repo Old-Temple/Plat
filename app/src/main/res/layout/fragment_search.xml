@@ -10,15 +10,15 @@
     android:paddingBottom="56dp"
     tools:context=".SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+<!--    바디-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="3dp"
         >
 
-        <LinearLayout
+<!--        상단 검색창 부분-->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -26,33 +26,35 @@
             android:paddingHorizontal="10dp"
             android:background="@drawable/edge">
 
-            <TextView
+<!--            검색창-->
+            <EditText
+                android:id="@+id/searchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Search Space"
-                android:background="@drawable/edge"
-                android:gravity="center"/>
+                android:background="#EEEEEE"/>
 
+<!--            제출버튼-->
+            <Button
+                android:id="@+id/searchSubmitButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"/>
 
-        </LinearLayout>
+        </FrameLayout>
 
+<!--        리스트 바디-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8"
             android:background="@drawable/edge">
 
-            <FrameLayout
+            <ListView
+                android:id="@+id/searchContentsListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="검색 결과 공간"
-                    android:gravity="center"/>
-
-            </FrameLayout>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
