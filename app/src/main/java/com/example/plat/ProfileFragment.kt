@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import org.w3c.dom.Text
 
 /**
  * 프로필 화면
@@ -43,7 +41,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_profile, null)
-        val profileListView = view.findViewById<ListView>(R.id.profile_listveiw)
+        val profileListView = view.findViewById<ListView>(R.id.profileContentsListView)
         val profileAdapter = ProfileListAdapter(activity!!, myList)
 
         profileListView.adapter = profileAdapter
