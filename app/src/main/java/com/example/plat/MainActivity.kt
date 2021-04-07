@@ -17,25 +17,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //네비게이션 버튼 클릭 리스너
-        bottom_navigation.setOnNavigationItemSelectedListener { item ->
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
-                R.id.action_main -> {
+                R.id.actionMain -> {
                     replaceFragment(MainFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.action_profile -> {
+                R.id.actionProfile -> {
                     replaceFragment(ProfileFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.action_store -> {
+                R.id.actionStore -> {
                     replaceFragment(StoreFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.action_search -> {
+                R.id.actionSearch -> {
                     replaceFragment(SearchFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.action_alarm -> {
+                R.id.actionAlarm -> {
                     replaceFragment(AlarmFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //초기 설정
-        bottom_navigation.selectedItemId = R.id.action_main
+        bottomNavigation.selectedItemId = R.id.actionMain
     }
 
     private fun replaceFragment(fragment: Fragment){

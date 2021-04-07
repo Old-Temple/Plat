@@ -3,25 +3,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_search"
-        android:title="@string/menu_search"
+        android:id="@+id/actionSearch"
+        android:title="@string/menuSearch"
         />
     <item
-        android:id="@+id/action_store"
-        android:title="@string/menu_store"
+        android:id="@+id/actionStore"
+        android:title="@string/menuStore"
         />
     <item
-        android:id="@+id/action_main"
-        android:title="@string/menu_main"
+        android:id="@+id/actionMain"
+        android:title="@string/menuMain"
         />
     <item
-        android:id="@+id/action_alarm"
-        android:title="@string/menu_alarm"
+        android:id="@+id/actionAlarm"
+        android:title="@string/menuAlarm"
         />
 
     <item
-        android:id="@+id/action_profile"
-        android:title="@string/menu_profile"
+        android:id="@+id/actionProfile"
+        android:title="@string/menuProfile"
         />
 
 </menu>
