@@ -51,10 +51,12 @@
             android:layout_weight="8"
             android:background="@drawable/edge">
 
-            <ListView
-                android:id="@+id/searchContentsListView"
+<!--            본문 GridView-->
+            <GridView
+                android:id="@+id/searchGridView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:numColumns="2"/>
 
         </LinearLayout>
 
