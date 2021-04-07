@@ -17,7 +17,7 @@ import android.widget.TextView
  */
 class ProfileFragment : Fragment() {
     //임시로 만든 arraylist
-    val myList = arrayListOf<ProfileContentsListItem>(
+    private val myList = arrayListOf<ProfileContentsListItem>(
         ProfileContentsListItem("Imgae1", "Title1", "Text1"),
         ProfileContentsListItem("Imgae2", "Title2", "Text2"),
         ProfileContentsListItem("Imgae3", "Title3", "Text3"),
