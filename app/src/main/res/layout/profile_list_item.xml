@@ -4,14 +4,68 @@
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
+<!--    콘텐츠 바디 레이아웃 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+<!--이미지 레이아웃-->
+        <LinearLayout
+            android:id="@+id/contentsImageLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+<!--            원래는 ImageView임. 임시로 TextView로 만들어놓았고 이것저것 넣을만하면 바꿀 것-->
+            <TextView
+                android:id="@+id/contentsImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/profileContents"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+        </LinearLayout>
+<!--타이틀 및 본문 레이아웃-->
+        <LinearLayout
+            android:id="@+id/contentsTextLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:weightSum="10"
+            android:orientation="vertical"
+            >
+<!--            타이틀-->
+            <TextView
+                android:id="@+id/contentsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
+<!--            본문-->
+            <TextView
+                android:id="@+id/contentsText"
+                android:layout_width="match_parent"
+                android:layout_height="170dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--    좋아요 버튼-->
+    <ImageButton
+        android:id="@+id/contentsLikeButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="bottom|right"/>
+<!--    공유버튼-->
+    <ImageButton
+        android:id="@+id/contentsShareButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="bottom|right"/>
 
 </FrameLayout>
