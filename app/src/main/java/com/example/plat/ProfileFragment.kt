@@ -60,7 +60,7 @@ class ProfileListAdapter (val context: Context, val profileContentsListItem: Arr
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View{
         
         //각 리스트의 형태 저장
-        val view: View = LayoutInflater.from(context).inflate(R.layout.profile_list_item, null)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_profile, null)
         
         //각 리스트의 내용
         val image = view.findViewById<TextView>(R.id.contentsImage)
