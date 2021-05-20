@@ -7,10 +7,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainFragment"
     android:paddingBottom="56dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,13 +23,49 @@
             android:layout_weight="13"
             android:padding="20dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edge"
-                android:text="@string/room"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/platListView"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:scrollbars="horizontal"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbarTrackHorizontal="@color/colorPrimary"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9">
+
+                    <TextView
+                        android:id="@+id/main_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edge"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="@string/room"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -11,12 +11,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:text="Warehouse"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <FrameLayout
         android:id="@+id/frameLayout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="56dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
@@ -30,7 +48,5 @@
             app:menu="@menu/navigation_items" />
 
     </FrameLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

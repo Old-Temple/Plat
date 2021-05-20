@@ -9,10 +9,71 @@
     android:layout_height="match_parent"
     tools:context=".StoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/menuStore" />
+        android:padding="20dp"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/edge">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonFurniture"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge"
+                    android:text="가구"
+                    android:gravity="center"/>
+
+                <Button
+                    android:id="@+id/buttonThema"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge"
+                    android:text="테마"
+                    android:gravity="center"/>
+
+                <Button
+                    android:id="@+id/buttonAvatar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge"
+                    android:text="아바타"
+                    android:gravity="center"/>
+
+                <Button
+                    android:id="@+id/buttonMylist"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/edge"
+                    android:text="찜목록"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chileFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </FrameLayout>

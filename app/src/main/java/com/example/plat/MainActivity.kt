@@ -2,6 +2,7 @@ package com.example.plat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +48,16 @@ class MainActivity : AppCompatActivity() {
 
         //초기 설정
         bottomNavigation.selectedItemId = R.id.actionMain
+
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayShowCustomEnabled(true)
+            actionBar.setDisplayShowTitleEnabled(false)
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
+
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -54,4 +65,5 @@ class MainActivity : AppCompatActivity() {
         fragmentTransactionListener.replace(R.id.frameLayout, fragment)
         fragmentTransactionListener.commit()
     }
+
 }
