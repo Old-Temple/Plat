@@ -427,8 +427,6 @@ class MainFragment : Fragment() {
                 for (a in 0..15) {
                     flags[a] = 0
                     for (b in 0..cha_num) {
-
-                        
                         if (cha_capsule[b]!!.getX() + tempwidth <= flat_funiture_areas[a]!!.getX()
                             && cha_capsule[b]!!.getX() + cha_capsule[b]!!.getWidth() - tempwidth>= flat_funiture_areas[a]!!.getX()
                             || flat_funiture_areas[a]!!.getX() <= cha_capsule[b]!!.getX() + tempwidth
