@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.list_item_plat_list.view.*
 import kotlinx.android.synthetic.main.plat_funiture.*
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.fragment.app.FragmentTransaction
 
 /**
  * A simple [Fragment] subclass.
@@ -116,6 +117,12 @@ class MainFragment : Fragment() {
         val platListAdapter = PlatListAdapter(myList)
 
         platlistView.adapter = platListAdapter
+        val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
+
+        mainWriteButton.setOnClickListener{ view ->
+            val makeContext = DialogMakeContext()
+            makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
+        }
 
         tempwidth =  fromDpToPx(activity!!, 15)
         tempheight =  fromDpToPx(activity!!, 30)
@@ -295,9 +302,6 @@ class MainFragment : Fragment() {
         // 배열에 가구 넣어서 조건 맞는거 가져오기
         //임시로 0번 배열에 index0
         flat_funiture_areas[0]?.setBackgroundResource(fun_arys_flat.getResourceId(0, -1))
-
-
-
         flat_funiture_areas[3]?.setBackgroundResource(R.drawable.table)
         flat_funiture_areas[9]?.setBackgroundResource(R.drawable.table)
 
@@ -307,6 +311,8 @@ class MainFragment : Fragment() {
         thread1.start()
         thread2.start()
         thread3.start()
+
+
 
 
 
@@ -325,12 +331,7 @@ class MainFragment : Fragment() {
             .toInt()
     }
 
-    fun dpToPx(dp: Float, context: MainActivity): Float {
 
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp, context.resources.displayMetrics)
-    }
     //*************************************************************************
     //애 니 메 이 션//
     //*************************************************************************

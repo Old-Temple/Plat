@@ -70,6 +70,12 @@ class MainActivity : AppCompatActivity() {
             actionBar.setDisplayShowTitleEnabled(false)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
+
+
+
+
+
+
     }
 
     private fun replaceFragment(fragment: Fragment){

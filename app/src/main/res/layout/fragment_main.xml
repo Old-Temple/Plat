@@ -118,12 +118,13 @@
                 android:layout_height="match_parent">
 
                 <Button
+                    android:id="@+id/mainWriteButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/write"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:textColor="@color/white"/>
+                    android:text="@string/write"
+                    android:textColor="@color/white" />
 
             </FrameLayout>
 

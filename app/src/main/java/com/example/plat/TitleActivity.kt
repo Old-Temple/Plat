@@ -26,7 +26,7 @@ class TitleActivity : AppCompatActivity() {
     //1초 후에 타이틀 화면 변환
     private fun goMain(){
         if(PlatPrefs.prefs.getValue("id","")==""){
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             this.finish()
         }
