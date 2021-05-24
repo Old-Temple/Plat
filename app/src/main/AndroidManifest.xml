@@ -3,14 +3,23 @@
     package="com.example.plat">
 
     <application
+<<<<<<< HEAD
         android:name=".PlatPrefs"
+=======
+>>>>>>> 6fa50400787439986e966bbf32665a1a4957d7b0
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme">
         <activity android:name=".FurniturePutActivity"></activity>
         <activity android:name=".LoginActivity" />
+=======
+        android:theme="@style/AppTheme"
+        android:name=".PlatPrefs">
+        <activity android:name=".LoginActivity"/>
+>>>>>>> 6fa50400787439986e966bbf32665a1a4957d7b0
         <activity android:name=".TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
