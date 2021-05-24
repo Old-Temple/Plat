@@ -174,8 +174,6 @@ class MainFragment : Fragment() {
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 
-
-        Log.d("Activity!!", R.id.plat_root.toString())
         val plat_root:FrameLayout = view.findViewById(R.id.plat_root)
         val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         for(i in 0..fun_num){
@@ -188,7 +186,7 @@ class MainFragment : Fragment() {
                 val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_funiture_area, false) as FrameLayout
 
                 val plat_funiture_lp =
-                    ConstraintLayout.LayoutParams(80, 80)
+                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 80), fromDpToPx(view.context, 80))
                 plat_funiture_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topMargin = fromDpToPx(view.context, funiture_margin_top)
@@ -202,7 +200,6 @@ class MainFragment : Fragment() {
                 )
                 plat_funiture.setId(tempID_plat_funiture)
 
-                Log.d("plat","aa")
                 return plat_funiture
 
             }
@@ -215,7 +212,6 @@ class MainFragment : Fragment() {
                 funiture_margin_top += fromDpToPx(view.context.applicationContext,36)
 
             }
-            Log.d("내용 : ",plat_root.toString())
             plat_root.addView(funiture_maker())
             flat_funiture_areas[i] = view.findViewById(tempID_plat_funiture)
             funiture_margin_start += fromDpToPx(view.context.applicationContext,36)
@@ -239,7 +235,7 @@ class MainFragment : Fragment() {
             fun cha_maker(): View {
                 val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
                 val character_capsule_lp =
-                    ConstraintLayout.LayoutParams(80, 80)
+                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 80),fromDpToPx(view.context, 100))
                 character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topMargin = fromDpToPx(view.context, bundle_margin_top)
@@ -257,10 +253,8 @@ class MainFragment : Fragment() {
 
             }
 
-            Log.d("Plat_root",plat_root.toString())
-            Log.d("Cha_Maker",cha_maker().toString())
             plat_root.addView(cha_maker())
-            cha_capsule[i] = activity!!.findViewById(tempID_bundle_capsule)
+            cha_capsule[i] = view.findViewById(tempID_bundle_capsule)
             cha_bundle[i] = cha_capsule[i]?.findViewById(R.id.character_bundle)
             head[i] = cha_capsule[i]?.findViewById(R.id.head)
             body[i] = cha_capsule[i]?.findViewById(R.id.body)
@@ -372,11 +366,12 @@ class MainFragment : Fragment() {
 
 
     inner class movecha : Thread() {
+        val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         override fun run() {
             while (true) {
                 handler2.post {
                     for (k in 0..cha_num) {
-                        randomdir()
+                        randomdir(inflater)
                         //if 가구위치 검사, 없으면->
                         //for(검사수..) 배열 = 백앤드값
                         //배열[i]. getx <=bundle[x]+dirx
@@ -472,14 +467,15 @@ class MainFragment : Fragment() {
     var ranindex_in = 0
     var random = Random()
 
-    fun randomdir() {
+    fun randomdir(inflater: LayoutInflater) {
         var randomnum = random.nextInt(4)
+        val view:View = inflater.inflate(R.layout.fragment_main, null)
         if (ranindex % 2 == 0) {
             when (randomnum) {
                 0 -> {
                     if (cha_bundle[k]!!.getY() + diry >= 0f && cha_bundle[k]!!.getY() + diry <= fromDpToPx(
-                            activity!!,
-                            1800)
+                            view.context,
+                        1800)
                     ) {
                         dirx = 0f
                         diry = -(random.nextInt(2) + 1) * 100f
@@ -491,7 +487,7 @@ class MainFragment : Fragment() {
                 }
                 1 -> {
                     if (cha_bundle[k]!!.getX() + dirx >= 0f && cha_bundle[k]!!.getX() + dirx <= fromDpToPx(
-                            activity!!,
+                            view.context,
                             500)
                     ) {
                         dirx = -(random.nextInt(2) + 1) * 100f
@@ -503,7 +499,7 @@ class MainFragment : Fragment() {
                 }
                 2 -> {
                     if (cha_bundle[k]!!.getY() + diry >= 0f && cha_bundle[k]!!.getY() + diry <= fromDpToPx(
-                            activity!!,
+                            view.context,
                             1000)
                     ) {
                         dirx = 0f
@@ -515,7 +511,7 @@ class MainFragment : Fragment() {
                 }
                 3 -> {
                     if (cha_bundle[k]!!.getX() + dirx >= 0f && cha_bundle[k]!!.getX() + dirx <= fromDpToPx(
-                            activity!!,
+                            view.context,
                             500)
                     ) {
                         dirx = (random.nextInt(2) + 1) * 100f
