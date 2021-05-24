@@ -1,12 +1,24 @@
 package com.example.plat
 
+import android.animation.ObjectAnimator
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import android.widget.Toolbar
+import android.os.Handler
+import android.util.TypedValue
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.plat_funiture.*
+import java.util.*
 
 /**
  * 메인화면
@@ -58,7 +70,6 @@ class MainActivity : AppCompatActivity() {
             actionBar.setDisplayShowTitleEnabled(false)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
-
     }
 
     private fun replaceFragment(fragment: Fragment){

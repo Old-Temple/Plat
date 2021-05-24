@@ -1,4 +1,4 @@
-package org.b4.yesol_part
+package com.example.plat
 
 import android.content.Context
 import android.graphics.Color
@@ -12,7 +12,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
 
-class funiture_put : AppCompatActivity() {
+class FurniturePutActivity : AppCompatActivity() {
 
     var funiture_ID: Int = 0
     var funiture_area_ID: Int = 0
@@ -29,7 +29,7 @@ class funiture_put : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_funiture_put)
+        setContentView(R.layout.activity_furniture_put)
 
 
         val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
@@ -93,7 +93,7 @@ class funiture_put : AppCompatActivity() {
             funiture_areas[i]?.addView(CreateXBox())
 
             xbox_buttons[i] = findViewById(xbox_ID)
-          //  xbox_buttons[i]?.setBackgroundColor(RED)
+            //  xbox_buttons[i]?.setBackgroundColor(RED)
 
 
         }
