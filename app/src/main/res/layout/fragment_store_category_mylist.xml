@@ -5,10 +5,54 @@
     android:layout_height="match_parent"
     tools:context=".StoreCategoryMylist">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFurniture"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="가구"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btnThema"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="테마"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btnAvatar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="아바타"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/storeMyListGridView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:numColumns="2" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

@@ -1,53 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/edge"
-        tools:ignore="UselessParent">
+        android:background="@drawable/edge">
 
-    <!--    이미지 레이아웃-->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="3dp"
             android:paddingTop="10dp"
             android:paddingBottom="5dp">
 
-    <!--        편의 구현상 ImageView 대신 TextView 사용함-->
             <TextView
-                android:id="@+id/searchImage"
+                android:id="@+id/imageOfStoreSearchMyList"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:background="@drawable/edge"/>
 
         </FrameLayout>
 
-    <!--    본문 레이아웃-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="5dp">
+            android:paddingHorizontal="3dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp">
 
             <TextView
-                android:id="@+id/searchText"
+                android:id="@+id/textOfStoreSearchMyList"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:gravity="center"
                 android:background="@drawable/edge"/>
-
         </FrameLayout>
-
-
     </LinearLayout>
-
 </FrameLayout>

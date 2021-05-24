@@ -5,10 +5,54 @@
     android:layout_height="match_parent"
     tools:context=".StoreCategoryAvatar">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnHead"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="머리"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btnBody"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="몸"
+                android:textColor="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btnShoes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:text="신발"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/storeAvatarGridView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:numColumns="2" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

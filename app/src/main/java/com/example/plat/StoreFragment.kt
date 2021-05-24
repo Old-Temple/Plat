@@ -27,6 +27,8 @@ class StoreFragment : Fragment() {
         val btn3: Button = view.findViewById(R.id.buttonAvatar)
         val btn4: Button = view.findViewById(R.id.buttonMylist)
 
+        replaceFragment(StoreCategoryFurniture().newInstance())
+
         btn1.setOnClickListener { view ->
             replaceFragment(StoreCategoryFurniture().newInstance())
         }
@@ -39,6 +41,8 @@ class StoreFragment : Fragment() {
         btn4.setOnClickListener { view ->
             replaceFragment(StoreCategoryMylist().newInstance())
         }
+
+
         return view
     }
 

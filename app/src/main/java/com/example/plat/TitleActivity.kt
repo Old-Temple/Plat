@@ -1,5 +1,6 @@
 package com.example.plat
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,8 +26,15 @@ class TitleActivity : AppCompatActivity() {
 
     //1초 후에 타이틀 화면 변환
     private fun goMain(){
-        var intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        this.finish()
+        if(PlatPrefs.prefs.getValue("id","")==""){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
+        else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
     }
 }
