@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -100,7 +101,7 @@ class MainFragment : Fragment() {
     var character_shose_moving1 = java.util.ArrayList<Drawable?>()
     var character_shose_moving2 = java.util.ArrayList<Drawable?>()
 
-    @SuppressLint("ServiceCast")
+    @SuppressLint("ServiceCast", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
     override fun onCreateView(
@@ -174,8 +175,8 @@ class MainFragment : Fragment() {
         //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
+        Log.d("Activity!!", R.id.plat_root.toString())
+        val plat_root:FrameLayout = view.findViewById(R.id.plat_root)
         val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         for(i in 0..fun_num){
 
@@ -190,8 +191,8 @@ class MainFragment : Fragment() {
                     ConstraintLayout.LayoutParams(80, 80)
                 plat_funiture_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                plat_funiture_lp.topMargin = fromDpToPx(activity!!, funiture_margin_top)
-                plat_funiture_lp.marginStart = fromDpToPx(activity!!, funiture_margin_start)
+                plat_funiture_lp.topMargin = fromDpToPx(view.context, funiture_margin_top)
+                plat_funiture_lp.marginStart = fromDpToPx(view.context, funiture_margin_start)
                 // binding.cardViews.setLayoutParams(layoutParams)
 
                 plat_funiture.layoutParams = plat_funiture_lp
@@ -201,22 +202,23 @@ class MainFragment : Fragment() {
                 )
                 plat_funiture.setId(tempID_plat_funiture)
 
+                Log.d("plat","aa")
                 return plat_funiture
 
             }
             if(i%4==0){
 
-                funiture_margin_start = fromDpToPx(activity!!,12)
+                funiture_margin_start = fromDpToPx(view.context.applicationContext,12)
             }
 
             if(i%4==0 && i!=0){
-                funiture_margin_top += fromDpToPx(activity!!,36)
+                funiture_margin_top += fromDpToPx(view.context.applicationContext,36)
 
             }
-
+            Log.d("내용 : ",plat_root.toString())
             plat_root.addView(funiture_maker())
-            flat_funiture_areas[i] = activity!!.findViewById(tempID_plat_funiture)
-            funiture_margin_start += fromDpToPx(activity!!,36)
+            flat_funiture_areas[i] = view.findViewById(tempID_plat_funiture)
+            funiture_margin_start += fromDpToPx(view.context.applicationContext,36)
 
 
 
@@ -235,13 +237,13 @@ class MainFragment : Fragment() {
 
 
             fun cha_maker(): View {
-                val character_capsule = activity!!.findViewById<FrameLayout>(R.id.plat_root)
+                val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
                 val character_capsule_lp =
                     ConstraintLayout.LayoutParams(80, 80)
                 character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                character_capsule_lp.topMargin = fromDpToPx(activity!!, bundle_margin_top)
-                character_capsule_lp.marginStart = fromDpToPx(activity!!, bundle_margin_start)
+                character_capsule_lp.topMargin = fromDpToPx(view.context, bundle_margin_top)
+                character_capsule_lp.marginStart = fromDpToPx(view.context, bundle_margin_start)
                 // binding.cardViews.setLayoutParams(layoutParams)
 
                 character_capsule.layoutParams = character_capsule_lp
@@ -255,7 +257,8 @@ class MainFragment : Fragment() {
 
             }
 
-
+            Log.d("Plat_root",plat_root.toString())
+            Log.d("Cha_Maker",cha_maker().toString())
             plat_root.addView(cha_maker())
             cha_capsule[i] = activity!!.findViewById(tempID_bundle_capsule)
             cha_bundle[i] = cha_capsule[i]?.findViewById(R.id.character_bundle)
@@ -425,6 +428,7 @@ class MainFragment : Fragment() {
                     flags[a] = 0
                     for (b in 0..cha_num) {
 
+                        
                         if (cha_capsule[b]!!.getX() + tempwidth <= flat_funiture_areas[a]!!.getX()
                             && cha_capsule[b]!!.getX() + cha_capsule[b]!!.getWidth() - tempwidth>= flat_funiture_areas[a]!!.getX()
                             || flat_funiture_areas[a]!!.getX() <= cha_capsule[b]!!.getX() + tempwidth
