@@ -45,8 +45,7 @@ class MainFragment : Fragment() {
         PlatListItem(10),
         PlatListItem(11),
         PlatListItem(12),
-        PlatListItem(13),
-        PlatListItem(14)
+        PlatListItem(13)
     )
 
     val cha_num = 5 //캐릭터 수-1
