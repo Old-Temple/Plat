@@ -1,52 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-메인 액티비티
-별 건 없고 일단 구축만 해두었음
-문서 작성 완료되는대로 구축 완료하겠음
--->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimaryDark">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:text="Warehouse"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+    </LinearLayout>
 
-    </androidx.appcompat.widget.Toolbar>
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="56dp">
+        android:layout_height="500dp"
+        android:background="#2EEDB1B1">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="bottom"
-            android:id="@+id/bottomNavigation"
-            app:labelVisibilityMode="labeled"
-            app:itemTextColor="@color/navigation_text_colors"
-            app:itemBackground="@color/navigation_bg_colors"
+            android:layout_height="800dp"
+            android:background="#5CAF4B4B"
+            app:layout_constraintEnd_toEndOf="@+id/button8"
+            app:layout_constraintStart_toEndOf="@+id/button8">
 
-            app:menu="@menu/navigation_items" />
 
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/plat_root"
+                android:layout_width="0dp"
+                android:layout_height="800dp"
+                android:background="#5700BCD4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/funiture_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#0003A9F4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/funiture_root"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#0003A9F4"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</LinearLayout>

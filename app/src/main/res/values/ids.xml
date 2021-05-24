@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="cha_bundle_0" />
+    <item type="id" name="cha_bundle_1" />
+    <item type="id" name="cha_bundle_2" />
+    <item type="id" name="cha_bundle_3" />
+    <item type="id" name="cha_bundle_4" />
+    <item type="id" name="cha_bundle_5" />
+
+    <item type="id" name="cha_head_0" />
+    <item type="id" name="cha_head_1" />
+    <item type="id" name="cha_head_2" />
+    <item type="id" name="cha_head_3" />
+    <item type="id" name="cha_head_4" />
+    <item type="id" name="cha_head_5" />
+
+    <item type="id" name="cha_body_0" />
+    <item type="id" name="cha_body_1" />
+    <item type="id" name="cha_body_2" />
+    <item type="id" name="cha_body_3" />
+    <item type="id" name="cha_body_4" />
+    <item type="id" name="cha_body_5" />
+
+    <item type="id" name="cha_left_hand_0" />
+    <item type="id" name="cha_left_hand_1" />
+    <item type="id" name="cha_left_hand_2" />
+    <item type="id" name="cha_left_hand_3" />
+    <item type="id" name="cha_left_hand_4" />
+    <item type="id" name="cha_left_hand_5" />
+
+    <item type="id" name="cha_right_hand_0" />
+    <item type="id" name="cha_right_hand_1" />
+    <item type="id" name="cha_right_hand_2" />
+    <item type="id" name="cha_right_hand_3" />
+    <item type="id" name="cha_right_hand_4" />
+    <item type="id" name="cha_right_hand_5" />
+
+    <item type="id" name="cha_shose_0" />
+    <item type="id" name="cha_shose_1" />
+    <item type="id" name="cha_shose_2" />
+    <item type="id" name="cha_shose_3" />
+    <item type="id" name="cha_shose_4" />
+    <item type="id" name="cha_shose_5" />
+    <item type="id" name="cha_shose_6" />
+
+    <item type="id" name="bundle_capsule_1" />
+    <item type="id" name="bundle_capsule_2" />
+    <item type="id" name="bundle_capsule_3" />
+    <item type="id" name="bundle_capsule_4" />
+    <item type="id" name="bundle_capsule_5" />
+    <item type="id" name="bundle_capsule_6" />
+
+    <item type="id" name="tooltip_1" />
+    <item type="id" name="tooltip_2" />
+    <item type="id" name="tooltip_3" />
+    <item type="id" name="tooltip_4" />
+    <item type="id" name="tooltip_5" />
+    <item type="id" name="tooltip_6" />
+
+    <item type="id" name="textip_text_1" />
+    <item type="id" name="textip_text_2" />
+    <item type="id" name="textip_text_3" />
+    <item type="id" name="textip_text_4" />
+    <item type="id" name="textip_text_5" />
+    <item type="id" name="textip_text_6" />
+
+    <item type="id" name="like_button_1" />
+    <item type="id" name="like_button_2" />
+    <item type="id" name="like_button_3" />
+    <item type="id" name="like_button_4" />
+    <item type="id" name="like_button_5" />
+    <item type="id" name="like_button_6" />
+
+    <item type="id" name="xbox_button_0" />
+    <item type="id" name="xbox_button_1" />
+    <item type="id" name="xbox_button_2" />
+    <item type="id" name="xbox_button_3" />
+    <item type="id" name="xbox_button_4" />
+    <item type="id" name="xbox_button_5" />
+    <item type="id" name="xbox_button_6" />
+    <item type="id" name="xbox_button_7" />
+    <item type="id" name="xbox_button_8" />
+    <item type="id" name="xbox_button_9" />
+    <item type="id" name="xbox_button_10" />
+    <item type="id" name="xbox_button_11" />
+    <item type="id" name="xbox_button_12" />
+    <item type="id" name="xbox_button_13" />
+    <item type="id" name="xbox_button_14" />
+    <item type="id" name="xbox_button_15" />
+    <item type="id" name="xbox_button_16" />
+    <item type="id" name="xbox_button_17" />
+    <item type="id" name="xbox_button_18" />
+    <item type="id" name="xbox_button_19" />
+    <item type="id" name="xbox_button_20" />
+
+
+    <item type="id" name="temp1" />
+
+
+    <item type="id" name="plat_funiture_area_0" />
+    <item type="id" name="plat_funiture_area_1" />
+    <item type="id" name="plat_funiture_area_2" />
+    <item type="id" name="plat_funiture_area_3" />
+    <item type="id" name="plat_funiture_area_4" />
+    <item type="id" name="plat_funiture_area_5" />
+    <item type="id" name="plat_funiture_area_6" />
+    <item type="id" name="plat_funiture_area_7" />
+    <item type="id" name="plat_funiture_area_8" />
+    <item type="id" name="plat_funiture_area_9" />
+    <item type="id" name="plat_funiture_area_10" />
+    <item type="id" name="plat_funiture_area_11" />
+    <item type="id" name="plat_funiture_area_12" />
+    <item type="id" name="plat_funiture_area_13" />
+    <item type="id" name="plat_funiture_area_14" />
+    <item type="id" name="plat_funiture_area_15" />
+
+
+    <dimen name="tempwidth">15</dimen>
+    <dimen name="tempheight">30</dimen>
+
+
+    <item type="id" name="shose_moving1" />
+    <item type="id" name="shose_moving2" />
+    <item type="id" name="shose_moving3" />
+    <item type="id" name="shose_moving4" />
+    <item type="id" name="shose_moving5" />
+    <item type="id" name="shose_moving6" />
+
+
+
+
+</resources>
