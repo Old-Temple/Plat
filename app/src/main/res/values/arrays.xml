@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="funi_imgs">
+        <item>@drawable/empty_item</item>
+        <item>@drawable/non_empty_item</item>
+        <item>@drawable/item_background</item>
+    </integer-array>
+
+    <integer-array name="funi_arys">
+        <item>@drawable/table</item>
+        <item>@drawable/table</item>
+
+    </integer-array>
+
+    <integer-array name="funi_arys_plat">
+        <item>@drawable/fn_flower_pot</item>
+        <item>@drawable/fn_flower_table</item>
+
+    </integer-array>
+</resources>
