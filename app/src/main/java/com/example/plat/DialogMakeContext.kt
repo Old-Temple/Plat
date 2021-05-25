@@ -26,8 +26,7 @@ class DialogMakeContext : DialogFragment() {
         val btn = view.findViewById<Button>(R.id.sendContext)
 
         btn.setOnClickListener {
-            val makeContext = DialogMakeContext()
-            makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
+            dismiss()
         }
         return view.rootView
     }
