@@ -179,10 +179,10 @@ class MainFragment : Fragment() {
 
         /////////////////////////////// 동적생성에 필요한 변수////////////////////////////////////////
 
-        var bundle_margin_top = 1
+        var bundle_margin_top = 20
         var bundle_margin_start = 1
 
-        var funiture_margin_top = 16
+        var funiture_margin_top = 50
         var funiture_margin_start = 0
 
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,7 +191,7 @@ class MainFragment : Fragment() {
         val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         for(i in 0..fun_num){
 
-
+            plat_root.setBackgroundResource(R.drawable.grass_background)
 
 
             fun funiture_maker(): View {
@@ -235,13 +235,7 @@ class MainFragment : Fragment() {
         }
         for (i in 0..cha_num) {
             // 배열하려는 모양 설정
-            if (i % 2 == 0) {
-                bundle_margin_start = fromDpToPx(view.context, 27)
-                bundle_margin_top = i * fromDpToPx(view.context, 50)
-            } else {
-                bundle_margin_start = fromDpToPx(view.context, 79)
-                bundle_margin_top = (i - 1) * fromDpToPx(view.context, 50)
-            }
+
 
 
 
@@ -264,9 +258,22 @@ class MainFragment : Fragment() {
 
                 return character_capsule
 
+
+
+            }
+            if(i%2==0){
+
+                bundle_margin_start = fromDpToPx(view.context.applicationContext,26)
             }
 
+            if(i%2==0 && i!=0){
+                bundle_margin_top += fromDpToPx(view.context.applicationContext,52)
+
+            }
             plat_root.addView(cha_maker())
+
+            bundle_margin_start += fromDpToPx(view.context.applicationContext,53)
+
             cha_capsule[i] = view.findViewById(tempID_bundle_capsule)
             cha_bundle[i] = cha_capsule[i]?.findViewById(R.id.character_bundle)
             head[i] = cha_capsule[i]?.findViewById(R.id.head)
@@ -298,15 +305,7 @@ class MainFragment : Fragment() {
                 }
             }
 
-            if(i%3==0){
 
-                funiture_margin_start = fromDpToPx(view.context.applicationContext,9)
-            }
-
-            if(i%3==0 && i!=0){
-                funiture_margin_top += fromDpToPx(view.context.applicationContext,45)
-
-            }
         }
 
 
@@ -318,6 +317,11 @@ class MainFragment : Fragment() {
         flat_funiture_areas[0]?.setBackgroundResource(fun_arys_flat.getResourceId(0, -1))
         flat_funiture_areas[3]?.setBackgroundResource(R.drawable.table)
         flat_funiture_areas[9]?.setBackgroundResource(R.drawable.table)
+
+        for(i in 0..20){
+            flat_funiture_areas[i]?.setBackgroundResource(R.drawable.tree)
+        }
+
 
         val thread1 = AnimThread()
         val thread2 = movecha()
