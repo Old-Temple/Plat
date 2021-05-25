@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/edge">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="3dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/imageOfWarehouseSearchAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/edge"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="3dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/textOfWarehouseSearchAvatar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:background="@drawable/edge"/>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

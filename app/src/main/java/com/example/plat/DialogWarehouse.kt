@@ -24,6 +24,8 @@ class DialogWarehouse : DialogFragment() {
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
+        replaceFragment(WarehouseCategoryFurniture().newInstance())
+
         btnFurniture.setOnClickListener { view ->
             replaceFragment(WarehouseCategoryFurniture().newInstance())
         }

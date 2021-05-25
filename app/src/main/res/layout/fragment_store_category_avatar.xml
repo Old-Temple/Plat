@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnHead"
+                android:id="@+id/btnStoreAvatarHead"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -26,7 +26,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/btnBody"
+                android:id="@+id/btnStoreAvatarBody"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -35,7 +35,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/btnShoes"
+                android:id="@+id/btnStoreAvatarShoes"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

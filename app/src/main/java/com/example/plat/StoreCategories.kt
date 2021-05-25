@@ -1,15 +1,12 @@
 package com.example.plat
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.GridView
-import android.widget.TextView
 
 /**
  * A simple [Fragment] subclass.
@@ -166,9 +163,9 @@ class StoreCategoryAvatar : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_store_category_avatar, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeAvatarGridView)
 
-        val btnBody: Button = view.findViewById(R.id.btnBody)
-        val btnHead: Button = view.findViewById(R.id.btnHead)
-        val btnShoes: Button = view.findViewById(R.id.btnShoes)
+        val btnBody: Button = view.findViewById(R.id.btnStoreAvatarBody)
+        val btnHead: Button = view.findViewById(R.id.btnStoreAvatarHead)
+        val btnShoes: Button = view.findViewById(R.id.btnStoreAvatarShoes)
 
         val adapter = StoreAvatarAdapter(activity!!, headList)
         gridView.adapter = adapter
@@ -238,9 +235,9 @@ class StoreCategoryMylist : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_store_category_mylist, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeMyListGridView)
 
-        val btnFurniture: Button = view.findViewById(R.id.btnFurniture)
-        val btnThema: Button = view.findViewById(R.id.btnThema)
-        val btnAvatar: Button = view.findViewById(R.id.btnAvatar)
+        val btnFurniture: Button = view.findViewById(R.id.btnStoreMylistFurniture)
+        val btnThema: Button = view.findViewById(R.id.btnStoreMylistThema)
+        val btnAvatar: Button = view.findViewById(R.id.btnStoreMylistAvatar)
 
         val adapter = StoreMyListAdapter(activity!!, furnitureList)
         gridView.adapter = adapter

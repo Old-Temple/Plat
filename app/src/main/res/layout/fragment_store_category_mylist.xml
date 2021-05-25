@@ -17,7 +17,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnFurniture"
+                android:id="@+id/btnStoreMylistFurniture"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -26,7 +26,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/btnThema"
+                android:id="@+id/btnStoreMylistThema"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -35,7 +35,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/btnAvatar"
+                android:id="@+id/btnStoreMylistAvatar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
