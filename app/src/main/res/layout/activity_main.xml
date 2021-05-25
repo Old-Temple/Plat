@@ -18,13 +18,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimaryDark">
 
-        <TextView
+        <Button
+            android:id="@+id/btnGoWarehouse"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
+            android:background="@drawable/edge"
             android:text="Warehouse"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+            android:gravity="center"/>
 
     </androidx.appcompat.widget.Toolbar>
 

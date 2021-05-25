@@ -69,12 +69,12 @@ class MainActivity : AppCompatActivity() {
             actionBar.setDisplayShowCustomEnabled(true)
             actionBar.setDisplayShowTitleEnabled(false)
             actionBar.setDisplayHomeAsUpEnabled(true)
+            val warehouse = findViewById<Button>(R.id.btnGoWarehouse)
+            warehouse.setOnClickListener { view ->
+                val wareHouse = DialogWarehouse()
+                wareHouse.show(supportFragmentManager, wareHouse.tag)
+            }
         }
-
-
-
-
-
 
     }
 

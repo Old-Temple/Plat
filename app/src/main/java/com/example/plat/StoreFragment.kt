@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
@@ -22,10 +21,10 @@ class StoreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_store, null)
-        val btn1: Button = view.findViewById(R.id.buttonFurniture)
-        val btn2: Button = view.findViewById(R.id.buttonThema)
-        val btn3: Button = view.findViewById(R.id.buttonAvatar)
-        val btn4: Button = view.findViewById(R.id.buttonMylist)
+        val btn1: Button = view.findViewById(R.id.btnStoreFurniture)
+        val btn2: Button = view.findViewById(R.id.btnStoreThema)
+        val btn3: Button = view.findViewById(R.id.btnStoreAvatar)
+        val btn4: Button = view.findViewById(R.id.btnStoreMylist)
 
         replaceFragment(StoreCategoryFurniture().newInstance())
 
@@ -48,7 +47,7 @@ class StoreFragment : Fragment() {
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransactionListener.replace(R.id.chileFragment, fragment)
+        fragmentTransactionListener.replace(R.id.storeChileFragment, fragment)
         fragmentTransactionListener.commit()
     }
 }

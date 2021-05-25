@@ -8,9 +8,6 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 
-
-// TODO: Rename parameter arguments, choose names that match
-
 class DialogMakeContext : DialogFragment() {
     // TODO
 
