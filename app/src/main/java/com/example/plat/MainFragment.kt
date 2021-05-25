@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
     )
 
     val cha_num = 5 //캐릭터 수-1
-    val fun_num = 15 // 가구 수 -1
+    val fun_num = 20 // 가구 수 -1
 
     var k = 0 // 애니메이션 for 문에 필요한 변수
 
@@ -79,7 +79,7 @@ class MainFragment : Fragment() {
     var body = arrayOfNulls<ImageView>(6)
     var shose = arrayOfNulls<ImageView>(6)
 
-    var flat_funiture_areas = arrayOfNulls<FrameLayout>(16) //plat 가구 들어있는 배열
+    var flat_funiture_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
 
 
     // ID값 부여 변수*****************************************
@@ -123,9 +123,15 @@ class MainFragment : Fragment() {
             val makeContext = DialogMakeContext()
             makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
         }
+        val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
+        tempGoFuniturePut.setOnClickListener{ view ->
+            val makePutFragment = DialogPutFragment()
+            makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
+        }
 
-        tempwidth =  fromDpToPx(activity!!, 15)
-        tempheight =  fromDpToPx(activity!!, 30)
+
+        tempwidth =  fromDpToPx(activity!!, 30)
+        tempheight =  fromDpToPx(activity!!, 60)
 
 
         ////////////////////////////
@@ -193,7 +199,7 @@ class MainFragment : Fragment() {
                 val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_funiture_area, false) as FrameLayout
 
                 val plat_funiture_lp =
-                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 80), fromDpToPx(view.context, 80))
+                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 70), fromDpToPx(view.context, 70))
                 plat_funiture_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topMargin = fromDpToPx(view.context, funiture_margin_top)
@@ -210,18 +216,18 @@ class MainFragment : Fragment() {
                 return plat_funiture
 
             }
-            if(i%4==0){
+            if(i%3==0){
 
-                funiture_margin_start = fromDpToPx(view.context.applicationContext,12)
+                funiture_margin_start = fromDpToPx(view.context.applicationContext,9)
             }
 
-            if(i%4==0 && i!=0){
-                funiture_margin_top += fromDpToPx(view.context.applicationContext,36)
+            if(i%3==0 && i!=0){
+                funiture_margin_top += fromDpToPx(view.context.applicationContext,50)
 
             }
             plat_root.addView(funiture_maker())
             flat_funiture_areas[i] = view.findViewById(tempID_plat_funiture)
-            funiture_margin_start += fromDpToPx(view.context.applicationContext,36)
+            funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
 
 
@@ -230,11 +236,11 @@ class MainFragment : Fragment() {
         for (i in 0..cha_num) {
             // 배열하려는 모양 설정
             if (i % 2 == 0) {
-                bundle_margin_start = 50
-                bundle_margin_top = i * 100
+                bundle_margin_start = fromDpToPx(view.context, 27)
+                bundle_margin_top = i * fromDpToPx(view.context, 50)
             } else {
-                bundle_margin_start = 210
-                bundle_margin_top = (i - 1) * 100
+                bundle_margin_start = fromDpToPx(view.context, 79)
+                bundle_margin_top = (i - 1) * fromDpToPx(view.context, 50)
             }
 
 
@@ -242,7 +248,7 @@ class MainFragment : Fragment() {
             fun cha_maker(): View {
                 val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
                 val character_capsule_lp =
-                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 80),fromDpToPx(view.context, 100))
+                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 100),fromDpToPx(view.context, 150))
                 character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topMargin = fromDpToPx(view.context, bundle_margin_top)
@@ -292,7 +298,15 @@ class MainFragment : Fragment() {
                 }
             }
 
+            if(i%3==0){
 
+                funiture_margin_start = fromDpToPx(view.context.applicationContext,9)
+            }
+
+            if(i%3==0 && i!=0){
+                funiture_margin_top += fromDpToPx(view.context.applicationContext,45)
+
+            }
         }
 
 
@@ -429,7 +443,7 @@ class MainFragment : Fragment() {
                             && flat_funiture_areas[a]!!.getX() + flat_funiture_areas[a]!!.getWidth() >= cha_capsule[b]!!.getX() + tempwidth) {
 
                             if (cha_capsule[b]!!.getY() +tempheight <= flat_funiture_areas[a]!!.getY()
-                                && cha_capsule[b]!!.getY() + cha_capsule[b]!!.getHeight() >= flat_funiture_areas[a]!!.getY()
+                                && cha_capsule[b]!!.getY() + cha_capsule[b]!!.getHeight() -tempheight >= flat_funiture_areas[a]!!.getY()
                                 || flat_funiture_areas[a]!!.getY() <= cha_capsule[b]!!.getY() + tempheight
                                 && flat_funiture_areas[a]!!.getY() + flat_funiture_areas[a]!!.getHeight() >= cha_capsule[b]!!.getY()) {
 
@@ -439,7 +453,6 @@ class MainFragment : Fragment() {
                         }
 
                     }
-
                 }
 
 
@@ -479,7 +492,7 @@ class MainFragment : Fragment() {
                         1800)
                     ) {
                         dirx = 0f
-                        diry = -(random.nextInt(2) + 1) * 100f
+                        diry = -(random.nextInt(2) + 1) * 50f
                     } else {
                         dirx = 0f
                         diry = 0f
@@ -504,7 +517,7 @@ class MainFragment : Fragment() {
                             1000)
                     ) {
                         dirx = 0f
-                        diry = (random.nextInt(2) + 1) * 200f
+                        diry = (random.nextInt(2) + 1) * 100f
                     } else {
                         dirx = 0f
                         diry = 0f

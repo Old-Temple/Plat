@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DialogPutFragment">
+
+    <!--    todo-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#13E91E63">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#4003A9F4"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_0"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/funiture_bt_0"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_1"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_0"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/funiture_bt_1"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_2"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_1"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/funiture_bt_2"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_3"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_2"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <Button
+                                android:id="@+id/funiture_bt_3"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_4"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_1">
+
+                            <Button
+                                android:id="@+id/funiture_bt_4"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_5"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_4"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_1">
+
+                            <Button
+                                android:id="@+id/funiture_bt_5"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_6"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_5"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_2">
+
+                            <Button
+                                android:id="@+id/funiture_bt_6"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_7"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_6"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_3">
+
+                            <Button
+                                android:id="@+id/funiture_bt_7"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_8"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_4">
+
+                            <Button
+                                android:id="@+id/funiture_bt_8"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_9"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_8"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_5">
+
+                            <Button
+                                android:id="@+id/funiture_bt_9"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_10"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_9"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_6">
+
+                            <Button
+                                android:id="@+id/funiture_bt_10"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_11"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_10"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_7">
+
+                            <Button
+                                android:id="@+id/funiture_bt_11"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_12"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_8">
+
+                            <Button
+                                android:id="@+id/funiture_bt_12"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_13"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_12"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_8">
+
+                            <Button
+                                android:id="@+id/funiture_bt_13"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_14"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_13"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_9">
+
+                            <Button
+                                android:id="@+id/funiture_bt_14"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/funiture_area_15"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@android:drawable/presence_invisible"
+                            app:layout_constraintStart_toEndOf="@+id/funiture_area_14"
+                            app:layout_constraintTop_toBottomOf="@+id/funiture_area_11">
+
+                            <Button
+                                android:id="@+id/funiture_bt_15"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@android:color/transparent"
+                                android:text="Button" />
+                        </FrameLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnWarehouseFurniture"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:text="가구" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/warehouseChildFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_weight="9" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="100dp"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/btnwarehouseClose"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="닫기" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -113,6 +113,13 @@
     <item type="id" name="plat_funiture_area_13" />
     <item type="id" name="plat_funiture_area_14" />
     <item type="id" name="plat_funiture_area_15" />
+    <item type="id" name="plat_funiture_area_16" />
+    <item type="id" name="plat_funiture_area_17" />
+    <item type="id" name="plat_funiture_area_18" />
+    <item type="id" name="plat_funiture_area_19" />
+    <item type="id" name="plat_funiture_area_20" />
+    <item type="id" name="plat_funiture_area_21" />
+
 
 
     <dimen name="tempwidth">15</dimen>
