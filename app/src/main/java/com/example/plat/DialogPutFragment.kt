@@ -2,6 +2,8 @@ package com.example.plat
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Color.*
 import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
@@ -11,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
@@ -28,7 +31,7 @@ class DialogPutFragment : DialogFragment() {
     var plat_funiture_put_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
     var plat_funiture_button = arrayOfNulls<Button>(21)
     var plat_funiture_xbutton = arrayOfNulls<Button>(21)
-    var flag = 0
+
     @SuppressLint("ServiceCast", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreateView(
@@ -44,6 +47,8 @@ class DialogPutFragment : DialogFragment() {
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
+        val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
+        val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange().newInstance())
 
 
@@ -106,6 +111,41 @@ class DialogPutFragment : DialogFragment() {
 
 
 
+        plat_funiture_button[0]?.setOnClickListener {
+
+
+            if (flag == 1) {
+                Toast.makeText(view!!.context, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
+
+                //삭제
+               //plat_funiture_xbutton[0]?.setBackgroundColor(0)
+                plat_funiture_xbutton[0]?.setBackgroundColor(BLUE)
+
+                //백에서 ary 값 받아와서!
+                plat_funiture_put_areas[0]?.setBackgroundColor(YELLOW)
+                plat_funiture_xbutton[0]?.setVisibility(View.VISIBLE)
+                plat_funiture_xbutton[0]?.setBackgroundColor(Color.GREEN)
+
+                flag = 0
+            }
+            else if(flag==0){
+                Toast.makeText(view!!.context, "플래그가 왜 0이지", Toast.LENGTH_SHORT).show()
+
+            }
+
+        }
+
+
+//*************************************************************
+
+        plat_funiture_xbutton[0]?.setOnClickListener {
+            //삭제
+
+            plat_funiture_put_areas[0]?.setBackgroundColor(Color.GREEN)
+            plat_funiture_xbutton[0]?.setVisibility(View.INVISIBLE)
+            plat_funiture_xbutton[0]?.setBackgroundColor(Color.RED);
+
+        }
 
 
 

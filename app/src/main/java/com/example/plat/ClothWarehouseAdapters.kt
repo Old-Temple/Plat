@@ -1,0 +1,113 @@
+package com.example.plat
+
+import android.content.Context
+import android.graphics.Color.RED
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+
+class ClothWarehouseFurnitureItems(val image:String, val text:String)
+class ClothWarehouseThemaItems(val image:String, val text:String)
+class ClothWarehouseAvatarItems(val image:String, val text:String)
+class ClothWarehouseMyListItems(val image:String, val text:String)
+
+class ClothWarehouseFurnitureAdapter(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
+    BaseAdapter(){
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
+
+        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
+        val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
+        val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem).setOnClickListener{ view ->
+            //todo : 여기 가구 작업
+        }
+
+        image.text = item.image
+        text.text = item.text
+
+        return view
+    }
+
+    override fun getCount(): Int {
+        return items.size
+    }
+
+    override fun getItem(position: Int): Any {
+        return items[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+}
+
+class ClothWarehouseThemaAdapter(val context: Context, val items: ArrayList<WarehouseThemaItems>):
+    BaseAdapter(){
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_thema, null)
+
+        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchThema)
+        val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchThema)
+        val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.warehouseThemaItem).setOnClickListener { view ->
+            //todo : 테마 아이템 클릭 리스너
+        }
+
+        image.text = item.image
+        text.text = item.text
+
+        return view
+    }
+
+    override fun getCount(): Int {
+        return items.size
+    }
+
+    override fun getItem(position: Int): Any {
+        return items[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+}
+
+class ClothWarehouseAvatarAdapter(val context: Context, val items: ArrayList<WarehouseAvatarItems>):
+    BaseAdapter(){
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_avatar, null)
+
+        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchAvatar)
+        val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchAvatar)
+        val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
+            //todo : 아바타 클릭
+            view.setBackgroundColor(RED)
+        }
+
+        image.text = item.image
+        text.text = item.text
+
+        return view
+    }
+
+    override fun getCount(): Int {
+        return items.size
+    }
+
+    override fun getItem(position: Int): Any {
+        return items[position]
+    }
+
+    override fun getItemId(position: Int): Long {
+        return 0
+    }
+}

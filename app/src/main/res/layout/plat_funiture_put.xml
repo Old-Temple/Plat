@@ -13,7 +13,6 @@
         android:layout_width="55dp"
         android:layout_height="70dp"
 
-        android:background="#AA7E7E"
         android:text="Button" />
 
     <Button
