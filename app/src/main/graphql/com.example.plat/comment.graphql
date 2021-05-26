@@ -1,0 +1,37 @@
+# Querys
+query SeeFeedComments($feedId: String!, $lastId: Int) {
+  seeFeedComments(feedId: $feedId, lastId: $lastId) {
+    id
+    user {
+      id
+      userName
+      profilePhoto
+    }
+    payload
+    isMine
+    createdAt
+    updatedAt
+  }
+}
+
+# Mutations
+mutation CreateComment($feedId: String!, $payload: String!) {
+  createComment(feedId: $feedId, payload: $payload) {
+    ok
+    error
+  }
+}
+
+mutation DeleteComment($id: Int!) {
+  deleteComment(id: $id) {
+    ok
+    error
+  }
+}
+
+mutation EditComment($id: Int!, $payload: String!) {
+  editComment(id: $id, payload: $payload) {
+    ok
+    error
+  }
+}

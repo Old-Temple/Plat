@@ -1,12 +1,142 @@
-query SeeProfile($userName:String!){
-    seeProfile(userName:$userName){
-        id
-    }
+# Querys
+query SearchUsers($keyword: String!, $lastId: String) {
+  searchUsers(keyword: $keyword, lastId: $lastId) {
+    id
+    userName
+    profilePhoto
+    isFollowing
+    isMe
+  }
 }
 
-mutation CreateAccount($firstName:String!, $lastName:String, $userName:String!, $email:String!){
-    createAccount(firstName:$firstName, lastName:$lastName, userName:$userName, email:$email) {
-        ok
-        error
+query SeeFollowers($userName: String!, $lastId: String) {
+  seeFollowers(userName: $userName, lastId: $lastId) {
+    ok
+    error
+    followers {
+      id
+      userName
+      profilePhoto
+      isFollowing
+      isMe
     }
+  }
+}
+
+query SeeFollowings($userName: String!, $lastId: String) {
+  seeFollowings(userName: $userName, lastId: $lastId) {
+    ok
+    error
+    followings {
+      id
+      userName
+      profilePhoto
+      isFollowing
+      isMe
+    }
+  }
+}
+
+query SeeProfile($userName: String!) {
+  seeProfile(userName: $userName) {
+    id
+    userName
+    firstName
+    lastName
+    bio
+    email
+    profilePhoto
+    feeds {
+      id
+      title
+      caption
+      file
+      user {
+        id
+        userName
+        profilePhoto
+      }
+      group {
+        id
+        title
+      }
+      likesCount
+      commentsCount
+      createdAt
+      disappearTime
+    }
+    point
+    followersCount
+    followingsCount
+    isMe
+    isFollowing
+  }
+}
+
+# Mutations
+mutation ConfirmSecret($email: String!, $secret: String!) {
+  confirmSecret(email: $email, secret: $secret) {
+    ok
+    token
+    error
+  }
+}
+
+mutation CreateAccount(
+  $firstName: String!
+  $lastName: String
+  $userName: String!
+  $email: String!
+) {
+  createAccount(
+    firstName: $firstName
+    lastName: $lastName
+    userName: $userName
+    email: $email
+  ) {
+    ok
+    error
+  }
+}
+
+mutation EditProfile(
+  $firstName: String
+  $lastName: String
+  $userName: String
+  $email: String
+  $bio: String
+  $profilePhoto: Upload
+) {
+  editProfile(
+    firstName: $firstName
+    lastName: $lastName
+    userName: $userName
+    email: $email
+    bio: $bio
+    profilePhoto: $profilePhoto
+  ) {
+    ok
+    error
+  }
+}
+
+mutation FollowUser($userName: String!) {
+  followUser(userName: $userName) {
+    ok
+    error
+  }
+}
+
+mutation RequestSecret($email: String!) {
+  requestSecret(email: $email) {
+    ok
+    error
+  }
+}
+
+mutation UnfollowUser($userName: String!) {
+  unfollowUser(userName: $userName) {
+    ok
+    error
+  }
 }

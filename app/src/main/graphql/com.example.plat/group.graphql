@@ -1,0 +1,250 @@
+# Querys
+query SearchGroups($keyword: String!, $lastId: String) {
+  searchGroups(keyword: $keyword, lastId: $lastId) {
+    id
+    title
+    bio
+    groupPhoto
+    userCount
+    open
+  }
+}
+
+query SeeGroup($id: String!) {
+  seeGroup(id: $id) {
+    id
+    adminId
+    managerId
+    title
+    bio
+    groupPhoto
+    open
+    hashtags {
+      hashtag
+    }
+    users {
+      id
+      userName
+      profilePhoto
+      avatar {
+        userId
+        color
+        headUrl
+        headId
+        bodyUrl
+        bodyId
+        legUrl
+        legId
+        headInfo {
+          id
+          itemName
+          info
+          file
+        }
+        bodyInfo {
+          id
+          itemName
+          info
+          file
+        }
+        legInfo {
+          id
+          itemName
+          info
+          file
+        }
+      }
+    }
+    feeds {
+      id
+      user {
+        id
+        userName
+        profilePhoto
+      }
+      file
+      title
+      caption
+      likesCount
+      commentsCount
+      isMine
+      createdAt
+      updatedAt
+      disappearTime
+    }
+    items {
+      id
+      itemInfoId
+      userId
+    }
+    theme
+    objectPositions {
+      id
+      objectId
+      owner
+      grid
+    }
+    createdAt
+  }
+}
+
+query SeeHashtag($hashtag: String!, $page: Int!) {
+  seeHashtag(hashtag: $hashtag) {
+    id
+    hashtag
+    groups(page: $page) {
+      id
+      title
+      bio
+      groupPhoto
+      userCount
+    }
+    groupsCount
+  }
+}
+
+# Mustations
+mutation ChangeAdmin($groupId: String!, $userId: String!) {
+  changeAdmin(groupId: $userId, userId: $userId) {
+    ok
+    error
+  }
+}
+
+mutation CreateGroup($title: String, $bio: String, $open: Boolean!) {
+  createGroup(title: $title, bio: $bio, open: $open) {
+    ok
+    error
+  }
+}
+
+mutation DeleteGroup($id: String!) {
+  deleteGroup(id: $id) {
+    ok
+    error
+  }
+}
+
+mutation DetectFeedsLife($feedId: String!) {
+  detectFeedsLife(feedId: $feedId) {
+    ok
+    error
+  }
+}
+
+mutation EditGroup(
+  $id: String!
+  $title: String
+  $bio: String
+  $groupPhoto: Upload
+  $open: Boolean
+) {
+  editGroup(
+    id: $id
+    title: $title
+    bio: $bio
+    groupPhoto: $groupPhoto
+    open: $open
+  ) {
+    ok
+    error
+  }
+}
+
+mutation EnterGroup($groupId: String!, $code: String) {
+  enterGroup(groupId: $groupId, code: $code) {
+    ok
+    error
+  }
+}
+
+mutation InviteUser($groupId: String!, $userName: String!) {
+  inviteUser(groupId: $groupId, userName: $userName) {
+    ok
+    error
+  }
+}
+
+mutation LeaveGroup($groupId: String!) {
+  leaveGroup(groupId: $groupId) {
+    ok
+    error
+  }
+}
+
+mutation MoveObject($groupId: String!, $objId: Int!, $grid: Int!) {
+  moveObject(groupId: $groupId, objId: $objId, grid: $grid) {
+    ok
+    error
+  }
+}
+
+mutation PlaceItem($groupId: String!, $itemId: String!, $grid: Int!) {
+  placeItem(groupId: $groupId, itemId: $itemId, grid: $grid) {
+    ok
+    error
+  }
+}
+
+mutation RemoveItem($groupId: String!, $posId: Int!) {
+  removeItem(groupId: $groupId, posId: $posId) {
+    ok
+    error
+  }
+}
+
+mutation SetTheme($groupId: String!, $itemId: String!) {
+  setTheme(groupId: $groupId, itemId: $itemId) {
+    ok
+    error
+  }
+}
+
+mutation ToggleGrant($groupId: String!, $userId: String!) {
+  toggleGrant(groupId: $groupId, userId: $userId) {
+    ok
+    grant
+    error
+  }
+}
+
+# Subscriptions
+subscription GroupFeedUpdates($groupId: String!) {
+  groupFeedUpdates(groupId: $groupId) {
+    id
+    user {
+      id
+      userName
+      profilePhoto
+      isMe
+    }
+    group {
+      id
+    }
+    file
+    title
+    caption
+    createdAt
+    updatedAt
+    disappearTime
+  }
+}
+
+subscription GroupObjectUpdates($groupId: String!) {
+  groupObjectUpdates(groupId: $groupId) {
+    id
+    objectId
+    owner
+    grid
+  }
+}
+
+subscription InviteUpdates {
+  inviteUpdates {
+    group {
+      id
+      title
+    }
+    code
+  }
+}

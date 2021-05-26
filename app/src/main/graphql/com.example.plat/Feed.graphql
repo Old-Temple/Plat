@@ -1,0 +1,127 @@
+# Querys
+query SearchFeeds($keyword: String!, $lastId: String) {
+  searchFeeds(keyword: $keyword, lastId: $lastId) {
+    id
+    title
+    caption
+    user {
+      id
+      userName
+      profilePhoto
+    }
+    group {
+      id
+      title
+    }
+    likesCount
+    commentsCount
+    isMine
+    createdAt
+    updatedAt
+    disappearTime
+  }
+}
+
+query SeeFeed($id: String!) {
+  seeFeed(id: $id) {
+    id
+    user {
+      id
+      userName
+      profilePhoto
+    }
+    group {
+      id
+      title
+    }
+    file
+    title
+    caption
+    likesCount
+    commentsCount
+    isMine
+    createdAt
+    updatedAt
+    disappearTime
+  }
+}
+
+query SeeFeedLikes($id: String!) {
+  seeFeedLikes(id: $id) {
+    id
+    userName
+    profilePhoto
+  }
+}
+
+query SeeGroupFeeds($groupId: String!) {
+  seeGroupFeeds(groupId: $groupId) {
+    id
+    user {
+      id
+      userName
+      profilePhoto
+    }
+    group {
+      id
+      title
+    }
+    file
+    title
+    caption
+    likesCount
+    commentsCount
+    isMine
+    createdAt
+    updatedAt
+    disappearTime
+  }
+}
+
+# Mutations
+mutation DeleteFeed($id: String!) {
+  deleteFeed(id: $id) {
+    ok
+    error
+  }
+}
+
+mutation EditFeed($id: String!, $caption: String!) {
+  editFeed(id: $id, caption: $caption) {
+    ok
+    error
+  }
+}
+
+mutation LikeFeed($id: String!) {
+  likeFeed(id: $id) {
+    ok
+    error
+  }
+}
+
+mutation UploadFeed(
+  $file: Upload
+  $title: String!
+  $caption: String
+  $groupId: String!
+) {
+  uploadFeed(file: $file, title: $title, caption: $caption, groupId: $groupId) {
+    ok
+    error
+  }
+}
+
+# Subscriptions
+subscription LikeUpdates($userId: String!) {
+  likeUpdates(userId: $userId) {
+    id
+    feed {
+      id
+      title
+      caption
+      file
+    }
+    createdAt
+  }
+}
