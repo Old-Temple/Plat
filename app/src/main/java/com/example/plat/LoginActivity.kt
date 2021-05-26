@@ -3,11 +3,17 @@ package com.example.plat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.*
+import java.util.*
+import kotlin.concurrent.schedule
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,19 +28,34 @@ class LoginActivity : AppCompatActivity() {
         btn.setOnClickListener { view ->
             //todo : 아이디랑 패스워드 보내고, True값 오면 프리퍼런스에 저장하고 메인으로
             //일단 저장이랑 액티비티 바꾸는 것만 구현
-            val personalID = id.text.toString()
+            var personalID = id.text.toString()
             val personalPW = pw.text.toString()
 
-            PlatPrefs.prefs.setValue("id", personalID)  //앱에 저장
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            this.finish()
+            val apolloCient = PlatApollo().apolloCient
+
+            val scope = CoroutineScope(Dispatchers.IO)
+            scope.launch {
+                val response: Response<SeeProfileQuery.Data> =
+                    apolloCient.query(SeeProfileQuery("zoody")).await()
+
+                async {
+                    val userID = response.data?.seeProfile?.id
+                    personalID = userID.toString()
+                    PlatPrefs.prefs.setValue("idKey", userID.toString())
+                }.await()
+                finishAcitivy()
+            }
         }
 
         createAC.setOnClickListener{ view ->
             val createAccount = DialogMakeAccount()
             createAccount.show(supportFragmentManager, createAccount.tag)
         }
+    }
+    fun finishAcitivy(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 }

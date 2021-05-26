@@ -1,11 +1,18 @@
 package com.example.plat
 
-import android.app.Application
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
+
 
 /**
  * 타이틀화면
@@ -15,9 +22,13 @@ import kotlin.concurrent.schedule
  */
 class TitleActivity : AppCompatActivity() {
 
+    public val apollo: ApolloClient = PlatApollo().apolloCient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
+
+        PlatPrefs.prefs.deleteValue()
         Timer().schedule(1000){
             goMain()
         }

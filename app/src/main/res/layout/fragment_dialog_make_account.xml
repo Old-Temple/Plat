@@ -10,6 +10,7 @@
         android:paddingHorizontal="20dp"
         android:background="@drawable/edge">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -20,27 +21,56 @@
             android:textSize="30sp"/>
 
         <EditText
+            android:id="@+id/createAccountUserName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="userName"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginVertical="10dp"
-            android:hint="Email"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/createAccountEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:hint="Email" />
+
+            <Button
+                android:id="@+id/btncreateAccountEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="확인"/>
+
+        </LinearLayout>
 
         <EditText
+            android:id="@+id/createAccountFirstName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginVertical="10dp"
-            android:hint="PassWord"/>
+            android:hint="First Name"/>
 
         <EditText
+            android:id="@+id/createAccountLastName"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginVertical="10dp"
-            android:hint="PassWord Again"/>
+            android:hint="Last Name"/>
 
         <TextView
+            android:id="@+id/createAccountErrorM"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -54,37 +84,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginVertical="10dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:hint="Code"
-                android:gravity="center"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:text="인증"
-                android:textSize="12sp"
-                android:gravity="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginVertical="10dp"
             android:paddingHorizontal="75dp">
 
             <Button
+                android:id="@+id/btncreateAccountSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="확인"

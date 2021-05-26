@@ -129,6 +129,8 @@ class MainFragment : Fragment() {
             makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
         }
 
+        Toast.makeText(context, PlatPrefs.prefs.getValue("idKey","false"), Toast.LENGTH_LONG).show()
+
 
         tempwidth =  fromDpToPx(activity!!, 30)
         tempheight =  fromDpToPx(activity!!, 60)

@@ -1,0 +1,12 @@
+query SeeProfile($userName:String!){
+    seeProfile(userName:$userName){
+        id
+    }
+}
+
+mutation CreateAccount($firstName:String!, $lastName:String, $userName:String!, $email:String!){
+    createAccount(firstName:$firstName, lastName:$lastName, userName:$userName, email:$email) {
+        ok
+        error
+    }
+}
