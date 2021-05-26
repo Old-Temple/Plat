@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 
 class WarehouseFurnitureItems(val image:String, val text:String)
 class WarehouseThemaItems(val image:String, val text:String)
@@ -20,6 +22,10 @@ class WarehouseFurnitureAdapter(val context: Context, val items: ArrayList<Wareh
         val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
         val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem).setOnClickListener{ view ->
+            //todo : 여기 가구 작업
+        }
 
         image.text = item.image
         text.text = item.text
@@ -49,6 +55,10 @@ class WarehouseThemaAdapter(val context: Context, val items: ArrayList<Warehouse
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchThema)
         val item = items[position]
 
+        view.findViewById<LinearLayout>(R.id.warehouseThemaItem).setOnClickListener { view ->
+            //todo : 테마 아이템 클릭 리스너
+        }
+
         image.text = item.image
         text.text = item.text
 
@@ -76,6 +86,10 @@ class WarehouseAvatarAdapter(val context: Context, val items: ArrayList<Warehous
         val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchAvatar)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchAvatar)
         val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
+            //todo : 아바타 클릭
+        }
 
         image.text = item.image
         text.text = item.text
