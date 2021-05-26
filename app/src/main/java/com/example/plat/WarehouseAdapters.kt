@@ -1,6 +1,7 @@
 package com.example.plat
 
 import android.content.Context
+import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,6 +90,7 @@ class WarehouseAvatarAdapter(val context: Context, val items: ArrayList<Warehous
 
         view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
             //todo : 아바타 클릭
+            view.setBackgroundColor(RED)
         }
 
         image.text = item.image

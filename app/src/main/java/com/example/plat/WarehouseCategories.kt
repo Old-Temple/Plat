@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.GridView
+import android.widget.*
 
 class WarehouseCategoryFurniture : Fragment() {
     // TODO: Rename and change types of parameters
@@ -167,6 +166,8 @@ class WarehouseCategoryAvatar : Fragment() {
 
         btnBody.setOnClickListener { view ->
             gridView.adapter = bodyAdapter
+
+
         }
         btnHead.setOnClickListener { view ->
             gridView.adapter = headAdapter
@@ -175,6 +176,11 @@ class WarehouseCategoryAvatar : Fragment() {
             gridView.adapter = shoesAdapter
         }
 
+
+
+
         return view
     }
+
 }
+

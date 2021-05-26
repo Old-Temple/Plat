@@ -121,6 +121,30 @@
     <item type="id" name="plat_funiture_area_21" />
 
 
+    <item type="id" name="plat_funiture_put_area_0" />
+    <item type="id" name="plat_funiture_put_area_1" />
+    <item type="id" name="plat_funiture_put_area_2" />
+    <item type="id" name="plat_funiture_put_area_3" />
+    <item type="id" name="plat_funiture_put_area_4" />
+    <item type="id" name="plat_funiture_put_area_5" />
+    <item type="id" name="plat_funiture_put_area_6" />
+    <item type="id" name="plat_funiture_put_area_7" />
+    <item type="id" name="plat_funiture_put_area_8" />
+    <item type="id" name="plat_funiture_put_area_9" />
+    <item type="id" name="plat_funiture_put_area_10" />
+    <item type="id" name="plat_funiture_put_area_11" />
+    <item type="id" name="plat_funiture_put_area_12" />
+    <item type="id" name="plat_funiture_put_area_13" />
+    <item type="id" name="plat_funiture_put_area_14" />
+    <item type="id" name="plat_funiture_put_area_15" />
+    <item type="id" name="plat_funiture_put_area_16" />
+    <item type="id" name="plat_funiture_put_area_17" />
+    <item type="id" name="plat_funiture_put_area_18" />
+    <item type="id" name="plat_funiture_put_area_19" />
+    <item type="id" name="plat_funiture_put_area_20" />
+    <item type="id" name="plat_funiture_put_area_21" />
+
+
 
     <dimen name="tempwidth">15</dimen>
     <dimen name="tempheight">30</dimen>
