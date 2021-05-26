@@ -1,0 +1,52 @@
+# Querys
+query SearchItemInfos($keyword: String!, $lastId: String) {
+  searchItemInfos(keyword: $keyword, lastId: $lastId) {
+    id
+    itemName
+    cost
+    info
+    file
+    typeId
+  }
+}
+
+query SeeItemInfo($id: String!) {
+  seeItemInfo(id: $id) {
+    id
+    itemName
+    cost
+    info
+    file
+    typeId
+  }
+}
+
+query SeeKategorie($kategorieId: String!) {
+  seeKategorie(kategorieId: $kategorieId) {
+    kategorie
+    types {
+      type
+    }
+  }
+}
+
+query SeeType($typeId: String!, $page: Int!) {
+  seeType(typeId: $typeId) {
+    type
+    itemInfos(page: $page) {
+      id
+      itemName
+      cost
+      info
+      file
+    }
+  }
+}
+
+# Muatations
+mutation BuyItem($itemInfoId: String!) {
+  buyItem(itemInfoId: $itemInfoId) {
+    ok
+    error
+  }
+}

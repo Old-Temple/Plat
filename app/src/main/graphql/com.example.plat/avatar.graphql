@@ -1,0 +1,48 @@
+# Querys
+query SeeAvatar($userId: String!) {
+  seeAvatar(userId: $userId) {
+    userId
+    color
+    headUrl
+    headId
+    bodyUrl
+    bodyId
+    legUrl
+    legId
+    headInfo {
+      itemName
+      info
+      file  
+    }
+    bodyInfo {
+      itemName
+      info
+      file  
+    }
+    legInfo {
+      itemName
+      info
+      file  
+    }
+  }
+}
+
+# Mustations
+mutation CreateAvatar($color: String!) {
+  createAvatar(color: $color) {
+    ok
+    error
+  }
+}
+
+mutation EditAvatar(
+  $color: String
+  $headId: String
+  $bodyId: String
+  $legId: String
+) {
+  editAvatar(color: $color, headId: $headId, bodyId: $bodyId, legId: $legId) {
+    ok
+    error
+  }
+}
