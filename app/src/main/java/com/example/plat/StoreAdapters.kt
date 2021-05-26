@@ -1,6 +1,7 @@
 package com.example.plat
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.GridView
+import android.widget.LinearLayout
 import android.widget.TextView
 
 class StoreFurnitureItems(val image:String, val text:String)
@@ -23,6 +25,11 @@ class StoreFurnitureAdapter(val context: Context, val items: ArrayList<StoreFurn
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchFurniture)
         val item = items[position]
 
+        view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
+
+            val makedialogbuyitems = DialogBuyItems()
+            makedialogbuyitems.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
+        }
         image.text = item.image
         text.text = item.text
 
