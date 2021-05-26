@@ -123,16 +123,16 @@ class MainFragment : Fragment() {
             val makeContext = DialogMakeContext()
             makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
         }
-        val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
-        tempGoFuniturePut.setOnClickListener{ view ->
-            val makePutFragment = DialogPutFragment()
-            makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
-        }
-        val tempGoChangeCloth = view.findViewById<Button>(R.id.tempGoFuniturePut)
-        tempGoFuniturePut.setOnClickListener{ view ->
-            val makeChangeFragment = DialogPutFragment()
-            makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
-        }
+          val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
+          tempGoFuniturePut.setOnClickListener{ view ->
+              val makePutFragment = DialogPutFragment()
+              makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
+          }
+          val tempGoChangeCloth = view.findViewById<Button>(R.id.tempGoChangeCloth)
+          tempGoChangeCloth.setOnClickListener{ view ->
+              val makeChangeFragment = DialogChangeCloth()
+              makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
+          }
 
         Toast.makeText(context, PlatPrefs.prefs.getValue("idKey","false"), Toast.LENGTH_LONG).show()
 

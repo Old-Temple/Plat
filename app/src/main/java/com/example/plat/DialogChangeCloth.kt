@@ -11,9 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
@@ -21,16 +19,9 @@ import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
 
-var flag2 =0
+var headflag =0
 
 class DialogChangeCloth : DialogFragment() {
-    val fun_num = 20
-    var funiture_margin_top = 50
-    var funiture_margin_start = 0
-    var tempID_plat_funiture : Int = 0
-    var plat_funiture_put_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
-    var plat_funiture_button = arrayOfNulls<Button>(21)
-    var plat_funiture_xbutton = arrayOfNulls<Button>(21)
 
     @SuppressLint("ServiceCast", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -45,13 +36,45 @@ class DialogChangeCloth : DialogFragment() {
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
-        replaceFragment(WarehouseCategoryFurniture().newInstance())
+        val head = view.findViewById<Button>(R.id.head)
+        val body = view.findViewById<Button>(R.id.body)
+        val shose = view.findViewById<Button>(R.id.shose)
+        val head_xbutton = view.findViewById<Button>(R.id.head_xbox)
+        val body_xbutton = view.findViewById<Button>(R.id.body_xbox)
+        val shose_xbutton = view.findViewById<Button>(R.id.shose_xbox)
 
-        btnThema.setOnClickListener { view ->
-            replaceFragment(WarehouseCategoryThema().newInstance())
+        head.setBackgroundColor(YELLOW)
+        head.setOnClickListener {
+
+            if (headflag == 1) {
+
+                //백에서 ary 값 받아와서!
+                head.setBackgroundColor(RED)
+                head_xbutton.visibility = View.VISIBLE
+                head_temp_view?.setBackgroundColor(0)
+
+                headflag = 0
+            }
+            else if(headflag==0){
+                Toast.makeText(view!!.context, "선택된 아이템이 없습니다", Toast.LENGTH_SHORT).show()
+
+            }
+
         }
+
+        head_xbutton.setOnClickListener {
+            //삭제
+
+            head.setBackgroundColor(YELLOW)
+            head_xbutton.visibility = View.INVISIBLE
+
+
+        }
+
+
+        replaceFragment(ClothWarehouseCategoryAvatar().newInstance())
         btnAvatar.setOnClickListener { view ->
-            replaceFragment(WarehouseCategoryAvatar().newInstance())
+            replaceFragment(ClothWarehouseCategoryAvatar().newInstance())
         }
         btnClose.setOnClickListener { view ->
             dismiss()

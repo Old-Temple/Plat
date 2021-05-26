@@ -11,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 
+var temp_view: View? = null
+
 class WarehouseFurnitureItems2(val image:String, val text:String)
 class WarehouseThemaItems2(val image:String, val text:String)
 class WarehouseAvatarItems2(val image:String, val text:String)
@@ -18,7 +20,7 @@ class WarehouseMyListItems2(val image:String, val text:String)
 
 class WarehouseFurnitureAdapter2(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
     BaseAdapter(){
-    var temp_view: View? = null
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
@@ -26,7 +28,6 @@ class WarehouseFurnitureAdapter2(val context: Context, val items: ArrayList<Ware
         val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
         val item = items[position]
-
 
 
 

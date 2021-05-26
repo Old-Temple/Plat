@@ -23,14 +23,16 @@ import kotlinx.android.synthetic.main.plat_funiture.*
 
 var flag =0
 
+var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
+var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
+var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
+
 class DialogPutFragment : DialogFragment() {
     val fun_num = 20
     var funiture_margin_top = 50
     var funiture_margin_start = 0
     var tempID_plat_funiture : Int = 0
-    var plat_funiture_put_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
-    var plat_funiture_button = arrayOfNulls<Button>(21)
-    var plat_funiture_xbutton = arrayOfNulls<Button>(21)
+
 
     @SuppressLint("ServiceCast", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -73,7 +75,7 @@ class DialogPutFragment : DialogFragment() {
                 val plat_funiture = inflater.inflate(R.layout.plat_funiture_put, plat_funiture_area, false) as FrameLayout
 
                 val plat_funiture_lp =
-                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 70), fromDpToPx(view.context, 70))
+                    ConstraintLayout.LayoutParams(fromDpToPx(view.context, 80), fromDpToPx(view.context, 80))
                 plat_funiture_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topMargin = fromDpToPx(view.context, funiture_margin_top)
@@ -100,36 +102,35 @@ class DialogPutFragment : DialogFragment() {
 
             }
             funiture_put_root.addView(funiture_maker())
-            plat_funiture_put_areas[i] = view.findViewById(tempID_plat_funiture)
+            plat_funiture_put_areas_Difuni[i] = view.findViewById(tempID_plat_funiture)
             funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
-            plat_funiture_button[i] = plat_funiture_put_areas[i]?.findViewById(R.id.funiture_put_bt)
-            plat_funiture_xbutton[i] = plat_funiture_put_areas[i]?.findViewById(R.id.xButton)
+            plat_funiture_button_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.funiture_put_bt)
+            plat_funiture_xbutton_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.xButton)
 
+            plat_funiture_put_areas_Difuni[i]?.setBackgroundColor(YELLOW)
 
         }
 
 
 
-        plat_funiture_button[0]?.setOnClickListener {
+        plat_funiture_button_Difuni[0]?.setOnClickListener {
 
 
             if (flag == 1) {
                 Toast.makeText(view!!.context, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
 
-                //삭제
-               //plat_funiture_xbutton[0]?.setBackgroundColor(0)
-                plat_funiture_xbutton[0]?.setBackgroundColor(BLUE)
+
 
                 //백에서 ary 값 받아와서!
-                plat_funiture_put_areas[0]?.setBackgroundColor(YELLOW)
-                plat_funiture_xbutton[0]?.setVisibility(View.VISIBLE)
-                plat_funiture_xbutton[0]?.setBackgroundColor(Color.GREEN)
+                plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(RED)
+                plat_funiture_xbutton_Difuni[0]?.setVisibility(View.VISIBLE)
+                temp_view?.setBackgroundColor(0)
 
                 flag = 0
             }
             else if(flag==0){
-                Toast.makeText(view!!.context, "플래그가 왜 0이지", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view!!.context, "선택된 아이템이 없습니다", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -138,12 +139,12 @@ class DialogPutFragment : DialogFragment() {
 
 //*************************************************************
 
-        plat_funiture_xbutton[0]?.setOnClickListener {
+        plat_funiture_xbutton_Difuni[0]?.setOnClickListener {
             //삭제
 
-            plat_funiture_put_areas[0]?.setBackgroundColor(Color.GREEN)
-            plat_funiture_xbutton[0]?.setVisibility(View.INVISIBLE)
-            plat_funiture_xbutton[0]?.setBackgroundColor(Color.RED);
+            plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(YELLOW)
+            plat_funiture_xbutton_Difuni[0]?.setVisibility(View.INVISIBLE)
+
 
         }
 
