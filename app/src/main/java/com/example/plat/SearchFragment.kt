@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.EditText
-import android.widget.GridView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.widget.addTextChangedListener
 
 /**
@@ -24,11 +21,11 @@ class SearchFragment : Fragment() {
         var list = loadItems("")
         val view: View = inflater.inflate(R.layout.fragment_search, null)
         val searchListView = view.findViewById<GridView>(R.id.searchGridView)
-        var searchListAdapter = SearchListAdapter(activity!!, list)
+        var searchListAdapter = SearchListAdapter(this, activity!!, list)
 
         view.findViewById<EditText>(R.id.searchInput).addTextChangedListener {
             list = loadItems(view.findViewById<EditText>(R.id.searchInput).text.toString())
-            searchListAdapter = SearchListAdapter(activity!!, list)
+            searchListAdapter = SearchListAdapter(this, activity!!, list)
 
             searchListView.adapter = searchListAdapter
         }
@@ -53,7 +50,7 @@ class SearchFragment : Fragment() {
 class SearchedItem(val image: String, val text: String)
 
 //listAdapter
-class SearchListAdapter(val context: Context, val searchedItems: ArrayList<SearchedItem>) : BaseAdapter(){
+class SearchListAdapter(val fragment: Fragment, val context: Context, val searchedItems: ArrayList<SearchedItem>) : BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         //각 리스트 형태 저장
@@ -67,6 +64,11 @@ class SearchListAdapter(val context: Context, val searchedItems: ArrayList<Searc
         image.text = item.image
         text.text = item.text
 
+        //검색된 아이템 클릭 리스너
+        view.findViewById<LinearLayout>(R.id.searchedItem).setOnClickListener { view ->
+            DialogSearchPlat(item)
+                .show(fragment.childFragmentManager.beginTransaction(), DialogSearchPlat(item).tag)
+        }
         return view
     }
 

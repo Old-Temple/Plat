@@ -14,15 +14,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
 <!--        상단 검색창 부분-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingVertical="15dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/edge"
             android:orientation="horizontal">
@@ -31,15 +29,19 @@
             <EditText
                 android:id="@+id/searchInput"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="9" />
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:layout_gravity="center"
+                android:textSize="18sp"/>
 
 <!--            제출버튼-->
             <Button
                 android:id="@+id/searchSubmitButton"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 
