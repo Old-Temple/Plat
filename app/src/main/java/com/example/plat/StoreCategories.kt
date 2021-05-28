@@ -14,7 +14,7 @@ import android.widget.GridView
  * create an instance of this fragment.
  */
 class StoreCategoryFurniture : Fragment() {
-    //todo
+    //todo : 스토어 가구 목록
     fun newInstance(): Fragment {
         return StoreCategoryFurniture()
     }
@@ -54,6 +54,7 @@ class StoreCategoryFurniture : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //todo : 뷰 할 때마다 리스트 불러와야함(서버)
         val view: View = inflater.inflate(R.layout.fragment_store_category_furniture, null)
         val storeFurnitureListView = view.findViewById<GridView>(R.id.storeFurnitureGridView)
         val storeFurnitureAdapter = StoreFurnitureAdapter(this, activity!!, myList)
@@ -65,7 +66,7 @@ class StoreCategoryFurniture : Fragment() {
 }
 
 class StoreCategoryThema : Fragment() {
-    // TODO
+    // todo : 스토어 테마 목록임
     fun newInstance(): Fragment {
         return StoreCategoryThema()
     }
@@ -105,6 +106,7 @@ class StoreCategoryThema : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //todo : 뷰 할 때마다 리스트 불러와야함(서버)
         val view: View = inflater.inflate(R.layout.fragment_store_category_thema, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeThemaGridView)
         val adapter = StoreThemaAdapter(this, activity!!, myList)
@@ -116,7 +118,7 @@ class StoreCategoryThema : Fragment() {
 }
 
 class StoreCategoryAvatar : Fragment() {
-    //todo
+    //todo : 스토어 아바타 목록
     fun newInstance(): Fragment {
         return StoreCategoryAvatar()
     }
@@ -160,6 +162,7 @@ class StoreCategoryAvatar : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //todo : 뷰 할 때마다 일단 헤드 리스트 불러와야함
         val view: View = inflater.inflate(R.layout.fragment_store_category_avatar, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeAvatarGridView)
 
@@ -188,7 +191,7 @@ class StoreCategoryAvatar : Fragment() {
 }
 
 class StoreCategoryMylist : Fragment() {
-    // TODO
+    // todo : 스토어의 마이 리스트 항목
     fun newInstance(): Fragment {
         return StoreCategoryMylist()
     }
@@ -232,6 +235,7 @@ class StoreCategoryMylist : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //todo : 뷰 할 때마다 일단 가구 리스트 불러와야함
         val view: View = inflater.inflate(R.layout.fragment_store_category_mylist, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeMyListGridView)
 

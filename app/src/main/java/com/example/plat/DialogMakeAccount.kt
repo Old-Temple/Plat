@@ -18,10 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-
 class DialogMakeAccount : DialogFragment() {
-    // TODO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,11 +46,10 @@ class DialogMakeAccount : DialogFragment() {
                 errorMessage.text = "Email을 입력해 주세요"
             }
             else {
-                //todo : 회원가입
-                var userName = getUserName.text.toString()
-                var email = getemail.text.toString()
-                var firstName = getFirstName.text.toString()
-                var lastName = getLastName.text.toString()
+                val userName = getUserName.text.toString()
+                val email = getemail.text.toString()
+                val firstName = getFirstName.text.toString()
+                val lastName = getLastName.text.toString()
 
                 val apolloClient = apolloClient(activity!!)
 
@@ -70,10 +66,12 @@ class DialogMakeAccount : DialogFragment() {
                                     email = email
                                 )
                             ).await()
+                        //에러가 나면 실행
                         if(response.data?.createAccount?.error != null){
                             errorMessage.setText(response.data?.createAccount?.error)
                         }
-                        if(response.data?.createAccount?.ok==true){
+                        //에러가 나지 않고 제대로 된 값이 나오면 실행
+                        if(response.data?.createAccount?.ok == true){
                             dismiss()
                         }
                     }

@@ -3,6 +3,7 @@ package com.example.plat
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,15 @@ import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class StoreFurnitureItems(val image:String, val text:String)
-class StoreThemaItems(val image:String, val text:String)
-class StoreAvatarItems(val image:String, val text:String)
-class StoreMyListItems(val image:String, val text:String)
+open class StoreItems {
+    open val image = ""
+    open val text = ""
+}
+
+class StoreFurnitureItems(override val image:String, override val text:String):StoreItems()
+class StoreThemaItems(override val image:String, override val text:String): StoreItems()
+class StoreAvatarItems(override val image:String, override val text:String):StoreItems()
+class StoreMyListItems(override val image:String, override val text:String):StoreItems()
 
 class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreFurnitureItems>):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -27,7 +33,7 @@ class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val it
 
         view.findViewById<LinearLayout>(R.id.storeFurnitureItem).setOnClickListener { view ->
 
-            val makedialogbuyitems = DialogBuyItems()
+            val makedialogbuyitems = DialogBuyItems(item)
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
@@ -61,7 +67,7 @@ class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items:
 
         view.findViewById<LinearLayout>(R.id.storeThemaItem).setOnClickListener { view ->
 
-            val makedialogbuyitems = DialogBuyItems()
+            val makedialogbuyitems = DialogBuyItems(item)
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
@@ -94,8 +100,8 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
         val item = items[position]
 
         view.findViewById<LinearLayout>(R.id.storeAvatarItem).setOnClickListener { view ->
-
-            val makedialogbuyitems = DialogBuyItems()
+            getItem(position)
+            val makedialogbuyitems = DialogBuyItems(item)
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
@@ -110,6 +116,7 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
     }
 
     override fun getItem(position: Int): Any {
+        Log.d("AAAA", items[position].toString())
         return items[position]
     }
 
@@ -129,7 +136,7 @@ class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items
 
         view.findViewById<LinearLayout>(R.id.storeMylistItem).setOnClickListener { view ->
 
-            val makedialogbuyitems = DialogBuyItems()
+            val makedialogbuyitems = DialogBuyItems(item)
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 

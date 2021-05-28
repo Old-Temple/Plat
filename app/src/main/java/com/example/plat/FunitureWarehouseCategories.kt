@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 
 class WarehouseCategoryFurnitureChange : Fragment() {
-    // TODO: Rename and change types of parameters
+    // todo : 예솔아 이건 내가 뭔지 모르겠다 걍 냅둔다
     fun newInstance(): Fragment {
         return WarehouseCategoryFurnitureChange()
     }
