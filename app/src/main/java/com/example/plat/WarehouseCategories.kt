@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 
 class WarehouseCategoryFurniture : Fragment() {
-    // TODO: Rename and change types of parameters
+    //todo : 창고 가구 목록
     fun newInstance(): Fragment {
         return WarehouseCategoryFurniture()
     }
@@ -48,6 +48,7 @@ class WarehouseCategoryFurniture : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //todo : 뷰 할 때마다 리스트 불러와야함
         val view:View = inflater.inflate(R.layout.fragment_warehouse_category_furniture, null)
         val gridView = view.findViewById<GridView>(R.id.warehouseFurnitureGridView)
         val adapter = WarehouseFurnitureAdapter(activity!!, myList)

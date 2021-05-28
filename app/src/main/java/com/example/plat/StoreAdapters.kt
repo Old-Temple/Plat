@@ -23,7 +23,7 @@ class StoreThemaItems(override val image:String, override val text:String): Stor
 class StoreAvatarItems(override val image:String, override val text:String):StoreItems()
 class StoreMyListItems(override val image:String, override val text:String):StoreItems()
 
-class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreFurnitureItems>):BaseAdapter(){
+class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_furniture, null)
 
@@ -56,7 +56,7 @@ class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val it
     }
 }
 
-class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreThemaItems>):
+class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_thema, null)
@@ -90,7 +90,7 @@ class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items:
     }
 }
 
-class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreAvatarItems>):
+class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_avatar, null)
@@ -125,7 +125,7 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
     }
 }
 
-class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreMyListItems>):
+class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_mylist, null)
