@@ -28,6 +28,13 @@ class DialogBuyItems(val item:StoreItems) : DialogFragment() {
         name.text = item.text
         image.text = item.image
 
+        view.findViewById<Button>(R.id.btnbuyItembuy).setOnClickListener { view ->
+            //todo : 구매버튼
+        }
+
+        view.findViewById<Button>(R.id.btnbuyItemCancle).setOnClickListener{ view ->
+            dismiss()
+        }
         return view.rootView
     }
 
