@@ -16,7 +16,7 @@
         android:textColor="@color/colorPrimary"/>
 
     <TextView
-        android:id="@+id/errorMessage"
+        android:id="@+id/loginErrorMessage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -25,14 +25,30 @@
         android:textColor="@color/red"/>
 
     <EditText
-        android:id="@+id/editTextID"
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:inputType="text"
-        android:hint="ID"
+        android:hint="Email"
         android:importantForAutofill="no"
         android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="75dp"
+        android:paddingVertical="20dp">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="전송"/>
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/editTextPW"

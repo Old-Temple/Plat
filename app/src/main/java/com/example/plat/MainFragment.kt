@@ -134,7 +134,7 @@ class MainFragment : Fragment() {
               makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
           }
 
-        Toast.makeText(context, PlatPrefs.prefs.getValue("idKey","false"), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, PlatPrefs.prefs.getValue("token","abc"), Toast.LENGTH_LONG).show()
 
 
         tempwidth =  fromDpToPx(activity!!, 30)

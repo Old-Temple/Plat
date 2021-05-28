@@ -3,6 +3,7 @@ package com.example.plat
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
@@ -28,7 +29,6 @@ class TitleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
 
-        PlatPrefs.prefs.deleteValue()
         Timer().schedule(1000){
             goMain()
         }
@@ -36,7 +36,7 @@ class TitleActivity : AppCompatActivity() {
 
     //1초 후에 타이틀 화면 변환
     private fun goMain(){
-        if(PlatPrefs.prefs.getValue("id","")==""){
+        if(PlatPrefs.prefs.getValue("token","abc") == "abc"){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             this.finish()
