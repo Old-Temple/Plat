@@ -13,6 +13,11 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.OkHttpClient
 
+
+/*
+서버 관련한 것들
+엥간해서는 건들지 말자
+ */
 private var instance: ApolloClient? = null
 
 class PlatApollo{

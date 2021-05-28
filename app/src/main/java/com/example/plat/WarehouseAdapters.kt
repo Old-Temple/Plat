@@ -13,7 +13,6 @@ import android.widget.Toast
 class WarehouseFurnitureItems(val image:String, val text:String)
 class WarehouseThemaItems(val image:String, val text:String)
 class WarehouseAvatarItems(val image:String, val text:String)
-class WarehouseMyListItems(val image:String, val text:String)
 
 class WarehouseFurnitureAdapter(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
     BaseAdapter(){

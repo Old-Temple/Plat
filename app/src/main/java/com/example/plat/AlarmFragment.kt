@@ -14,45 +14,52 @@ import android.widget.TextView
  * A simple [Fragment] subclass.
  * 알람창 화면
  */
+
+class AlarmContentsListItem(val image: String, val user: String, val action: String)
+
 class AlarmFragment : Fragment() {
-    //임시로 만든 arraylist
-    private val myList = arrayListOf<AlarmContentsListItem>(
-        AlarmContentsListItem("Image1", "User1", "Like"),
-        AlarmContentsListItem("Image2", "User2", "Share"),
-        AlarmContentsListItem("Image3", "User3", "Like"),
-        AlarmContentsListItem("Image4", "User4", "Like"),
-        AlarmContentsListItem("Image5", "User5", "Share"),
-        AlarmContentsListItem("Image6", "User6", "Like"),
-        AlarmContentsListItem("Image7", "User7", "Share"),
-        AlarmContentsListItem("Image8", "User8", "Share"),
-        AlarmContentsListItem("Image9", "User9", "Like"),
-        AlarmContentsListItem("Image0", "User0", "Like"),
-        AlarmContentsListItem("Image1", "User1", "Share"),
-        AlarmContentsListItem("Image2", "User2", "Share"),
-        AlarmContentsListItem("Image3", "User3", "Like"),
-        AlarmContentsListItem("Image4", "User4", "Like"),
-        AlarmContentsListItem("Image5", "User5", "Share"),
-        AlarmContentsListItem("Image6", "User6", "Like")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        val list = loadItems()
         val view: View = inflater.inflate(R.layout.fragment_alarm, null)
         val alarmListView = view.findViewById<ListView>(R.id.alarmListView)
-        val alarmListAdapter = AlarmListAdapter(activity!!, myList)
+        val alarmListAdapter = AlarmListAdapter(activity!!, list)
 
         alarmListView.adapter = alarmListAdapter
 
         return view
     }
 
+    fun loadItems():ArrayList<AlarmContentsListItem>{
+        //todo : 알람 항목 불러오기
+        val list = arrayListOf<AlarmContentsListItem>(
+            AlarmContentsListItem("Image1", "User1", "Like"),
+            AlarmContentsListItem("Image2", "User2", "Share"),
+            AlarmContentsListItem("Image3", "User3", "Like"),
+            AlarmContentsListItem("Image4", "User4", "Like"),
+            AlarmContentsListItem("Image5", "User5", "Share"),
+            AlarmContentsListItem("Image6", "User6", "Like"),
+            AlarmContentsListItem("Image7", "User7", "Share"),
+            AlarmContentsListItem("Image8", "User8", "Share"),
+            AlarmContentsListItem("Image9", "User9", "Like"),
+            AlarmContentsListItem("Image0", "User0", "Like"),
+            AlarmContentsListItem("Image1", "User1", "Share"),
+            AlarmContentsListItem("Image2", "User2", "Share"),
+            AlarmContentsListItem("Image3", "User3", "Like"),
+            AlarmContentsListItem("Image4", "User4", "Like"),
+            AlarmContentsListItem("Image5", "User5", "Share"),
+            AlarmContentsListItem("Image6", "User6", "Like")
+        )
+
+        return list
+    }
 }
 
 //이미지의 경우 임시로 String타입 줬음
-class AlarmContentsListItem(val image: String, val user: String, val action: String)
+
 
 //listAdapter
 class AlarmListAdapter(val context: Context, val alarmContentsListItem: ArrayList<AlarmContentsListItem>) : BaseAdapter(){
