@@ -7,69 +7,62 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.EditText
 import android.widget.GridView
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 
 /**
  * 서치 창 화면
  */
 class SearchFragment : Fragment() {
 
-    private val myList = arrayListOf<SearchContentsListItem>(
-        SearchContentsListItem("Image1","Text1"),
-        SearchContentsListItem("Image2","Text2"),
-        SearchContentsListItem("Image3","Text3"),
-        SearchContentsListItem("Image4","Text4"),
-        SearchContentsListItem("Image5","Text5"),
-        SearchContentsListItem("Image6","Text6"),
-        SearchContentsListItem("Image7","Text7"),
-        SearchContentsListItem("Image8","Text8"),
-        SearchContentsListItem("Image9","Text9"),
-        SearchContentsListItem("Image0","Text0"),
-        SearchContentsListItem("Image9","Text9"),
-        SearchContentsListItem("Image8","Text8"),
-        SearchContentsListItem("Image7","Text7"),
-        SearchContentsListItem("Image6","Text6"),
-        SearchContentsListItem("Image5","Text5"),
-        SearchContentsListItem("Image4","Text4"),
-        SearchContentsListItem("Image3","Text3"),
-        SearchContentsListItem("Image2","Text2"),
-        SearchContentsListItem("Image1","Text1"),
-        SearchContentsListItem("Image2","Text2"),
-        SearchContentsListItem("Image3","Text3"),
-        SearchContentsListItem("Image4","Text4"),
-        SearchContentsListItem("Image5","Text5")
-    )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        var list = loadItems("")
         val view: View = inflater.inflate(R.layout.fragment_search, null)
         val searchListView = view.findViewById<GridView>(R.id.searchGridView)
-        val searchListAdapter = SearchListAdapter(activity!!, myList)
+        var searchListAdapter = SearchListAdapter(activity!!, list)
 
-        searchListView.adapter = searchListAdapter
+        view.findViewById<EditText>(R.id.searchInput).addTextChangedListener {
+            list = loadItems(view.findViewById<EditText>(R.id.searchInput).text.toString())
+            searchListAdapter = SearchListAdapter(activity!!, list)
+
+            searchListView.adapter = searchListAdapter
+        }
 
         return view
     }
 
+    fun loadItems(text:String):ArrayList<SearchedItem>{
+        //todo : 검색 결과 서버에서 가져와함.
+        // 일단 테스트용으로 입력될 때마다 리스트 추가되는 것으로 만듬
+        val list = arrayListOf<SearchedItem>()
+
+        for(i in 0..text.length){
+            list.add(SearchedItem(text, text))
+        }
+
+        return list
+    }
 }
 
 //이미지의 경우 임시로 String타입 줬음
-class SearchContentsListItem(val image: String, val text: String)
+class SearchedItem(val image: String, val text: String)
 
 //listAdapter
-class SearchListAdapter(val context: Context, val searchContentsListItem: ArrayList<SearchContentsListItem>) : BaseAdapter(){
+class SearchListAdapter(val context: Context, val searchedItems: ArrayList<SearchedItem>) : BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         //각 리스트 형태 저장
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_search, null)
 
         //각 리스트 내용
-        val image = view.findViewById<TextView>(R.id.searchImage)
-        val text = view.findViewById<TextView>(R.id.searchText)
-        val item = searchContentsListItem[position]
+        val image = view.findViewById<TextView>(R.id.searchedImage)
+        val text = view.findViewById<TextView>(R.id.searchedText)
+        val item = searchedItems[position]
 
         image.text = item.image
         text.text = item.text
@@ -78,11 +71,11 @@ class SearchListAdapter(val context: Context, val searchContentsListItem: ArrayL
     }
 
     override fun getCount(): Int {
-        return searchContentsListItem.size
+        return searchedItems.size
     }
 
     override fun getItem(position: Int): Any {
-        return searchContentsListItem[position]
+        return searchedItems[position]
     }
 
     override fun getItemId(position: Int): Long {

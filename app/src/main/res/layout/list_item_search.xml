@@ -22,7 +22,7 @@
 
     <!--        편의 구현상 ImageView 대신 TextView 사용함-->
             <TextView
-                android:id="@+id/searchImage"
+                android:id="@+id/searchedImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="center"
@@ -39,7 +39,7 @@
             android:paddingTop="5dp">
 
             <TextView
-                android:id="@+id/searchText"
+                android:id="@+id/searchedText"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:gravity="center"

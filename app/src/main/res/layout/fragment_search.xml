@@ -18,31 +18,30 @@
         >
 
 <!--        상단 검색창 부분-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingVertical="15dp"
             android:paddingHorizontal="10dp"
-            android:background="@drawable/edge">
+            android:background="@drawable/edge"
+            android:orientation="horizontal">
 
 <!--            검색창-->
             <EditText
                 android:id="@+id/searchInput"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="#EEEEEE"/>
+                android:layout_weight="9" />
 
 <!--            제출버튼-->
             <Button
                 android:id="@+id/searchSubmitButton"
-                android:layout_width="40dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginRight="5dp"
-                android:layout_marginEnd="5dp"/>
+                android:layout_weight="1" />
 
-        </FrameLayout>
+        </LinearLayout>
 
 <!--        리스트 바디-->
         <LinearLayout
