@@ -17,7 +17,7 @@ class StoreThemaItems(val image:String, val text:String)
 class StoreAvatarItems(val image:String, val text:String)
 class StoreMyListItems(val image:String, val text:String)
 
-class StoreFurnitureAdapter(val context: Context, val items: ArrayList<StoreFurnitureItems>):BaseAdapter(){
+class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreFurnitureItems>):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_furniture, null)
 
@@ -25,11 +25,12 @@ class StoreFurnitureAdapter(val context: Context, val items: ArrayList<StoreFurn
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchFurniture)
         val item = items[position]
 
-        view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
+        view.findViewById<LinearLayout>(R.id.storeFurnitureItem).setOnClickListener { view ->
 
             val makedialogbuyitems = DialogBuyItems()
-            makedialogbuyitems.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
+            makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
+
         image.text = item.image
         text.text = item.text
 
@@ -49,7 +50,7 @@ class StoreFurnitureAdapter(val context: Context, val items: ArrayList<StoreFurn
     }
 }
 
-class StoreThemaAdapter(val context: Context, val items: ArrayList<StoreThemaItems>):
+class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreThemaItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_thema, null)
@@ -58,6 +59,12 @@ class StoreThemaAdapter(val context: Context, val items: ArrayList<StoreThemaIte
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchThema)
         val item = items[position]
 
+        view.findViewById<LinearLayout>(R.id.storeThemaItem).setOnClickListener { view ->
+
+            val makedialogbuyitems = DialogBuyItems()
+            makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
+        }
+
         image.text = item.image
         text.text = item.text
 
@@ -77,7 +84,7 @@ class StoreThemaAdapter(val context: Context, val items: ArrayList<StoreThemaIte
     }
 }
 
-class StoreAvatarAdapter(val context: Context, val items: ArrayList<StoreAvatarItems>):
+class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreAvatarItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_avatar, null)
@@ -86,6 +93,12 @@ class StoreAvatarAdapter(val context: Context, val items: ArrayList<StoreAvatarI
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchAvatar)
         val item = items[position]
 
+        view.findViewById<LinearLayout>(R.id.storeAvatarItem).setOnClickListener { view ->
+
+            val makedialogbuyitems = DialogBuyItems()
+            makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
+        }
+
         image.text = item.image
         text.text = item.text
 
@@ -105,7 +118,7 @@ class StoreAvatarAdapter(val context: Context, val items: ArrayList<StoreAvatarI
     }
 }
 
-class StoreMyListAdapter(val context: Context, val items: ArrayList<StoreMyListItems>):
+class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreMyListItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_mylist, null)
@@ -113,6 +126,12 @@ class StoreMyListAdapter(val context: Context, val items: ArrayList<StoreMyListI
         val image = view.findViewById<TextView>(R.id.imageOfStoreSearchMyList)
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchMyList)
         val item = items[position]
+
+        view.findViewById<LinearLayout>(R.id.storeMylistItem).setOnClickListener { view ->
+
+            val makedialogbuyitems = DialogBuyItems()
+            makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
+        }
 
         image.text = item.image
         text.text = item.text

@@ -36,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
         btn.visibility = View.INVISIBLE
 
         btnSubmit.setOnClickListener { view ->
-            //todo : 아이디랑 패스워드 보내고, True값 오면 프리퍼런스에 저장하고 메인으로
-            //일단 저장이랑 액티비티 바꾸는 것만 구현
             personalEmail = email.text.toString()
 
 

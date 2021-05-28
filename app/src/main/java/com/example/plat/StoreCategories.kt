@@ -56,7 +56,7 @@ class StoreCategoryFurniture : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_store_category_furniture, null)
         val storeFurnitureListView = view.findViewById<GridView>(R.id.storeFurnitureGridView)
-        val storeFurnitureAdapter = StoreFurnitureAdapter(activity!!, myList)
+        val storeFurnitureAdapter = StoreFurnitureAdapter(this, activity!!, myList)
 
         storeFurnitureListView.adapter = storeFurnitureAdapter
 
@@ -107,7 +107,7 @@ class StoreCategoryThema : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_store_category_thema, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeThemaGridView)
-        val adapter = StoreThemaAdapter(activity!!, myList)
+        val adapter = StoreThemaAdapter(this, activity!!, myList)
 
         gridView.adapter = adapter
 
@@ -167,19 +167,19 @@ class StoreCategoryAvatar : Fragment() {
         val btnHead: Button = view.findViewById(R.id.btnStoreAvatarHead)
         val btnShoes: Button = view.findViewById(R.id.btnStoreAvatarShoes)
 
-        val adapter = StoreAvatarAdapter(activity!!, headList)
+        val adapter = StoreAvatarAdapter(this, activity!!, headList)
         gridView.adapter = adapter
 
         btnBody.setOnClickListener { view ->
-            val adapter = StoreAvatarAdapter(activity!!, bodyList)
+            val adapter = StoreAvatarAdapter(this, activity!!, bodyList)
             gridView.adapter = adapter
         }
         btnHead.setOnClickListener { view ->
-            val adapter = StoreAvatarAdapter(activity!!, headList)
+            val adapter = StoreAvatarAdapter(this, activity!!, headList)
             gridView.adapter = adapter
         }
         btnShoes.setOnClickListener { view ->
-            val adapter = StoreAvatarAdapter(activity!!, shoesList)
+            val adapter = StoreAvatarAdapter(this, activity!!, shoesList)
             gridView.adapter = adapter
         }
 
@@ -239,19 +239,19 @@ class StoreCategoryMylist : Fragment() {
         val btnThema: Button = view.findViewById(R.id.btnStoreMylistThema)
         val btnAvatar: Button = view.findViewById(R.id.btnStoreMylistAvatar)
 
-        val adapter = StoreMyListAdapter(activity!!, furnitureList)
+        val adapter = StoreMyListAdapter(this, activity!!, furnitureList)
         gridView.adapter = adapter
 
         btnFurniture.setOnClickListener { view ->
-            val adapter = StoreMyListAdapter(activity!!, furnitureList)
+            val adapter = StoreMyListAdapter(this, activity!!, furnitureList)
             gridView.adapter = adapter
         }
         btnThema.setOnClickListener { view ->
-            val adapter = StoreMyListAdapter(activity!!, themaList)
+            val adapter = StoreMyListAdapter(this, activity!!, themaList)
             gridView.adapter = adapter
         }
         btnAvatar.setOnClickListener { view ->
-            val adapter = StoreMyListAdapter(activity!!, avatarList)
+            val adapter = StoreMyListAdapter(this, activity!!, avatarList)
             gridView.adapter = adapter
         }
 
