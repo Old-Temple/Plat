@@ -18,7 +18,7 @@
             android:layout_weight="1"
             >
 <!--            원래는 ImageView임. 임시로 TextView로 만들어놓았고 이것저것 넣을만하면 바꿀 것-->
-            <TextView
+            <ImageView
                 android:id="@+id/contentsImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

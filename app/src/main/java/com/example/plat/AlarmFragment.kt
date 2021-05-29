@@ -17,7 +17,7 @@ import android.widget.TextView
 
 class AlarmContentsListItem(val image: String, val user: String, val action: String)
 
-class AlarmFragment : Fragment() {
+class AlarmFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

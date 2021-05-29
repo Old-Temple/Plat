@@ -37,15 +37,21 @@
                     android:orientation="horizontal">
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/platListView"
+                    <FrameLayout
+                        android:id="@+id/platListFrameLayout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:scrollbars="horizontal"
-                        android:scrollbarAlwaysDrawHorizontalTrack="true"
                         android:scrollbarTrackHorizontal="@color/colorPrimary"/>
+
+                    <Button
+                        android:id="@+id/makePlat"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edge"
+                        android:text="Make\nPlat"
+                        android:textSize="12sp"/>
 
                     <Button
                         android:id="@+id/tempGoFuniturePut"

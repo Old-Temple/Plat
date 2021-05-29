@@ -1,18 +1,20 @@
 package com.example.plat
 
 import android.content.Context
+import android.content.LocusId
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,37 +32,28 @@ class Profile(var userName:String,
               var followersCount:Int?,
               var followingsCount:Int?)
 
-class Feeds(val image: String,
-            val title:String,
-            val text:String)
-
 class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
 
-    var profile:Profile? = null
+    val userName = PlatPrefs.prefs.getValue("userName","")
+    private val apolloClient = apolloClient(mainActivity.applicationContext)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val list = loadFeeds()
         val view: View = inflater.inflate(R.layout.fragment_profile, null)
-        val profileListView = view.findViewById<ListView>(R.id.profileFeedsListView)
-        val profileAdapter = ProfileFeedsAdapter(activity!!, list)
-        loadProfile(view)
 
-        profileListView.adapter = profileAdapter
-
-
+        loadProfile()
+        loadFeeds()
 
         return view
     }
 
-    fun loadProfile(view : View){
-        val apolloClient = apolloClient(mainActivity.applicationContext)
+    fun loadProfile(){
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val response : Response<SeeProfileQuery.Data> =
-                apolloClient.query(SeeProfileQuery(PlatPrefs.prefs.getValue("userName", ""))).await()
+                apolloClient.query(SeeProfileQuery(userName)).await()
 
             val userName = response.data?.seeProfile?.userName.toString()
             val firstName = response.data?.seeProfile?.firstName.toString()
@@ -69,9 +62,26 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
             val followersCount = response.data?.seeProfile?.followersCount
             val followingsCount = response.data?.seeProfile?.followingsCount
 
-            profile = Profile(userName, firstName, lastName, profilePhoto, followersCount, followingsCount)
+            val profile = Profile(userName, firstName, lastName, profilePhoto, followersCount, followingsCount)
 
-            view.findViewById<TextView>(R.id.profileImage).text = profile?.profilePhoto
+            //fragment 호출
+            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransactionListener.replace(R.id.profileChildMeLayout, ProfileChildMe(profile))
+            fragmentTransactionListener.commit()
+
+            return@launch
+        }
+    }
+
+    class ProfileChildMe(val profile: Profile?) : Fragment() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val view: View = inflater.inflate(R.layout.fragment_profile_child_me, null)
+
+            Glide.with(view).load(profile?.profilePhoto).into(view.findViewById<ImageView>(R.id.profileImage))
             view.findViewById<TextView>(R.id.profileUserName).text = profile?.userName
             view.findViewById<TextView>(R.id.profileFirstName).text = profile?.firstName
             view.findViewById<TextView>(R.id.profileLastName).text = profile?.lastName
@@ -79,67 +89,77 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
                 "Follower : " + profile?.followersCount.toString()
             view.findViewById<TextView>(R.id.profileFollowingCount).text =
                 "Following : " + profile?.followingsCount.toString()
+
+            return view
+        }
+    }
+
+    fun loadFeeds(){
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response : Response<SeeProfileQuery.Data> =
+                apolloClient.query(SeeProfileQuery(userName)).await()
+
+            val feeds: List<SeeProfileQuery.Feed>? = response.data?.seeProfile?.feeds
+
+            //fragment 호출
+            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransactionListener.replace(R.id.profileChileFeedsLayout, ProfileChildFeeds(feeds))
+            fragmentTransactionListener.commit()
+
             return@launch
         }
     }
 
-    fun loadFeeds(): ArrayList<Feeds> {
-        //todo : 서버에서 프로필 피드 불러와야함
-        val feeds = arrayListOf<Feeds>(
-            Feeds("Imgae1", "Title1", "Text1"),
-            Feeds("Imgae2", "Title2", "Text2"),
-            Feeds("Imgae3", "Title3", "Text3"),
-            Feeds("Imgae4", "Title4", "Text4"),
-            Feeds("Imgae5", "Title5", "Text5"),
-            Feeds("Imgae6", "Title6", "Text6"),
-            Feeds("Imgae7", "Title7", "Text7"),
-            Feeds("Imgae8", "Title8", "Text8"),
-            Feeds("Imgae9", "Title9", "Text9"),
-            Feeds("Imgae10", "Title10", "Text10"),
-            Feeds("Imgae11", "Title11", "Text11"),
-            Feeds("Imgae12", "Title12", "Text12"),
-            Feeds("Imgae13", "Title13", "Text13"),
-            Feeds("Imgae14", "Title14", "Text14"),
-            Feeds("Imgae15", "Title15", "Text15")
-        )
+    class ProfileChildFeeds(val feeds: List<SeeProfileQuery.Feed>?) : Fragment() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val view: View = inflater.inflate(R.layout.fragment_profile_child_feeds, null)
+            val profileListView = view.findViewById<ListView>(R.id.profileFeedsListView)
+            val profileAdapter = ProfileFeedsAdapter(activity!!, feeds)
 
-        return feeds
+            profileListView.adapter = profileAdapter
+
+            return view
+        }
     }
 
 }
 
 //테스트용 listadapter
-class ProfileFeedsAdapter (val context: Context, val feeds: ArrayList<Feeds>) : BaseAdapter() {
+class ProfileFeedsAdapter (val context: Context, val feeds: List<SeeProfileQuery.Feed>?) : BaseAdapter() {
     
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View{
-        
-        //각 리스트의 형태 저장
+
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_profile_feeds, null)
-        
-        //각 리스트의 내용
-        val image = view.findViewById<TextView>(R.id.contentsImage)
+
+        val image = view.findViewById<ImageView>(R.id.contentsImage)
         val title = view.findViewById<TextView>(R.id.contentsTitle)
         val text = view.findViewById<TextView>(R.id.contentsText)
-        val item = feeds[position]
-        image.text = item.image
-        title.text = item.title
-        text.text = item.text
+        val item = feeds?.get(position)
+        Glide.with(view).load(item?.file.toString()).into(image)
+        title.text = item?.title
+        text.text = item?.caption
 
         return view
     }
-    //오버라이드 함수
-    //리스트 크기 반환함
+
     override fun getCount(): Int {
-        return feeds.size
+        if (feeds != null) {
+            return feeds.size
+        }
+        else {
+            return 0
+        }
     }
-    //오버라이드 함수
-    //해당 인덱스의 아이템 반환함
-    override fun getItem(position: Int): Any {
-        return feeds[position]
+
+    override fun getItem(position: Int): SeeProfileQuery.Feed? {
+        return feeds?.get(position)
     }
-    //오버라이드 함수
-    //해당 인덱스의 아이디 반환함
-    //버튼 안 만들어서 현재 쓸 일 없음
+
     override fun getItemId(position: Int): Long {
         return 0
     }

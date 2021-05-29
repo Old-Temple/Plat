@@ -10,5 +10,5 @@
         android:background="@drawable/edge"
         android:textColor="@color/colorPrimary"
         android:gravity="center"
-        android:textSize="10pt"/>
+        android:textSize="12sp"/>
 </LinearLayout>

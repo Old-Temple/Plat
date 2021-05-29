@@ -111,7 +111,7 @@ mutation ChangeAdmin($groupId: String!, $userId: String!) {
   }
 }
 
-mutation CreateGroup($title: String, $bio: String, $open: Boolean!) {
+mutation CreateGroup($title: String!, $bio: String, $open: Boolean!) {
   createGroup(title: $title, bio: $bio, open: $open) {
     ok
     error

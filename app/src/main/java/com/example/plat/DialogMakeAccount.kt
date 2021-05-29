@@ -18,7 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DialogMakeAccount : DialogFragment() {
+class DialogMakeAccount(val loginActivity: LoginActivity) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +51,7 @@ class DialogMakeAccount : DialogFragment() {
                 val firstName = getFirstName.text.toString()
                 val lastName = getLastName.text.toString()
 
-                val apolloClient = apolloClient(activity!!)
+                val apolloClient = apolloClient(loginActivity.applicationContext)
 
                 val scope = CoroutineScope(Dispatchers.IO)
                 try {

@@ -27,28 +27,20 @@ import kotlinx.android.synthetic.main.plat_funiture.*
 import java.util.*
 import kotlin.collections.ArrayList
 import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
  * 메인화면
  */
-class MainFragment : Fragment() {
-    //임시로 만든 arraylist
-    private val myList = arrayListOf<PlatListItem>(
-        PlatListItem(1),
-        PlatListItem(2),
-        PlatListItem(3),
-        PlatListItem(4),
-        PlatListItem(5),
-        PlatListItem(6),
-        PlatListItem(7),
-        PlatListItem(8),
-        PlatListItem(9),
-        PlatListItem(10),
-        PlatListItem(11),
-        PlatListItem(12),
-        PlatListItem(13)
-    )
+class MainFragment(val mainActivity: MainActivity) : Fragment() {
+    val userName = PlatPrefs.prefs.getValue("userName","")
+
+    val apolloClient = apolloClient(mainActivity.applicationContext)
 
     val cha_num = 5 //todo : 캐릭터 수-1
     val fun_num = 20 //todo : 가구 수 -1
@@ -109,12 +101,7 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_main, null)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        val platlistView = view.findViewById<RecyclerView>(R.id.platListView)
-        platlistView.layoutManager = layoutManager
-        val platListAdapter = PlatListAdapter(myList)
-
-        platlistView.adapter = platListAdapter
+        loadPlatList()
         val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
         //todo : 글쓰기버튼
         mainWriteButton.setOnClickListener{ view ->
@@ -133,6 +120,11 @@ class MainFragment : Fragment() {
         tempGoChangeCloth.setOnClickListener{ view ->
           val makeChangeFragment = DialogChangeCloth()
           makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
+        }
+
+        view.findViewById<Button>(R.id.makePlat).setOnClickListener { view ->
+            val makeDialogMakePlat = DialogMakePlat(mainActivity)
+            makeDialogMakePlat.show(childFragmentManager.beginTransaction(), makeDialogMakePlat.tag)
         }
 
         Toast.makeText(context, PlatPrefs.prefs.getValue("token","abc"), Toast.LENGTH_LONG).show()
@@ -566,11 +558,40 @@ class MainFragment : Fragment() {
 
     }
 
+    fun loadPlatList(){
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            val response : Response<SeeUserGroupsQuery.Data> =
+                apolloClient.query(SeeUserGroupsQuery(userName)).await()
+
+            val groupList = response.data?.seeProfile?.groups
+
+            Log.d("AAA", groupList.toString())
+            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransactionListener.replace(R.id.platListFrameLayout, MainChildPlatList(groupList))
+            fragmentTransactionListener.commit()
+        }
+    }
+    class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val view: View = inflater.inflate(R.layout.fragment_main_child_platlist, null)
+            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            val platlistView = view.findViewById<RecyclerView>(R.id.platListView)
+            platlistView.layoutManager = layoutManager
+            val platListAdapter = PlatListAdapter(list)
+
+            platlistView.adapter = platListAdapter
+
+            return view
+        }
+    }
 }
 
-class PlatListItem(val num: Int)
-
-class PlatListAdapter(val items: ArrayList<PlatListItem>): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
+class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatListAdapter.ViewHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_plat_list, parent, false)
@@ -579,18 +600,23 @@ class PlatListAdapter(val items: ArrayList<PlatListItem>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: PlatListAdapter.ViewHolder, position: Int) {
-        val num = items[position]
+        val num = items?.get(position)
 
         holder.bind(num)
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else {
+            return 0
+        }
     }
 
     class ViewHolder(private var v: View) : RecyclerView.ViewHolder(v){
-        fun bind(item: PlatListItem){
-            v.item_plat_list.text = item.num.toString()
+        fun bind(item: SeeUserGroupsQuery.Group?){
+            v.item_plat_list.text = item?.title.toString()
         }
     }
 }

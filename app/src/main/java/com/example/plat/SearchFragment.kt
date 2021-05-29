@@ -12,7 +12,7 @@ import androidx.core.widget.addTextChangedListener
 /**
  * 서치 창 화면
  */
-class SearchFragment : Fragment() {
+class SearchFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

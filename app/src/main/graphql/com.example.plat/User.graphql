@@ -80,6 +80,21 @@ query SeeProfile($userName: String!) {
   }
 }
 
+query SeeUserGroups($userName: String!) {
+  seeProfile(userName: $userName) {
+    id
+    groups {
+      id
+      title
+      bio
+      groupPhoto
+      open
+      userCount
+    }
+  }
+}
+
+
 # Mutations
 mutation ConfirmSecret($email: String!, $secret: String!) {
   confirmSecret(email: $email, secret: $secret) {

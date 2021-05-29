@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.actionMain -> {
-                    replaceFragment(MainFragment())
+                    replaceFragment(MainFragment(this))
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionProfile -> {
@@ -42,15 +42,15 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionStore -> {
-                    replaceFragment(StoreFragment())
+                    replaceFragment(StoreFragment(this))
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionSearch -> {
-                    replaceFragment(SearchFragment())
+                    replaceFragment(SearchFragment(this))
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionAlarm -> {
-                    replaceFragment(AlarmFragment())
+                    replaceFragment(AlarmFragment(this))
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> {

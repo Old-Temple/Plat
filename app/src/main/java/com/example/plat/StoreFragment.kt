@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction
  * A simple [Fragment] subclass.
  * 스토어 화면
  */
-class StoreFragment : Fragment() {
+class StoreFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
