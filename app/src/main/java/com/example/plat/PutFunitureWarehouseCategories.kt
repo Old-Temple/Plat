@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 
 class WarehouseCategoryFurnitureChange : Fragment() {
-    // todo : 예솔아 이건 내가 뭔지 모르겠다 걍 냅둔다
+    // todo : 가구 바꿀때  내부 카테고리
     fun newInstance(): Fragment {
         return WarehouseCategoryFurnitureChange()
     }
@@ -50,7 +50,7 @@ class WarehouseCategoryFurnitureChange : Fragment() {
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_warehouse_category_furniture, null)
         val gridView = view.findViewById<GridView>(R.id.warehouseFurnitureGridView)
-        val adapter = WarehouseFurnitureAdapter2(activity!!, myList)
+        val adapter = PutFurnitureWarehouseAdapter(activity!!, myList)
 
         gridView.adapter = adapter
 

@@ -18,7 +18,7 @@ class WarehouseThemaItems2(val image:String, val text:String)
 class WarehouseAvatarItems2(val image:String, val text:String)
 class WarehouseMyListItems2(val image:String, val text:String)
 
-class WarehouseFurnitureAdapter2(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
+class PutFurnitureWarehouseAdapter(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
     BaseAdapter(){
 
 
@@ -30,7 +30,7 @@ class WarehouseFurnitureAdapter2(val context: Context, val items: ArrayList<Ware
         val item = items[position]
 
 
-
+        // todo : 가구 아이템창 터치되었는지 확인위한 flag
         view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem).setOnClickListener{ view ->
 
             if(flag==1){
@@ -43,7 +43,6 @@ class WarehouseFurnitureAdapter2(val context: Context, val items: ArrayList<Ware
                 view.setBackgroundColor(RED)
                 flag = 1
             }
-
 
 
         }

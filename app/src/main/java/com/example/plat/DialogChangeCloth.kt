@@ -32,10 +32,10 @@ class DialogChangeCloth : DialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_change_cloth, container, false)
-        val btnThema = view.findViewById<Button>(R.id.btnWarehouseThema)
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
+        //todo: 캐릭터 부위별 버튼
         val head = view.findViewById<Button>(R.id.head)
         val body = view.findViewById<Button>(R.id.body)
         val shose = view.findViewById<Button>(R.id.shose)
@@ -43,7 +43,8 @@ class DialogChangeCloth : DialogFragment() {
         val body_xbutton = view.findViewById<Button>(R.id.body_xbox)
         val shose_xbutton = view.findViewById<Button>(R.id.shose_xbox)
 
-        head.setBackgroundColor(YELLOW)
+        //todo : 임시로 색 변하게 해놓음. 나중에 이미지로 바뀌게 고쳐야함함
+       head.setBackgroundColor(YELLOW)
         head.setOnClickListener {
 
             if (headflag == 1) {
@@ -61,7 +62,7 @@ class DialogChangeCloth : DialogFragment() {
             }
 
         }
-
+        //todo : 머리에 끼워진 아이템 지우고 싶을때
         head_xbutton.setOnClickListener {
             //삭제
 

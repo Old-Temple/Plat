@@ -20,14 +20,16 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
-
+//todo : 아이템이 먼저 터치되고 장소가 터치되는지 확인 위함
 var flag =0
 
-var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
+//todo: 가구, 가구 지우기 위한 x버튼 들어있는 배열
+var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21)
 var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
 var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
 
 class DialogPutFragment : DialogFragment() {
+    //todo: 가구 배치 위한 변수들
     val fun_num = 20
     var funiture_margin_top = 50
     var funiture_margin_start = 0
@@ -44,11 +46,9 @@ class DialogPutFragment : DialogFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
 
-        val btnFurniture = view.findViewById<Button>(R.id.btnWarehouseFurniture)
-        val btnThema = view.findViewById<Button>(R.id.btnWarehouseThema)
-        val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
+        //todo : 가구 이미지 담기위한 임시배열
         val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
         val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange().newInstance())
@@ -59,17 +59,12 @@ class DialogPutFragment : DialogFragment() {
         }
 
 
-        if (flag==1){
-
-        }
         for(i in 0..fun_num){
+            //todo : 배경 이미지 간격 맞추느라 임시로 갖다놓은 이미지 [지워질친구]
             val funiture_put_root:ConstraintLayout = view.findViewById(R.id.funiture_put_root)
             funiture_put_root.setBackgroundResource(R.drawable.grass_background)
 
-
-
-
-
+            //todo : 가구 동적생성 하기위한 함수
             fun funiture_maker(): View {
 
                 val plat_funiture = inflater.inflate(R.layout.plat_funiture_put, plat_funiture_area, false) as FrameLayout
@@ -92,6 +87,7 @@ class DialogPutFragment : DialogFragment() {
                 return plat_funiture
 
             }
+            //todo : 배치 간격맞추기
             if(i%3==0){
 
                 funiture_margin_start = fromDpToPx(view.context.applicationContext,9)
@@ -102,6 +98,8 @@ class DialogPutFragment : DialogFragment() {
 
             }
             funiture_put_root.addView(funiture_maker())
+
+            //todo : 나중에 편하게 쓰려고 가구랑 버튼들 배열에 넣어놓음
             plat_funiture_put_areas_Difuni[i] = view.findViewById(tempID_plat_funiture)
             funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
@@ -112,17 +110,11 @@ class DialogPutFragment : DialogFragment() {
 
         }
 
-
-
+        //todo : ex)아이템창 터치 확인(flag) 하고 가구 0번째 배열 터치하면 임시로 색 변화(후에 이미지로 교체)
         plat_funiture_button_Difuni[0]?.setOnClickListener {
 
-
             if (flag == 1) {
-                Toast.makeText(view!!.context, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
 
-
-
-                //백에서 ary 값 받아와서!
                 plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(RED)
                 plat_funiture_xbutton_Difuni[0]?.setVisibility(View.VISIBLE)
                 temp_view?.setBackgroundColor(0)
@@ -138,7 +130,7 @@ class DialogPutFragment : DialogFragment() {
 
 
 //*************************************************************
-
+            //todo : x버튼 누르면 삭제 -> 0부터 20번까지 다 써야하는데 편한방법 찾아야함
         plat_funiture_xbutton_Difuni[0]?.setOnClickListener {
             //삭제
 
@@ -155,7 +147,7 @@ class DialogPutFragment : DialogFragment() {
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransactionListener.replace(R.id.warehouseChildFragment2, fragment)
+        fragmentTransactionListener.replace(R.id.warehouseChildFragment_funchange, fragment)
         fragmentTransactionListener.commit()
     }
 
