@@ -1,19 +1,15 @@
 package com.example.plat
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Color
 import android.graphics.Color.*
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
@@ -31,7 +27,12 @@ class DialogChangeCloth : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+<<<<<<< Updated upstream
         val view = inflater.inflate(R.layout.fragment_change_cloth, container, false)
+=======
+        val view = inflater.inflate(R.layout.fragment_dialog_change_cloth, container, false)
+        val btnThema = view.findViewById<Button>(R.id.btnWarehouseThema)
+>>>>>>> Stashed changes
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 

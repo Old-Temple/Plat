@@ -8,13 +8,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.*
-import java.util.*
-import kotlin.concurrent.schedule
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val email:EditText = findViewById(R.id.editTextEmail)
         val pw:EditText = findViewById(R.id.editTextPW)
 
-        val apolloCient = apolloClient(context = applicationContext)
+        val apolloClient = apolloClient(context = applicationContext)
 
         var personalEmail = String()
 
@@ -43,14 +39,11 @@ class LoginActivity : AppCompatActivity() {
             val scope = CoroutineScope(Dispatchers.IO)
             scope.launch {
                 val response: Response<RequestSecretMutation.Data> =
-                    apolloCient
+                    apolloClient
                         .mutate(RequestSecretMutation(email = personalEmail))
                         .await()
 
-                if(response.data?.requestSecret?.ok == true){
-                    Log.d("AAA1", personalEmail)
-                }
-                else{
+                if(response.data?.requestSecret?.ok != true){
                     error.text = "이메일이 올바르지 않습니다"
                 }
             }
@@ -62,12 +55,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         btn.setOnClickListener { view ->
-            var personalPW = pw.text.toString()
+            val personalPW = pw.text.toString()
 
             val scope = CoroutineScope(Dispatchers.IO)
             scope.launch {
                 val response: Response<ConfirmSecretMutation.Data> =
-                    apolloCient
+                    apolloClient
                         .mutate(ConfirmSecretMutation(
                             email = personalEmail,
                             secret = personalPW
