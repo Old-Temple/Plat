@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val email:EditText = findViewById(R.id.editTextEmail)
         val pw:EditText = findViewById(R.id.editTextPW)
 
-        val apolloClient = apolloClient(applicationContext)
+        val apolloClient = apolloClient(applicationContext) //클라 생성
 
         var personalEmail = String()
 
@@ -34,9 +34,8 @@ class LoginActivity : AppCompatActivity() {
         btnSubmit.setOnClickListener { view ->
             personalEmail = email.text.toString()
 
-
-
-            val scope = CoroutineScope(Dispatchers.IO)
+            val scope = CoroutineScope(Dispatchers.IO)  //루틴생성
+            //비동기 시작
             scope.launch {
                 val response: Response<RequestSecretMutation.Data> =
                     apolloClient

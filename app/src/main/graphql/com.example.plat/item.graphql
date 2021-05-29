@@ -10,6 +10,19 @@ query SearchItemInfos($keyword: String!, $lastId: String) {
   }
 }
 
+query  SeeItem($id: String!) {
+  seeItem(id: $id) {
+    itemId
+    count
+    itemInfo {
+      id
+      itemName
+      info
+      file
+    }
+  }
+}
+
 query SeeItemInfo($id: String!) {
   seeItemInfo(id: $id) {
     id
