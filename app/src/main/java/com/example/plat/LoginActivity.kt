@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val email:EditText = findViewById(R.id.editTextEmail)
         val pw:EditText = findViewById(R.id.editTextPW)
 
-        val apolloClient = apolloClient(context = applicationContext)
+        val apolloClient = apolloClient(applicationContext)
 
         var personalEmail = String()
 
@@ -66,8 +66,12 @@ class LoginActivity : AppCompatActivity() {
                             secret = personalPW
                         )).await()
 
+                val me : Response<MeQuery.Data> =
+                    apolloClient.query(MeQuery()).await()
+
                 if(response.data?.confirmSecret?.ok == true){
-                    Log.d("AAA1", response.data?.confirmSecret?.token.toString())
+                    PlatPrefs.prefs.setValue("id", me.data?.me?.id.toString())
+                    PlatPrefs.prefs.setValue("userName", me.data?.me?.userName.toString())
                     PlatPrefs.prefs.setValue("token", response.data?.confirmSecret?.token.toString())
                     finishAcitivy()
                 }

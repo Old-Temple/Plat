@@ -1,4 +1,11 @@
 # Querys
+query me {
+  me {
+    id
+    userName
+  }
+}
+
 query SearchUsers($keyword: String!, $lastId: String) {
   searchUsers(keyword: $keyword, lastId: $lastId) {
     id

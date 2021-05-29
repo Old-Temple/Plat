@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.ApolloClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.plat_funiture.*
@@ -29,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //네비게이션 버튼 클릭 리스너
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionProfile -> {
-                    replaceFragment(ProfileFragment())
+                    replaceFragment(ProfileFragment(this))
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.actionStore -> {
@@ -76,11 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-
-
-
-
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -88,6 +83,5 @@ class MainActivity : AppCompatActivity() {
         fragmentTransactionListener.replace(R.id.frameLayout, fragment)
         fragmentTransactionListener.commit()
     }
-
 }
 

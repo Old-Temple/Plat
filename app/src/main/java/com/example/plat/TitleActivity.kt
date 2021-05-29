@@ -21,9 +21,8 @@ import kotlin.concurrent.schedule
  * 추후에 서버 구축 다 되면
  * 로딩 끝나고 난 다음에 메인으로 들어가도록 바꿀 예정임
  */
-class TitleActivity : AppCompatActivity() {
 
-    public val apollo: ApolloClient = PlatApollo().apolloCient
+class TitleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
