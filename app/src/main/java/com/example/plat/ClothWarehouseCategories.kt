@@ -24,8 +24,7 @@ class ClothWarehouseCategoryAvatar : Fragment() {
         ClothWarehouseAvatarItems("BImage3","Text3"),
         ClothWarehouseAvatarItems("BImage4","Text4"),
         ClothWarehouseAvatarItems("BImage5","Text5"),
-        ClothWarehouseAvatarItems("BImage6","Text6"),
-        ClothWarehouseAvatarItems("BImage7","Text7")
+        ClothWarehouseAvatarItems("BImage6","Text6")
     )
     private val headList = arrayListOf<ClothWarehouseAvatarItems>(
         ClothWarehouseAvatarItems("HImage8","Text8"),

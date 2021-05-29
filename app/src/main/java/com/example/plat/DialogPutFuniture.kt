@@ -111,23 +111,23 @@ class DialogPutFragment : DialogFragment() {
         }
 
         //todo : ex)아이템창 터치 확인(flag) 하고 가구 0번째 배열 터치하면 임시로 색 변화(후에 이미지로 교체)
-        plat_funiture_button_Difuni[0]?.setOnClickListener {
+        for(i in 0..20) {
+            plat_funiture_button_Difuni[i]?.setOnClickListener {
 
-            if (funi_flag == 1) {
+                if (funi_flag == 1) {
 
-                plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(RED)
-                plat_funiture_xbutton_Difuni[0]?.setVisibility(View.VISIBLE)
-                temp_view?.setBackgroundColor(0)
+                    plat_funiture_put_areas_Difuni[i]?.setBackgroundColor(RED)
+                    plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
+                    temp_view?.setBackgroundColor(0)
 
-                funi_flag = 0
+                    funi_flag = 0
+                } else if (funi_flag == 0) {
+                    Toast.makeText(view!!.context, "선택된 아이템이 없습니다", Toast.LENGTH_SHORT).show()
+
+                }
+
             }
-            else if(funi_flag==0){
-                Toast.makeText(view!!.context, "선택된 아이템이 없습니다", Toast.LENGTH_SHORT).show()
-
-            }
-
         }
-
 
 //*************************************************************
             //todo : x버튼 누르면 삭제 -> 0부터 20번까지 다 써야하는데 편한방법 찾아야함

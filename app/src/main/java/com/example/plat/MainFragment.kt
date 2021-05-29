@@ -238,6 +238,10 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
         }
+        /*
+        서버에서 불러옴
+        aaa = List<dddddd.sdf>
+         */
         for (i in 0..cha_num) {
             // 배열하려는 모양 설정
 
@@ -566,7 +570,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
             val groupList = response.data?.seeProfile?.groups
 
-            Log.d("AAA", groupList.toString())
             val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransactionListener.replace(R.id.platListFrameLayout, MainChildPlatList(groupList))
             fragmentTransactionListener.commit()
@@ -605,18 +608,19 @@ class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.
         holder.bind(num)
     }
 
+
+    class ViewHolder(private var v: View) : RecyclerView.ViewHolder(v){
+        fun bind(item: SeeUserGroupsQuery.Group?){
+            v.item_plat_list.text = item?.title.toString()
+        }
+    }
+
     override fun getItemCount(): Int {
         if (items != null) {
             return items.size
         }
         else {
             return 0
-        }
-    }
-
-    class ViewHolder(private var v: View) : RecyclerView.ViewHolder(v){
-        fun bind(item: SeeUserGroupsQuery.Group?){
-            v.item_plat_list.text = item?.title.toString()
         }
     }
 }
