@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
 //todo : 아이템이 먼저 터치되고 장소가 터치되는지 확인 위함
-var flag =0
+var funi_flag =0
 
 //todo: 가구, 가구 지우기 위한 x버튼 들어있는 배열
 var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21)
@@ -113,15 +113,15 @@ class DialogPutFragment : DialogFragment() {
         //todo : ex)아이템창 터치 확인(flag) 하고 가구 0번째 배열 터치하면 임시로 색 변화(후에 이미지로 교체)
         plat_funiture_button_Difuni[0]?.setOnClickListener {
 
-            if (flag == 1) {
+            if (funi_flag == 1) {
 
                 plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(RED)
                 plat_funiture_xbutton_Difuni[0]?.setVisibility(View.VISIBLE)
                 temp_view?.setBackgroundColor(0)
 
-                flag = 0
+                funi_flag = 0
             }
-            else if(flag==0){
+            else if(funi_flag==0){
                 Toast.makeText(view!!.context, "선택된 아이템이 없습니다", Toast.LENGTH_SHORT).show()
 
             }

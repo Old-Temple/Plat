@@ -8,17 +8,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 
 var head_temp_view: View? = null
-class ClothWarehouseFurnitureItems(val image:String, val text:String)
-class ClothWarehouseThemaItems(val image:String, val text:String)
+
 class ClothWarehouseAvatarItems(val image:String, val text:String)
-class ClothWarehouseMyListItems(val image:String, val text:String)
 
 
 
-class ClothWarehouseAvatarAdapter(val context: Context, val items: ArrayList<WarehouseAvatarItems>):
+
+class ClothWarehouseAvatarAdapter(val context: Context, val items: ArrayList<ClothWarehouseAvatarItems>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_avatar, null)
@@ -29,7 +27,7 @@ class ClothWarehouseAvatarAdapter(val context: Context, val items: ArrayList<War
 
 
 
-
+        //todo : 아이템 터치된후에 아바타 파츠 터치되었는지 확인 위함
         view.findViewById<LinearLayout>(R.id.warehouseAvatarItem).setOnClickListener { view ->
 
             if(headflag==1){

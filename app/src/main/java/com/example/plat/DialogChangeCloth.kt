@@ -27,12 +27,11 @@ class DialogChangeCloth : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-<<<<<<< Updated upstream
-        val view = inflater.inflate(R.layout.fragment_change_cloth, container, false)
-=======
+
+
         val view = inflater.inflate(R.layout.fragment_dialog_change_cloth, container, false)
-        val btnThema = view.findViewById<Button>(R.id.btnWarehouseThema)
->>>>>>> Stashed changes
+
+
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 

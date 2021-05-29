@@ -17,35 +17,35 @@ class ClothWarehouseCategoryAvatar : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val bodyList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("BImage1","Text1"),
-        WarehouseAvatarItems("BImage2","Text2"),
-        WarehouseAvatarItems("BImage3","Text3"),
-        WarehouseAvatarItems("BImage4","Text4"),
-        WarehouseAvatarItems("BImage5","Text5"),
-        WarehouseAvatarItems("BImage6","Text6"),
-        WarehouseAvatarItems("BImage7","Text7")
+    //todo : PutFunitureWarehouseCategories와 같이 리스트 어떻게 사용되는지 물어봐야하는부분
+    private val bodyList = arrayListOf<ClothWarehouseAvatarItems>(
+        ClothWarehouseAvatarItems("BImage1","Text1"),
+        ClothWarehouseAvatarItems("BImage2","Text2"),
+        ClothWarehouseAvatarItems("BImage3","Text3"),
+        ClothWarehouseAvatarItems("BImage4","Text4"),
+        ClothWarehouseAvatarItems("BImage5","Text5"),
+        ClothWarehouseAvatarItems("BImage6","Text6"),
+        ClothWarehouseAvatarItems("BImage7","Text7")
     )
-    private val headList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("HImage8","Text8"),
-        WarehouseAvatarItems("HImage9","Text9"),
-        WarehouseAvatarItems("HImage0","Text0"),
-        WarehouseAvatarItems("HImage9","Text9"),
-        WarehouseAvatarItems("HImage8","Text8"),
-        WarehouseAvatarItems("HImage7","Text7"),
-        WarehouseAvatarItems("HImage6","Text6"),
-        WarehouseAvatarItems("HImage5","Text5"),
-        WarehouseAvatarItems("hImage4","Text4"),
-        WarehouseAvatarItems("hImage3","Text3"),
-        WarehouseAvatarItems("hImage2","Text2")
+    private val headList = arrayListOf<ClothWarehouseAvatarItems>(
+        ClothWarehouseAvatarItems("HImage8","Text8"),
+        ClothWarehouseAvatarItems("HImage9","Text9"),
+        ClothWarehouseAvatarItems("HImage0","Text0"),
+        ClothWarehouseAvatarItems("HImage9","Text9"),
+        ClothWarehouseAvatarItems("HImage8","Text8"),
+        ClothWarehouseAvatarItems("HImage7","Text7"),
+        ClothWarehouseAvatarItems("HImage6","Text6"),
+        ClothWarehouseAvatarItems("HImage5","Text5"),
+        ClothWarehouseAvatarItems("hImage4","Text4"),
+        ClothWarehouseAvatarItems("hImage3","Text3"),
+        ClothWarehouseAvatarItems("hImage2","Text2")
     )
-    private val shoesList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("Image1","Text1"),
-        WarehouseAvatarItems("Image2","Text2"),
-        WarehouseAvatarItems("Image3","Text3"),
-        WarehouseAvatarItems("Image4","Text4"),
-        WarehouseAvatarItems("Image5","Text5")
+    private val shoesList = arrayListOf<ClothWarehouseAvatarItems>(
+        ClothWarehouseAvatarItems("Image1","Text1"),
+        ClothWarehouseAvatarItems("Image2","Text2"),
+        ClothWarehouseAvatarItems("Image3","Text3"),
+        ClothWarehouseAvatarItems("Image4","Text4"),
+        ClothWarehouseAvatarItems("Image5","Text5")
     )
 
     override fun onCreateView(

@@ -13,12 +13,9 @@ import android.widget.Toast
 
 var temp_view: View? = null
 
-class WarehouseFurnitureItems2(val image:String, val text:String)
-class WarehouseThemaItems2(val image:String, val text:String)
-class WarehouseAvatarItems2(val image:String, val text:String)
-class WarehouseMyListItems2(val image:String, val text:String)
+class PutFunitureWarehouseFurnitureItems(val image:String, val text:String)
 
-class PutFurnitureWarehouseAdapter(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
+class PutFurnitureWarehouseAdapter(val context: Context, val items: ArrayList<PutFunitureWarehouseFurnitureItems>):
     BaseAdapter(){
 
 
@@ -33,15 +30,15 @@ class PutFurnitureWarehouseAdapter(val context: Context, val items: ArrayList<Wa
         // todo : 가구 아이템창 터치되었는지 확인위한 flag
         view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem).setOnClickListener{ view ->
 
-            if(flag==1){
+            if(funi_flag==1){
                 temp_view?.setBackgroundColor(0)
-                flag = 0
+                funi_flag = 0
             }
             
-            if(flag==0){
+            if(funi_flag==0){
                 temp_view = view
                 view.setBackgroundColor(RED)
-                flag = 1
+                funi_flag = 1
             }
 
 

@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 
+//todo : 나중에 삭제될 액티비티 %%%%%%%%%%%%%%%% 필요없음
 
 class FurniturePutActivity : AppCompatActivity() {
 

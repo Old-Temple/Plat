@@ -16,31 +16,31 @@ class WarehouseCategoryFurnitureChange : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val myList = arrayListOf<WarehouseFurnitureItems>(
-        WarehouseFurnitureItems("Image1","Text1"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image5","Text5"),
-        WarehouseFurnitureItems("Image6","Text6"),
-        WarehouseFurnitureItems("Image7","Text7"),
-        WarehouseFurnitureItems("Image8","Text8"),
-        WarehouseFurnitureItems("Image9","Text9"),
-        WarehouseFurnitureItems("Image0","Text0"),
-        WarehouseFurnitureItems("Image9","Text9"),
-        WarehouseFurnitureItems("Image8","Text8"),
-        WarehouseFurnitureItems("Image7","Text7"),
-        WarehouseFurnitureItems("Image6","Text6"),
-        WarehouseFurnitureItems("Image5","Text5"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image1","Text1"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image5","Text5")
+    //todo : 이건 어떻게 쓰는거죠
+    private val myList = arrayListOf<PutFunitureWarehouseFurnitureItems>(
+        PutFunitureWarehouseFurnitureItems("Image1","Text1"),
+        PutFunitureWarehouseFurnitureItems("Image2","Text2"),
+        PutFunitureWarehouseFurnitureItems("Image3","Text3"),
+        PutFunitureWarehouseFurnitureItems("Image4","Text4"),
+        PutFunitureWarehouseFurnitureItems("Image5","Text5"),
+        PutFunitureWarehouseFurnitureItems("Image6","Text6"),
+        PutFunitureWarehouseFurnitureItems("Image7","Text7"),
+        PutFunitureWarehouseFurnitureItems("Image8","Text8"),
+        PutFunitureWarehouseFurnitureItems("Image9","Text9"),
+        PutFunitureWarehouseFurnitureItems("Image0","Text0"),
+        PutFunitureWarehouseFurnitureItems("Image9","Text9"),
+        PutFunitureWarehouseFurnitureItems("Image8","Text8"),
+        PutFunitureWarehouseFurnitureItems("Image7","Text7"),
+        PutFunitureWarehouseFurnitureItems("Image6","Text6"),
+        PutFunitureWarehouseFurnitureItems("Image5","Text5"),
+        PutFunitureWarehouseFurnitureItems("Image4","Text4"),
+        PutFunitureWarehouseFurnitureItems("Image3","Text3"),
+        PutFunitureWarehouseFurnitureItems("Image2","Text2"),
+        PutFunitureWarehouseFurnitureItems("Image1","Text1"),
+        PutFunitureWarehouseFurnitureItems("Image2","Text2"),
+        PutFunitureWarehouseFurnitureItems("Image3","Text3"),
+        PutFunitureWarehouseFurnitureItems("Image4","Text4"),
+        PutFunitureWarehouseFurnitureItems("Image5","Text5")
     )
 
     override fun onCreateView(
