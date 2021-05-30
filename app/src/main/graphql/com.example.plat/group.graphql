@@ -1,6 +1,6 @@
 # Querys
-query SearchGroups($keyword: String!, $lastId: String) {
-  searchGroups(keyword: $keyword, lastId: $lastId) {
+query SearchGroups($keyword: String!) {
+  searchGroups(keyword: $keyword) {
     id
     title
     bio
@@ -87,11 +87,11 @@ query SeeGroup($id: String!) {
   }
 }
 
-query SeeHashtag($hashtag: String!, $lastId: String) {
+query SeeHashtag($hashtag: String!) {
   seeHashtag(hashtag: $hashtag) {
     id
     hashtag
-    groups(lastId: $lastId) {
+    groups {
       id
       title
       bio

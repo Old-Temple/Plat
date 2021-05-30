@@ -43,13 +43,6 @@ class StoreCategoryFurniture(val list: List<SeeTypeQuery.ItemInfo>?) : Fragment(
 
         storeFurnitureListView.adapter = storeFurnitureAdapter
 
-        storeFurnitureListView.setOnScrollChangeListener { view, i, i2, i3, i4 ->
-            Log.d("AAA", storeFurnitureListView.canScrollVertically(1).toString())
-            if (storeFurnitureListView.canScrollVertically(1) == false){
-                Toast.makeText(context, "AAA", Toast.LENGTH_LONG).show()
-            }
-        }
-
         return view
     }
 }

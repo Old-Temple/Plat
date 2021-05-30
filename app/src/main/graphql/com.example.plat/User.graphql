@@ -6,8 +6,8 @@ query me {
   }
 }
 
-query SearchUsers($keyword: String!, $lastId: String) {
-  searchUsers(keyword: $keyword, lastId: $lastId) {
+query SearchUsers($keyword: String!) {
+  searchUsers(keyword: $keyword) {
     id
     userName
     profilePhoto
@@ -16,8 +16,8 @@ query SearchUsers($keyword: String!, $lastId: String) {
   }
 }
 
-query SeeFollowers($userName: String!, $lastId: String) {
-  seeFollowers(userName: $userName, lastId: $lastId) {
+query SeeFollowers($userName: String!) {
+  seeFollowers(userName: $userName) {
     ok
     error
     followers {
@@ -30,8 +30,8 @@ query SeeFollowers($userName: String!, $lastId: String) {
   }
 }
 
-query SeeFollowings($userName: String!, $lastId: String) {
-  seeFollowings(userName: $userName, lastId: $lastId) {
+query SeeFollowings($userName: String!) {
+  seeFollowings(userName: $userName) {
     ok
     error
     followings {

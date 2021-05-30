@@ -1,6 +1,6 @@
 # Querys
-query SearchItemInfos($keyword: String!, $lastId: String) {
-  searchItemInfos(keyword: $keyword, lastId: $lastId) {
+query SearchItemInfos($keyword: String!) {
+  searchItemInfos(keyword: $keyword) {
     id
     itemName
     cost

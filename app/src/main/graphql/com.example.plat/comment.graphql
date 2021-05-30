@@ -1,6 +1,6 @@
 # Querys
-query SeeFeedComments($feedId: String!, $lastId: Int) {
-  seeFeedComments(feedId: $feedId, lastId: $lastId) {
+query SeeFeedComments($feedId: String!) {
+  seeFeedComments(feedId: $feedId) {
     id
     user {
       id

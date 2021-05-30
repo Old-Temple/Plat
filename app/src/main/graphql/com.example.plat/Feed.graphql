@@ -1,6 +1,6 @@
 # Querys
-query SearchFeeds($keyword: String!, $lastId: String) {
-  searchFeeds(keyword: $keyword, lastId: $lastId) {
+query SearchFeeds($keyword: String!) {
+  searchFeeds(keyword: $keyword) {
     id
     title
     caption

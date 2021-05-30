@@ -936,18 +936,7 @@
             {
               "name": "groups",
               "description": null,
-              "args": [
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
+              "args": [],
               "type": {
                 "kind": "LIST",
                 "name": null,
@@ -3942,16 +3931,6 @@
                     }
                   },
                   "defaultValue": null
-                },
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
                 }
               ],
               "type": {
@@ -4084,16 +4063,6 @@
                     }
                   },
                   "defaultValue": null
-                },
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
                 }
               ],
               "type": {
@@ -4181,16 +4150,6 @@
                       "name": "String",
                       "ofType": null
                     }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
                   },
                   "defaultValue": null
                 }
@@ -4391,16 +4350,6 @@
                     }
                   },
                   "defaultValue": null
-                },
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  },
-                  "defaultValue": null
                 }
               ],
               "type": {
@@ -4434,16 +4383,6 @@
                       "name": "String",
                       "ofType": null
                     }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "lastId",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
                   },
                   "defaultValue": null
                 }

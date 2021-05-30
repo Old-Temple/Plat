@@ -80,9 +80,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             val makeDialogMakePlat = DialogMakePlat(mainActivity)
             makeDialogMakePlat.show(childFragmentManager.beginTransaction(), makeDialogMakePlat.tag)
         }
-
-        Toast.makeText(context, PlatPrefs.prefs.getValue("token","abc"), Toast.LENGTH_LONG).show()
-
         //  캐릭터와 가구 충돌범위 조절위한 변수
 
 
