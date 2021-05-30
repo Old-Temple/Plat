@@ -585,9 +585,15 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     fun loadPlat(){
         //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
+<<<<<<< HEAD
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
         fragmentTransactionListener.replace(R.id.plat_scroll_root, MainChildPlat())
         fragmentTransactionListener.commit()
+=======
+            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransactionListener.replace(R.id.plat_fragment_root, MainChildPlat())
+            fragmentTransactionListener.commit()
+>>>>>>> parent of 86378b69 (Merge branch 'master' of https://github.com/Old-Temple/Plat)
 
     }
 
@@ -646,7 +652,6 @@ class MainChildPlat() : Fragment(){
 
         val platlistView2 = view.findViewById<FrameLayout>(R.id.PlatFrame)
 
-//        platlistView2.addView(view)
         platlistView2.addView(view)
 
         return view
