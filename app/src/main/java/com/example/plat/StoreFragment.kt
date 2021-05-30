@@ -32,7 +32,6 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
         val btnFuniture: Button = view.findViewById(R.id.btnStoreFurniture)
         val btnThema: Button = view.findViewById(R.id.btnStoreThema)
         val btnAvatar: Button = view.findViewById(R.id.btnStoreAvatar)
-        val btnMylist: Button = view.findViewById(R.id.btnStoreMylist)
 
         val apolloClient = apolloClient(mainActivity.applicationContext)
         val scope = CoroutineScope(Dispatchers.IO)
@@ -50,7 +49,7 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
         btnThema.setOnClickListener { view ->
             scope.launch {
                 val response : Response<SeeTypeQuery.Data> =
-                    apolloClient.query(SeeTypeQuery("furniture")).await()
+                    apolloClient.query(SeeTypeQuery("theme")).await()
 
                 val result : List<SeeTypeQuery.ItemInfo>? = response.data?.seeType?.itemInfos
 
@@ -59,26 +58,20 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
         }
         btnAvatar.setOnClickListener { view ->
             scope.launch {
-                val response : Response<SeeTypeQuery.Data> =
-                    apolloClient.query(SeeTypeQuery("furniture")).await()
+                val head : Response<SeeTypeQuery.Data> =
+                    apolloClient.query(SeeTypeQuery("head")).await()
+                val body : Response<SeeTypeQuery.Data> =
+                    apolloClient.query(SeeTypeQuery("body")).await()
+                val leg : Response<SeeTypeQuery.Data> =
+                    apolloClient.query(SeeTypeQuery("leg")).await()
 
-                val result : List<SeeTypeQuery.ItemInfo>? = response.data?.seeType?.itemInfos
+                val headlist : List<SeeTypeQuery.ItemInfo>? = head.data?.seeType?.itemInfos
+                val bodylist : List<SeeTypeQuery.ItemInfo>? = body.data?.seeType?.itemInfos
+                val leglist : List<SeeTypeQuery.ItemInfo>? = leg.data?.seeType?.itemInfos
 
-                replaceFragment(StoreCategoryAvatar(result).newInstance())
+                replaceFragment(StoreCategoryAvatar(headlist, bodylist, leglist).newInstance())
             }
         }
-        btnMylist.setOnClickListener { view ->
-            scope.launch {
-                val response : Response<SeeTypeQuery.Data> =
-                    apolloClient.query(SeeTypeQuery("furniture")).await()
-
-                val result : List<SeeTypeQuery.ItemInfo>? = response.data?.seeType?.itemInfos
-
-                replaceFragment(StoreCategoryMylist(result).newInstance())
-            }
-        }
-
-
         return view
     }
 

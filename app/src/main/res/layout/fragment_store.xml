@@ -53,15 +53,6 @@
                     android:text="아바타"
                     android:gravity="center"/>
 
-                <Button
-                    android:id="@+id/btnStoreMylist"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/edge"
-                    android:text="찜목록"
-                    android:gravity="center"/>
-
             </LinearLayout>
 
             <FrameLayout

@@ -43,10 +43,10 @@ query SeeKategorie($kategorieId: String!) {
   }
 }
 
-query SeeType($typeId: String!, $lastId: String) {
+query SeeType($typeId: String!) {
   seeType(typeId: $typeId) {
     type
-    itemInfos(lastId: $lastId) {
+    itemInfos {
       id
       itemName
       cost

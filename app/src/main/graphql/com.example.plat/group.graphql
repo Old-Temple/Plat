@@ -87,11 +87,11 @@ query SeeGroup($id: String!) {
   }
 }
 
-query SeeHashtag($hashtag: String!, $page: Int!) {
+query SeeHashtag($hashtag: String!, $lastId: String) {
   seeHashtag(hashtag: $hashtag) {
     id
     hashtag
-    groups(page: $page) {
+    groups(lastId: $lastId) {
       id
       title
       bio

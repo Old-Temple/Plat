@@ -17,12 +17,6 @@ open class StoreItems {
     open val image = ""
     open val text = ""
 }
-
-class StoreFurnitureItems(override val image:String, override val text:String):StoreItems()
-class StoreThemaItems(override val image:String, override val text:String): StoreItems()
-class StoreAvatarItems(override val image:String, override val text:String):StoreItems()
-class StoreMyListItems(override val image:String, override val text:String):StoreItems()
-
 class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_furniture, null)
@@ -111,45 +105,6 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
 
         view.findViewById<LinearLayout>(R.id.storeAvatarItem).setOnClickListener { view ->
             getItem(position)
-            val makedialogbuyitems = DialogBuyItems(item)
-            makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
-        }
-
-        image.text = item?.file
-        text.text = item?.itemName
-
-        return view
-    }
-
-    override fun getCount(): Int {
-        if (items != null) {
-            return items.size
-        }
-        else {
-            return 0
-        }
-    }
-
-    override fun getItem(position: Int): SeeTypeQuery.ItemInfo? {
-        return items?.get(position)
-    }
-
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
-}
-
-class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):
-    BaseAdapter(){
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_mylist, null)
-
-        val image = view.findViewById<TextView>(R.id.imageOfStoreSearchMyList)
-        val text = view.findViewById<TextView>(R.id.textOfStoreSearchMyList)
-        val item = items?.get(position)
-
-        view.findViewById<LinearLayout>(R.id.storeMylistItem).setOnClickListener { view ->
-
             val makedialogbuyitems = DialogBuyItems(item)
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
