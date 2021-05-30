@@ -7,41 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
-class WarehouseCategoryFurniture : Fragment() {
+class WarehouseCategoryFurniture(val furnitures : MutableList<SeeItemQuery.SeeItem>) : Fragment() {
     //todo : 창고 가구 목록
     fun newInstance(): Fragment {
-        return WarehouseCategoryFurniture()
+        return WarehouseCategoryFurniture(furnitures)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val myList = arrayListOf<WarehouseFurnitureItems>(
-        WarehouseFurnitureItems("Image1","Text1"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image5","Text5"),
-        WarehouseFurnitureItems("Image6","Text6"),
-        WarehouseFurnitureItems("Image7","Text7"),
-        WarehouseFurnitureItems("Image8","Text8"),
-        WarehouseFurnitureItems("Image9","Text9"),
-        WarehouseFurnitureItems("Image0","Text0"),
-        WarehouseFurnitureItems("Image9","Text9"),
-        WarehouseFurnitureItems("Image8","Text8"),
-        WarehouseFurnitureItems("Image7","Text7"),
-        WarehouseFurnitureItems("Image6","Text6"),
-        WarehouseFurnitureItems("Image5","Text5"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image1","Text1"),
-        WarehouseFurnitureItems("Image2","Text2"),
-        WarehouseFurnitureItems("Image3","Text3"),
-        WarehouseFurnitureItems("Image4","Text4"),
-        WarehouseFurnitureItems("Image5","Text5")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +25,7 @@ class WarehouseCategoryFurniture : Fragment() {
         //todo : 뷰 할 때마다 리스트 불러와야함
         val view:View = inflater.inflate(R.layout.fragment_warehouse_category_furniture, null)
         val gridView = view.findViewById<GridView>(R.id.warehouseFurnitureGridView)
-        val adapter = WarehouseFurnitureAdapter(activity!!, myList)
+        val adapter = WarehouseFurnitureAdapter(activity!!, furnitures)
 
         gridView.adapter = adapter
 
@@ -59,40 +33,14 @@ class WarehouseCategoryFurniture : Fragment() {
     }
 }
 
-class WarehouseCategoryThema : Fragment() {
+class WarehouseCategoryThema(val themas : MutableList<SeeItemQuery.SeeItem>) : Fragment() {
     fun newInstance() : Fragment {
-        return WarehouseCategoryThema()
+        return WarehouseCategoryThema(themas)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val myList = arrayListOf<WarehouseThemaItems>(
-        WarehouseThemaItems("ThemaImage1","Text1"),
-        WarehouseThemaItems("ThemaImage2","Text2"),
-        WarehouseThemaItems("ThemaImage3","Text3"),
-        WarehouseThemaItems("ThemaImage4","Text4"),
-        WarehouseThemaItems("ThemaImage5","Text5"),
-        WarehouseThemaItems("ThemaImage6","Text6"),
-        WarehouseThemaItems("ThemaImage7","Text7"),
-        WarehouseThemaItems("ThemaImage8","Text8"),
-        WarehouseThemaItems("ThemaImage9","Text9"),
-        WarehouseThemaItems("ThemaImage0","Text0"),
-        WarehouseThemaItems("ThemaImage9","Text9"),
-        WarehouseThemaItems("ThemaImage8","Text8"),
-        WarehouseThemaItems("ThemaImage7","Text7"),
-        WarehouseThemaItems("ThemaImage6","Text6"),
-        WarehouseThemaItems("ThemaImage5","Text5"),
-        WarehouseThemaItems("ThemaImage4","Text4"),
-        WarehouseThemaItems("ThemaImage3","Text3"),
-        WarehouseThemaItems("ThemaImage2","Text2"),
-        WarehouseThemaItems("ThemaImage1","Text1"),
-        WarehouseThemaItems("ThemaImage2","Text2"),
-        WarehouseThemaItems("ThemaImage3","Text3"),
-        WarehouseThemaItems("ThemaImage4","Text4"),
-        WarehouseThemaItems("ThemaImage5","Text5")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -101,7 +49,7 @@ class WarehouseCategoryThema : Fragment() {
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_warehouse_category_thema, null)
         val gridView = view.findViewById<GridView>(R.id.warehouseThemaGridView)
-        val adapter = WarehouseThemaAdapter(activity!!, myList)
+        val adapter = WarehouseThemaAdapter(activity!!, themas)
 
         gridView.adapter = adapter
 
@@ -109,44 +57,18 @@ class WarehouseCategoryThema : Fragment() {
     }
 }
 
-class WarehouseCategoryAvatar : Fragment() {
+class WarehouseCategoryAvatar(
+    val heads : MutableList<SeeItemQuery.SeeItem>,
+    val bodys : MutableList<SeeItemQuery.SeeItem>,
+    val legs : MutableList<SeeItemQuery.SeeItem>
+) : Fragment() {
     fun newInstance(): Fragment{
-        return WarehouseCategoryAvatar()
+        return WarehouseCategoryAvatar(heads, bodys, legs)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val bodyList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("BImage1","Text1"),
-        WarehouseAvatarItems("BImage2","Text2"),
-        WarehouseAvatarItems("BImage3","Text3"),
-        WarehouseAvatarItems("BImage4","Text4"),
-        WarehouseAvatarItems("BImage5","Text5"),
-        WarehouseAvatarItems("BImage6","Text6"),
-        WarehouseAvatarItems("BImage7","Text7")
-    )
-    private val headList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("HImage8","Text8"),
-        WarehouseAvatarItems("HImage9","Text9"),
-        WarehouseAvatarItems("HImage0","Text0"),
-        WarehouseAvatarItems("HImage9","Text9"),
-        WarehouseAvatarItems("HImage8","Text8"),
-        WarehouseAvatarItems("HImage7","Text7"),
-        WarehouseAvatarItems("HImage6","Text6"),
-        WarehouseAvatarItems("HImage5","Text5"),
-        WarehouseAvatarItems("hImage4","Text4"),
-        WarehouseAvatarItems("hImage3","Text3"),
-        WarehouseAvatarItems("hImage2","Text2")
-    )
-    private val shoesList = arrayListOf<WarehouseAvatarItems>(
-        WarehouseAvatarItems("Image1","Text1"),
-        WarehouseAvatarItems("Image2","Text2"),
-        WarehouseAvatarItems("Image3","Text3"),
-        WarehouseAvatarItems("Image4","Text4"),
-        WarehouseAvatarItems("Image5","Text5")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -155,9 +77,9 @@ class WarehouseCategoryAvatar : Fragment() {
     ): View? {
         val view:View = inflater.inflate(R.layout.fragment_warehouse_category_avatar, null)
         val gridView = view.findViewById<GridView>(R.id.warehouseAvatarGridView)
-        val headAdapter = WarehouseAvatarAdapter(activity!!, headList)
-        val bodyAdapter = WarehouseAvatarAdapter(activity!!, bodyList)
-        val shoesAdapter = WarehouseAvatarAdapter(activity!!, shoesList)
+        val headAdapter = WarehouseAvatarAdapter(activity!!, heads)
+        val bodyAdapter = WarehouseAvatarAdapter(activity!!, bodys)
+        val shoesAdapter = WarehouseAvatarAdapter(activity!!, legs)
 
         val btnBody = view.findViewById<Button>(R.id.btnWarehouseAvatarBody)
         val btnHead = view.findViewById<Button>(R.id.btnWarehouseAvatarHead)
@@ -167,8 +89,6 @@ class WarehouseCategoryAvatar : Fragment() {
 
         btnBody.setOnClickListener { view ->
             gridView.adapter = bodyAdapter
-
-
         }
         btnHead.setOnClickListener { view ->
             gridView.adapter = headAdapter

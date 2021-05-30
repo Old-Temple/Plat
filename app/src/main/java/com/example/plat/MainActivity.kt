@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +17,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.plat_funiture.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 /**
@@ -27,10 +33,15 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
 
+    val userName = PlatPrefs.prefs.getValue("userName","")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //네비게이션 버튼 클릭 리스너
+
+        val apolloClient = apolloClient(applicationContext)
+        val scope = CoroutineScope(Dispatchers.IO)
+            //네비게이션 버튼 클릭 리스너
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.actionMain -> {
@@ -71,8 +82,44 @@ class MainActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
             val warehouse = findViewById<Button>(R.id.btnGoWarehouse)
             warehouse.setOnClickListener { view ->
-                val wareHouse = DialogWarehouse()
-                wareHouse.show(supportFragmentManager, wareHouse.tag)
+                scope.launch {
+                    val response : Response<SeeUserItemsQuery.Data> =
+                        apolloClient.query(SeeUserItemsQuery(userName)).await()
+
+                    val list = response.data?.seeProfile?.items
+                    val furnitures = mutableListOf<SeeItemQuery.SeeItem>()
+                    val themas = mutableListOf<SeeItemQuery.SeeItem>()
+                    val heads = mutableListOf<SeeItemQuery.SeeItem>()
+                    val bodys = mutableListOf<SeeItemQuery.SeeItem>()
+                    val legs = mutableListOf<SeeItemQuery.SeeItem>()
+
+                    if (list != null) {
+                        for (i in list){
+
+                            val temp: Response<SeeItemQuery.Data> =
+                                apolloClient.query(SeeItemQuery(i.id)).await()
+                            val test = temp.data?.seeItem
+                            val tempValue = temp.data?.seeItem?.itemInfo?.typeId
+
+
+                            Log.d("AAA", tempValue.toString())
+                            if (tempValue == "furniture") {
+                                furnitures.add(temp.data?.seeItem!!)
+                            } else if (tempValue == "theme") {
+                                themas.add(temp.data?.seeItem!!)
+                            } else if (tempValue == "head") {
+                                heads.add(temp.data?.seeItem!!)
+                            } else if (tempValue == "body") {
+                                bodys.add(temp.data?.seeItem!!)
+                            } else if (tempValue == "leg") {
+                                legs.add(temp.data?.seeItem!!)
+                            }
+
+                        }
+                    }
+                    val wareHouse = DialogWarehouse(furnitures, themas, heads, bodys, legs)
+                    wareHouse.show(supportFragmentManager, wareHouse.tag)
+                }
             }
         }
 

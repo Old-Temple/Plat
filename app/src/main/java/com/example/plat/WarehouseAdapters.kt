@@ -8,11 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class WarehouseFurnitureItems(val image:String, val text:String)
-class WarehouseThemaItems(val image:String, val text:String)
-class WarehouseAvatarItems(val image:String, val text:String)
-
-class WarehouseFurnitureAdapter(val context: Context, val items: ArrayList<WarehouseFurnitureItems>):
+class WarehouseFurnitureAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
@@ -25,8 +21,8 @@ class WarehouseFurnitureAdapter(val context: Context, val items: ArrayList<Wareh
             //todo : 여기 가구 작업
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item.itemInfo?.file
+        text.text = item.itemInfo?.itemName
 
         return view
     }
@@ -44,7 +40,7 @@ class WarehouseFurnitureAdapter(val context: Context, val items: ArrayList<Wareh
     }
 }
 
-class WarehouseThemaAdapter(val context: Context, val items: ArrayList<WarehouseThemaItems>):
+class WarehouseThemaAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_thema, null)
@@ -57,8 +53,8 @@ class WarehouseThemaAdapter(val context: Context, val items: ArrayList<Warehouse
             //todo : 테마 아이템 클릭 리스너
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item.itemInfo?.file
+        text.text = item.itemInfo?.itemName
 
         return view
     }
@@ -76,7 +72,7 @@ class WarehouseThemaAdapter(val context: Context, val items: ArrayList<Warehouse
     }
 }
 
-class WarehouseAvatarAdapter(val context: Context, val items: ArrayList<WarehouseAvatarItems>):
+class WarehouseAvatarAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_avatar, null)
@@ -90,8 +86,8 @@ class WarehouseAvatarAdapter(val context: Context, val items: ArrayList<Warehous
 
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item.itemInfo?.file
+        text.text = item.itemInfo?.itemName
 
         return view
     }

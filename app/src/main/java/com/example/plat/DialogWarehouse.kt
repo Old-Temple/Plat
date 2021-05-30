@@ -9,7 +9,13 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 
-class DialogWarehouse : DialogFragment() {
+class DialogWarehouse(
+    val furnitures : MutableList<SeeItemQuery.SeeItem>,
+    val themas : MutableList<SeeItemQuery.SeeItem>,
+    val heads : MutableList<SeeItemQuery.SeeItem>,
+    val bodys : MutableList<SeeItemQuery.SeeItem>,
+    val legs : MutableList<SeeItemQuery.SeeItem>
+) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,16 +30,16 @@ class DialogWarehouse : DialogFragment() {
         val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
-        replaceFragment(WarehouseCategoryFurniture().newInstance())
+        replaceFragment(WarehouseCategoryFurniture(furnitures).newInstance())
 
         btnFurniture.setOnClickListener { view ->
-            replaceFragment(WarehouseCategoryFurniture().newInstance())
+            replaceFragment(WarehouseCategoryFurniture(furnitures).newInstance())
         }
         btnThema.setOnClickListener { view ->
-            replaceFragment(WarehouseCategoryThema().newInstance())
+            replaceFragment(WarehouseCategoryThema(themas).newInstance())
         }
         btnAvatar.setOnClickListener { view ->
-            replaceFragment(WarehouseCategoryAvatar().newInstance())
+            replaceFragment(WarehouseCategoryAvatar(heads, bodys, legs).newInstance())
         }
         btnClose.setOnClickListener { view ->
             dismiss()
