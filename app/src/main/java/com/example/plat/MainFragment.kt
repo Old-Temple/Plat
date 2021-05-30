@@ -601,21 +601,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 =======
 >>>>>>> parent of 53f44f95 ([영현] 참조할 부분 주석 달아 놓음)
     class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
-        val mylist = listOf<SeeUserGroupsQuery.Group>(
-            SeeUserGroupsQuery.Group("Group","id1","title1","bio1","photo1",false,4),
-            SeeUserGroupsQuery.Group("Group","id2","title2","bio2","photo2",true,3),
-            SeeUserGroupsQuery.Group("Group","id3","title3","bio3","photo3",false,6),
-            SeeUserGroupsQuery.Group("Group","id4","title4","bio4","photo4",true,8),
-            SeeUserGroupsQuery.Group("Group","id5","title5","bio5","photo5",false,0),
-            SeeUserGroupsQuery.Group("Group","id6","title5","bio6","photo6",true,1),
-            SeeUserGroupsQuery.Group("Group","id7","title6","bio7","photo7",false,8),
-            SeeUserGroupsQuery.Group("Group","id8","title7","bio8","photo8",true,2),
-            SeeUserGroupsQuery.Group("Group","id9","title8","bio9","photo9",true,4),
-            SeeUserGroupsQuery.Group("Group","id0","title9","bio0","photo0",false,2),
-            SeeUserGroupsQuery.Group("Group","id1","title0","bio1","photo1",false,3),
-            SeeUserGroupsQuery.Group("Group","id2","title1","bio2","photo2",false,4)
-
-        )
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -625,7 +610,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             val platlistView = view.findViewById<RecyclerView>(R.id.platListView)
             platlistView.layoutManager = layoutManager
-            val platListAdapter = PlatListAdapter(mylist)
+            val platListAdapter = PlatListAdapter(list)
 
             platlistView.adapter = platListAdapter
 
@@ -634,6 +619,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -659,6 +645,8 @@ class MainChildPlat() : Fragment(){
 =======
 //todo : 테스트 때문에 매개변수 잠시 바꿈 추후 수정
 >>>>>>> parent of 53f44f95 ([영현] 참조할 부분 주석 달아 놓음)
+=======
+>>>>>>> parent of ad59497f ([영현] 테스트용 리스트 생성)
 class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatListAdapter.ViewHolder {

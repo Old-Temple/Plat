@@ -124,7 +124,6 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
 
             profileListView.adapter = profileAdapter
 
-
             return view
         }
     }

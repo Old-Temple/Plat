@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 /**
  * A simple [Fragment] subclass.
  * 스토어 화면
  */
-class StoreFragment(val mainActivity: MainActivity) : Fragment() {
+class StoreFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +29,16 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
         replaceFragment(StoreCategoryFurniture().newInstance())
 
         btn1.setOnClickListener { view ->
-            loadItems(btn1.id)
+            replaceFragment(StoreCategoryFurniture().newInstance())
         }
         btn2.setOnClickListener { view ->
-            loadItems(btn2.id)
+            replaceFragment(StoreCategoryThema().newInstance())
         }
         btn3.setOnClickListener { view ->
-            loadItems(btn3.id)
+            replaceFragment(StoreCategoryAvatar().newInstance())
         }
         btn4.setOnClickListener { view ->
-            loadItems(btn4.id)
+            replaceFragment(StoreCategoryMylist().newInstance())
         }
 
 
@@ -52,29 +49,5 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
         fragmentTransactionListener.replace(R.id.storeChileFragment, fragment)
         fragmentTransactionListener.commit()
-    }
-
-    private fun loadItems(id : Int){
-        val apolloClient = apolloClient(mainActivity.applicationContext)
-
-        val scope = CoroutineScope(Dispatchers.IO)
-        scope.launch {
-//            val response : List<> = scope.query().await()
-//
-//            result = response.data?.
-//
-            if (id == R.id.btnStoreFurniture){
-                replaceFragment(StoreCategoryFurniture().newInstance())
-            }
-            else if (id == R.id.btnStoreThema){
-                replaceFragment(StoreCategoryThema().newInstance())
-            }
-            else if (id == R.id.btnStoreAvatar){
-                replaceFragment(StoreCategoryAvatar().newInstance())
-            }
-            else{
-                replaceFragment(StoreCategoryMylist().newInstance())
-            }
-        }
     }
 }
