@@ -42,24 +42,24 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
     val apolloClient = apolloClient(mainActivity.applicationContext)
 
-    val cha_num = 5 //todo : 캐릭터 수-1
-    val fun_num = 20 //todo : 가구 수 -1
+    val cha_num = 5 //캐릭터 수-1
+    val fun_num = 20 //가구 수 -1
 
-    var k = 0 // todo : 애니메이션 for 문에 필요한 변수
+    var k = 0 // 애니메이션 for 문에 필요한 변수
 
-    var dirx = 0f //todo :캐릭터 이동위한 x
-    var diry = 0f //todo : 캐릭터 이동위한 y
+    var dirx = 0f //캐릭터 이동위한 x
+    var diry = 0f //캐릭터 이동위한 y
 
-    //todo :쓰레드 돌리기 위한 변수
+    //쓰레드 돌리기 위한 변수
     var handler1 = Handler()
     var handler2: Handler = Handler()
     var handler3 = Handler()
     var handler4 = Handler()
     var runnable: Runnable = Runnable {}
-    //todo :지연 함수
+    //지연 함수
 
 
-    //todo : 캐릭터 파츠 객체 담기위한 변수
+    // 캐릭터 파츠 객체 담기위한 변수
     var cha_capsule = arrayOfNulls<FrameLayout>(6)
     var tooltip = arrayOfNulls<ImageView>(6)
     var tooltip_text = arrayOfNulls<TextView>(6)
@@ -72,7 +72,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     var flat_funiture_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
 
 
-    //todo : ID값 부여 변수*****************************************
+    // ID값 부여 변수*****************************************
     var tempID_head: Int = 0
     var tempID_body: Int = 0
 
@@ -88,7 +88,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     var tempwidth : Int = 0  // 캐릭터와 가구 충돌조절변수 - 가로
     var tempheight : Int = 0 // 캐릭터와 가구 충돌조절변수 - 세로
 
-    //todo :움직임 위한 각 캐릭터 신발 배열 *************************************
+    //움직임 위한 각 캐릭터 신발 배열 *************************************
     var character_shose_moving1 = java.util.ArrayList<Drawable?>()
     var character_shose_moving2 = java.util.ArrayList<Drawable?>()
 
@@ -101,22 +101,23 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_main, null)
+        //todo : 리스트 프래그먼트의 정보 받아오는 함수
         loadPlatList()
         loadPlat()
         val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
-        //todo : 글쓰기버튼
+        // 글쓰기버튼
         mainWriteButton.setOnClickListener{ view ->
             val makeContext = DialogMakeContext()
             makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
         }
-        //todo : 가구 배치하는 임시버튼 [이후에 변수명 바꿔야할것]
+        // 가구 배치하는 임시버튼 [이후에 변수명 바꿔야할것]
         val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
         tempGoFuniturePut.setOnClickListener{ view ->
             val makePutFragment = DialogPutFragment()
             makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
         }
 
-        //todo : 옷갈아입는 임시버튼
+        // 옷갈아입는 임시버튼
         val tempGoChangeCloth = view.findViewById<Button>(R.id.tempGoChangeCloth)
         tempGoChangeCloth.setOnClickListener{ view ->
             val makeChangeFragment = DialogChangeCloth()
@@ -130,7 +131,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
         Toast.makeText(context, PlatPrefs.prefs.getValue("token","abc"), Toast.LENGTH_LONG).show()
 
-        // todo : 캐릭터와 가구 충돌범위 조절위한 변수
+        //  캐릭터와 가구 충돌범위 조절위한 변수
         tempwidth =  fromDpToPx(activity!!, 30)
         tempheight =  fromDpToPx(activity!!, 60)
 
@@ -149,7 +150,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
          }
  */
 
-        //todo : 1차원 배열에 있는 shose_moving 이미지 나눠넣기 위함. 좀 더 알아보기 쉬운 방법 써도 될듯함
+        // 1차원 배열에 있는 shose_moving 이미지 나눠넣기 위함. 좀 더 알아보기 쉬운 방법 써도 될듯함
 
         var temp_shosemoving_ID :Int = 0
 
@@ -179,7 +180,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
 
-        //todo://////////////////////////// 동적생성에 필요한 변수////////////////////////////////////////
+        ////////////////////////////// 동적생성에 필요한 변수////////////////////////////////////////
 
         var bundle_margin_top = 20
         var bundle_margin_start = 1
@@ -192,19 +193,19 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         val plat_root:FrameLayout = view.findViewById(R.id.plat_root)
         val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        //todo: 가구 동적생성
+        //가구 동적생성
         for(i in 0..fun_num){
-            //todo: 임시로 이미지 깔아둠. [나중에 지워야함]
+            //임시로 이미지 깔아둠. [나중에 지워야함]
             plat_root.setBackgroundResource(R.drawable.grass_background)
 
 
             fun funiture_maker(): View {
                 // 동적생성
                 val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_funiture_area, false) as FrameLayout
-                //TODO : 크기설정
+                // 크기설정
                 val plat_funiture_lp =
                     ConstraintLayout.LayoutParams(fromDpToPx(view.context, 70), fromDpToPx(view.context, 70))
-                //todo: 제약, 마진설정
+                //제약, 마진설정
                 plat_funiture_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 plat_funiture_lp.topMargin = fromDpToPx(view.context, funiture_margin_top)
@@ -221,7 +222,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 return plat_funiture
 
             }
-            //todo: 마진 배치계산
+            //마진 배치계산
             if(i%3==0){
 
                 funiture_margin_start = fromDpToPx(view.context.applicationContext,9)
@@ -247,15 +248,13 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             // 배열하려는 모양 설정
 
 
-            //todo: 캐릭터 동적생성
+            //캐릭터 동적생성
             fun cha_maker(): View {
                 val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
                 //크기설정
-
-               //todo: 크기설정
                 val character_capsule_lp =
                     ConstraintLayout.LayoutParams(fromDpToPx(view.context, 100),fromDpToPx(view.context, 150))
-                //todo: 제약, 마진설정
+                //제약, 마진설정
                 character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 character_capsule_lp.topMargin = fromDpToPx(view.context, bundle_margin_top)
@@ -274,7 +273,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
             }
-            //todo: 캐릭터 배치계산
+            //캐릭터 배치계산
             if(i%2==0){
 
                 bundle_margin_start = fromDpToPx(view.context.applicationContext,26)
@@ -288,7 +287,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
             bundle_margin_start += fromDpToPx(view.context.applicationContext,53)
 
-            //todo : 이미지 불러올때 편하게 하려고 배열에 다 담아놓음
+            // 이미지 불러올때 편하게 하려고 배열에 다 담아놓음
             cha_capsule[i] = view.findViewById(tempID_bundle_capsule)
             cha_bundle[i] = cha_capsule[i]?.findViewById(R.id.character_bundle)
             head[i] = cha_capsule[i]?.findViewById(R.id.head)
@@ -302,7 +301,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             body[i]?.setBackgroundResource(R.drawable.body)
 
 
-            //todo : 옷입히는거 작동되는지 확인위함 [나중에 삭제될것]
+            // 옷입히는거 작동되는지 확인위함 [나중에 삭제될것]
             if(i%2==0){
                 temp_shosemoving_ID = 0
             }
@@ -352,7 +351,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     }
 
 
-    //todo: dp px변환
+    //dp px변환
     private fun fromDpToPx(context: Context, dp: Int): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -368,7 +367,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     //*************************************************************************
 
 
-    //todo : 걷는 모션
+    // 걷는 모션
     inner class AnimThread : Thread() {
         override fun run() {
             var index = 1
@@ -398,7 +397,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
-    // todo : 이동
+    //  이동
     inner class movecha : Thread() {
         val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         override fun run() {
@@ -426,7 +425,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
-    // todo : 이동 x,y
+    //  이동 x,y
     fun imagemove(image1: FrameLayout, posix: Float, posiy: Float, duration1: Long) {
         runnable = object : Runnable {
             override fun run() {
@@ -448,9 +447,9 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
     }
 
-    // todo : 충돌확인 flag
+    //  충돌확인 flag
     var flags = arrayOfNulls<Int>(16)
-    // todo : 가구, 아바타 충돌->알파값 변경
+    //  가구, 아바타 충돌->알파값 변경
     inner class crash : Thread() {
         override fun run() {
             while (true) {
@@ -501,7 +500,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     var ranindex_in = 0
     var random = Random()
 
-    // todo : 4방향 랜덤
+    //  4방향 랜덤
     fun randomdir(inflater: LayoutInflater) {
         var randomnum = random.nextInt(4)
         val view:View = inflater.inflate(R.layout.fragment_main, null)
@@ -566,6 +565,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     }
 
     fun loadPlatList(){
+        //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val response : Response<SeeUserGroupsQuery.Data> =
@@ -579,12 +579,15 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
+
+
+
     fun loadPlat(){
         //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
-            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransactionListener.replace(R.id.plat_scroll_root, MainChildPlat())
-            fragmentTransactionListener.commit()
+        val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+        fragmentTransactionListener.replace(R.id.plat_scroll_root, MainChildPlat())
+        fragmentTransactionListener.commit()
 
     }
 
@@ -593,23 +596,44 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
     //todo : 리스트 프래그먼트 뷰
     class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
+        val mylist = listOf<SeeUserGroupsQuery.Group>(
+            SeeUserGroupsQuery.Group("Group","id1","title1","bio1","photo1",false,4),
+            SeeUserGroupsQuery.Group("Group","id2","title2","bio2","photo2",true,3),
+            SeeUserGroupsQuery.Group("Group","id3","title3","bio3","photo3",false,6),
+            SeeUserGroupsQuery.Group("Group","id4","title4","bio4","photo4",true,8),
+            SeeUserGroupsQuery.Group("Group","id5","title5","bio5","photo5",false,0),
+            SeeUserGroupsQuery.Group("Group","id6","title5","bio6","photo6",true,1),
+            SeeUserGroupsQuery.Group("Group","id7","title6","bio7","photo7",false,8),
+            SeeUserGroupsQuery.Group("Group","id8","title7","bio8","photo8",true,2),
+            SeeUserGroupsQuery.Group("Group","id9","title8","bio9","photo9",true,4),
+            SeeUserGroupsQuery.Group("Group","id0","title9","bio0","photo0",false,2),
+            SeeUserGroupsQuery.Group("Group","id1","title0","bio1","photo1",false,3),
+            SeeUserGroupsQuery.Group("Group","id2","title1","bio2","photo2",false,4)
+
+        )
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
             val view: View = inflater.inflate(R.layout.fragment_main_child_platlist, null)
+            //리스트뷰 설정(가로 스크롤)
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            //리스트뷰 만들 곳
             val platlistView = view.findViewById<RecyclerView>(R.id.platListView)
+            //설정 적용
             platlistView.layoutManager = layoutManager
-            val platListAdapter = PlatListAdapter(list)
-
+            //어댑터 연결, 서버에서 받아온 리스트 보내줌
+            val platListAdapter = PlatListAdapter(mylist)
+            //뷰에 어댑터를 연결 시킴
             platlistView.adapter = platListAdapter
 
             return view
         }
     }
 }
+
+
 
 class MainChildPlat() : Fragment(){
 
@@ -630,7 +654,6 @@ class MainChildPlat() : Fragment(){
 
 
 //todo : 리스트프래그먼트 어댑터, 리스트 받아서 그 리스트의 수만큼 아이템 만들어줌
-//todo : 테스트 때문에 매개변수 잠시 바꿈 추후 수정
 class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatListAdapter.ViewHolder {
