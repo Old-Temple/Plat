@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
-class DialogSearchPlat(val item:SearchedItem) : DialogFragment() {
+class DialogSearchPlat(val item:SearchGroupsQuery.SearchGroup?) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,9 +19,9 @@ class DialogSearchPlat(val item:SearchedItem) : DialogFragment() {
         val view:View = inflater.inflate(R.layout.fragment_dialog_search_plat, container, false)
 
         view.findViewById<TextView>(R.id.searchedItemText).text =
-            item.text
+            item?.title
         view.findViewById<TextView>(R.id.searchedItemImage).text =
-            item.image
+            item?.groupPhoto
 
         view.findViewById<Button>(R.id.btnSearchedRequest).setOnClickListener { view ->
             //todo : 참가 요청 버튼

@@ -8,49 +8,67 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * 서치 창 화면
  */
-class SearchFragment(mainActivity: MainActivity) : Fragment() {
+class SearchFragment(val mainActivity: MainActivity) : Fragment() {
+
+    val apolloClient = apolloClient(mainActivity.applicationContext)
+    val scope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var list = loadItems("")
         val view: View = inflater.inflate(R.layout.fragment_search, null)
-        val searchListView = view.findViewById<GridView>(R.id.searchGridView)
-        var searchListAdapter = SearchListAdapter(this, activity!!, list)
 
-        view.findViewById<EditText>(R.id.searchInput).addTextChangedListener {
-            list = loadItems(view.findViewById<EditText>(R.id.searchInput).text.toString())
-            searchListAdapter = SearchListAdapter(this, activity!!, list)
+        val searchInput = view.findViewById<EditText>(R.id.searchInput)
 
-            searchListView.adapter = searchListAdapter
+
+        view.findViewById<Button>(R.id.searchSubmitButton).setOnClickListener { view ->
+            val input = searchInput.text.toString()
+            scope.launch {
+                val response : Response<SearchGroupsQuery.Data> =
+                    apolloClient.query(SearchGroupsQuery(input)).await()
+
+                val result = response.data?.searchGroups
+
+                val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+                fragmentTransactionListener.replace(R.id.searchedLayout, SearchChildResult(result))
+                fragmentTransactionListener.commit()
+            }
+
         }
 
         return view
     }
 
-    fun loadItems(text:String):ArrayList<SearchedItem>{
-        //todo : 검색 결과 서버에서 가져와함.
-        // 일단 테스트용으로 입력될 때마다 리스트 추가되는 것으로 만듬
-        val list = arrayListOf<SearchedItem>()
+    class SearchChildResult(val list : List<SearchGroupsQuery.SearchGroup>?):Fragment(){
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val view: View = inflater.inflate(R.layout.fragment_search_child_result, null)
+            val layout = view.findViewById<GridView>(R.id.searchGridView)
+            val searchListAdapter = SearchListAdapter(this, activity!!, list)
 
-        for(i in 0..text.length){
-            list.add(SearchedItem(text, text))
+            layout.adapter = searchListAdapter
+
+            return view
         }
-
-        return list
     }
 }
 
-//이미지의 경우 임시로 String타입 줬음
-class SearchedItem(val image: String, val text: String)
-
 //listAdapter
-class SearchListAdapter(val fragment: Fragment, val context: Context, val searchedItems: ArrayList<SearchedItem>) : BaseAdapter(){
+class SearchListAdapter(val fragment: Fragment, val context: Context, var searchedItems: List<SearchGroupsQuery.SearchGroup>?) : BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         //각 리스트 형태 저장
@@ -59,10 +77,10 @@ class SearchListAdapter(val fragment: Fragment, val context: Context, val search
         //각 리스트 내용
         val image = view.findViewById<TextView>(R.id.searchedImage)
         val text = view.findViewById<TextView>(R.id.searchedText)
-        val item = searchedItems[position]
+        val item = searchedItems?.get(position)
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item?.groupPhoto
+        text.text = item?.title
 
         //검색된 아이템 클릭 리스너
         view.findViewById<LinearLayout>(R.id.searchedItem).setOnClickListener { view ->
@@ -73,15 +91,17 @@ class SearchListAdapter(val fragment: Fragment, val context: Context, val search
     }
 
     override fun getCount(): Int {
-        return searchedItems.size
+        return searchedItems!!.size
     }
 
     override fun getItem(position: Int): Any {
-        return searchedItems[position]
+        return searchedItems!!.get(position)
     }
 
     override fun getItemId(position: Int): Long {
         return 0
     }
 
+
 }
+

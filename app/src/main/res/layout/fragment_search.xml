@@ -53,8 +53,8 @@
             android:background="@drawable/edge">
 
 <!--            본문 GridView-->
-            <GridView
-                android:id="@+id/searchGridView"
+            <FrameLayout
+                android:id="@+id/searchedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:numColumns="2"/>
