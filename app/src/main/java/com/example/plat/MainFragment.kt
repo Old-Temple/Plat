@@ -117,7 +117,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransactionListener.replace(R.id.plat_scroll_root, MainChildPlat())
+        fragmentTransactionListener.replace(R.id.scroll_root, MainChildPlat())
         fragmentTransactionListener.commit()
     }
 
@@ -220,7 +220,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         ): View? {
             val view: View = inflater.inflate(R.layout.fragment_main_child_plat, null)
 
-            val platlistView2 = view.findViewById<FrameLayout>(R.id.PlatFrame)
+            val platlistView2 = view.findViewById<FrameLayout>(R.id.plat_root)
 
 
             tempwidth =  fromDpToPx(activity!!, 30)
