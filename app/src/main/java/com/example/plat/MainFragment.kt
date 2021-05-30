@@ -647,6 +647,7 @@ class MainChildPlat() : Fragment(){
         val platlistView2 = view.findViewById<FrameLayout>(R.id.PlatFrame)
 
 //        platlistView2.addView(view)
+        platlistView2.addView(view)
 
         return view
     }
