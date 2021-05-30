@@ -27,7 +27,7 @@ class StoreCategoryFurniture : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val list = loadItems()
         val view: View = inflater.inflate(R.layout.fragment_store_category_furniture, null)
         val storeFurnitureListView = view.findViewById<GridView>(R.id.storeFurnitureGridView)

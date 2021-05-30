@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
  * A simple [Fragment] subclass.
  * 스토어 화면
  */
-class StoreFragment(mainActivity: MainActivity) : Fragment() {
+class StoreFragment(val mainActivity: MainActivity) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,16 +32,16 @@ class StoreFragment(mainActivity: MainActivity) : Fragment() {
         replaceFragment(StoreCategoryFurniture().newInstance())
 
         btn1.setOnClickListener { view ->
-            replaceFragment(StoreCategoryFurniture().newInstance())
+            loadItems(btn1.id)
         }
         btn2.setOnClickListener { view ->
-            replaceFragment(StoreCategoryThema().newInstance())
+            loadItems(btn2.id)
         }
         btn3.setOnClickListener { view ->
-            replaceFragment(StoreCategoryAvatar().newInstance())
+            loadItems(btn3.id)
         }
         btn4.setOnClickListener { view ->
-            replaceFragment(StoreCategoryMylist().newInstance())
+            loadItems(btn4.id)
         }
 
 
@@ -49,5 +52,29 @@ class StoreFragment(mainActivity: MainActivity) : Fragment() {
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
         fragmentTransactionListener.replace(R.id.storeChileFragment, fragment)
         fragmentTransactionListener.commit()
+    }
+
+    private fun loadItems(id : Int){
+        val apolloClient = apolloClient(mainActivity.applicationContext)
+
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+//            val response : List<> = scope.query().await()
+//
+//            result = response.data?.
+//
+            if (id == R.id.btnStoreFurniture){
+                replaceFragment(StoreCategoryFurniture().newInstance())
+            }
+            else if (id == R.id.btnStoreThema){
+                replaceFragment(StoreCategoryThema().newInstance())
+            }
+            else if (id == R.id.btnStoreAvatar){
+                replaceFragment(StoreCategoryAvatar().newInstance())
+            }
+            else{
+                replaceFragment(StoreCategoryMylist().newInstance())
+            }
+        }
     }
 }
