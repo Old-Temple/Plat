@@ -38,8 +38,8 @@ import kotlinx.coroutines.launch
  * 메인화면
  */
 class MainFragment(val mainActivity: MainActivity) : Fragment() {
-    val userName = PlatPrefs.prefs.getValue("userName","")
 
+    val userName = PlatPrefs.prefs.getValue("userName", "")
     val apolloClient = apolloClient(mainActivity.applicationContext)
 
 
@@ -54,8 +54,9 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_main, null)
         //todo : 리스트 프래그먼트의 정보 받아오는 함수
-        loadPlatList()
-        loadPlat()
+        loadPlatList(this)
+        //loadPlat()// 첫번째 나오는거 호출해야함 나중에..
+
         val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
         // 글쓰기버튼
         mainWriteButton.setOnClickListener{ view ->
@@ -91,7 +92,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     //dp px변환
 
 
-    fun loadPlatList(){
+    fun loadPlatList(mainFragment: MainFragment){
         //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
@@ -101,7 +102,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             val groupList = response.data?.seeProfile?.groups
 
             val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransactionListener.replace(R.id.platListFrameLayout, MainChildPlatList(groupList))
+            fragmentTransactionListener.replace(R.id.platListFrameLayout, MainChildPlatList(mainFragment, mainActivity, groupList))
             fragmentTransactionListener.commit()
         }
     }
@@ -109,35 +110,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
 
-    fun loadPlat(){
-        //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
-
-        val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransactionListener.replace(R.id.scroll_root, MainChildPlat())
-        fragmentTransactionListener.commit()
-    }
 
 
 
 
     //todo : 리스트 프래그먼트 뷰
-    class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
-        val mylist = listOf<SeeUserGroupsQuery.Group>(
-            SeeUserGroupsQuery.Group("Group","id1","title1","bio1","photo1",false,4),
-            SeeUserGroupsQuery.Group("Group","id2","title2","bio2","photo2",true,3),
-            SeeUserGroupsQuery.Group("Group","id3","title3","bio3","photo3",false,6),
-            SeeUserGroupsQuery.Group("Group","id4","title4","bio4","photo4",true,8),
-            SeeUserGroupsQuery.Group("Group","id5","title5","bio5","photo5",false,0),
-            SeeUserGroupsQuery.Group("Group","id6","title5","bio6","photo6",true,1),
-            SeeUserGroupsQuery.Group("Group","id7","title6","bio7","photo7",false,8),
-            SeeUserGroupsQuery.Group("Group","id8","title7","bio8","photo8",true,2),
-            SeeUserGroupsQuery.Group("Group","id9","title8","bio9","photo9",true,4),
-            SeeUserGroupsQuery.Group("Group","id0","title9","bio0","photo0",false,2),
-            SeeUserGroupsQuery.Group("Group","id1","title0","bio1","photo1",false,3),
-            SeeUserGroupsQuery.Group("Group","id2","title1","bio2","photo2",false,4)
+    class MainChildPlatList(val mainFragment: MainFragment, val mainActivity: MainActivity, val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
 
-        )
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -151,7 +131,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             //설정 적용
             platlistView.layoutManager = layoutManager
             //어댑터 연결, 서버에서 받아온 리스트 보내줌
-            val platListAdapter = PlatListAdapter(list)
+            val platListAdapter = PlatListAdapter(mainFragment, mainActivity, list)
             //뷰에 어댑터를 연결 시킴
             platlistView.adapter = platListAdapter
 
@@ -159,9 +139,10 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%뷰그리는곳~
+    class MainChildPlat(val data : SeeGroupQuery.SeeGroup) : Fragment(){
 
-    class MainChildPlat() : Fragment(){
-        val cha_num = 5 //캐릭터 수-1
+        //val cha_num = data.user //캐릭터 수-1
         val fun_num = 20 //가구 수 -1
 
         var k = 0 // 애니메이션 for 문에 필요한 변수
@@ -210,6 +191,34 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         //움직임 위한 각 캐릭터 신발 배열 *************************************
         var character_shose_moving1 = java.util.ArrayList<Drawable?>()
         var character_shose_moving2 = java.util.ArrayList<Drawable?>()
+
+        // apollo
+//        fun loadGroupData(){
+//            val scope = CoroutineScope(Dispatchers.IO)
+//            scope.launch {
+//                val response : Response<SeeGroupQuery.Data> =
+//                    apolloClient.query(SeeGroupQuery(id)).await()
+//
+//                val userName = response.data?.seeProfile?.userName.toString()
+//                val firstName = response.data?.seeProfile?.firstName.toString()
+//                val lastName = response.data?.seeProfile?.lastName.toString()
+//                val profilePhoto = response.data?.seeProfile?.profilePhoto.toString()
+//                val followersCount = response.data?.seeProfile?.followersCount
+//                val followingsCount = response.data?.seeProfile?.followingsCount
+//
+//                val profile = Profile(userName, firstName, lastName, profilePhoto, followersCount, followingsCount)
+//
+//                //fragment 호출
+//                val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+//                fragmentTransactionListener.replace(R.id.profileChildMeLayout,
+//                    ProfileFragment.ProfileChildMe(profile)
+//                )
+//                fragmentTransactionListener.commit()
+//
+//                return@launch
+//            }
+//        }
+
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -218,7 +227,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             val view: View = inflater.inflate(R.layout.fragment_main_child_plat, null)
 
             val platlistView2 = view.findViewById<FrameLayout>(R.id.plat_root)
-
 
             tempwidth =  fromDpToPx(activity!!, 30)
             tempheight =  fromDpToPx(activity!!, 60)
@@ -665,12 +673,20 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
     //todo : 리스트프래그먼트 어댑터, 리스트 받아서 그 리스트의 수만큼 아이템 만들어줌
-    class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
+    class PlatListAdapter(val mainFragment: MainFragment, val mainActivity: MainActivity, val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatListAdapter.ViewHolder {
             val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_plat_list, parent, false)
 
-            return ViewHolder(inflatedView)
+//
+//            inflatedView.findViewById<TextView>(R.id.item_plat_list).setOnClickListener { view ->
+//
+//                Log.d("ASd", )
+//
+//            }
+
+
+            return ViewHolder(mainFragment, mainActivity, inflatedView)
         }
 
         override fun onBindViewHolder(holder: PlatListAdapter.ViewHolder, position: Int) {
@@ -680,9 +696,31 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
 
 
-        class ViewHolder(private var v: View) : RecyclerView.ViewHolder(v){
-            fun bind(item: SeeUserGroupsQuery.Group?){
-                v.item_plat_list.text = item?.title.toString()
+        class ViewHolder(val mainFragment: MainFragment, val mainActivity: MainActivity, private var v: View) : RecyclerView.ViewHolder(v){
+            val apolloClient = apolloClient(mainActivity.applicationContext)
+            val scope = CoroutineScope(Dispatchers.IO)
+            fun bind(group: SeeUserGroupsQuery.Group?){
+                v.item_plat_list.text = group?.title.toString()
+                v.setOnClickListener {
+                    Log.d("ASD", group?.toString())
+                    scope.launch {
+                        val response : Response<SeeGroupQuery.Data> =
+                            apolloClient.query(SeeGroupQuery(group?.id.toString())).await()
+
+                        val data = response.data?.seeGroup
+
+                        loadPlat(mainFragment, data)
+                    }
+
+                    // 플랏렌더 함수 호출 (item?.id)
+                    // 호출된 함수 안에서 data = apollo(item.id)
+                    // data.userCount
+                    // 어떤 아바타의 해드그리는 (data.users[9].avatar.headId)
+                    // var avatar9_headId = asdasdasas
+                    // 어떤 아바타의 해드 그리는(avatar9_headId)
+
+
+                }
             }
         }
 
@@ -698,7 +736,13 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 }
 
+fun loadPlat(fragment: Fragment, data: SeeGroupQuery.SeeGroup){
+    //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
+    val fragmentTransactionListener: FragmentTransaction = fragment.childFragmentManager.beginTransaction()
+    fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
+    fragmentTransactionListener.commit()
+}
 
 
 

@@ -83,7 +83,8 @@ class DialogChangeCloth : DialogFragment() {
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransactionListener.replace(R.id.warehouseChildFragment3, fragment)
+        //fragmentTransactionListener.replace(R.id.warehouseChildFragment3, fragment)
+        //todo: 나중에 변수명 바꾸기..
         fragmentTransactionListener.commit()
     }
 }

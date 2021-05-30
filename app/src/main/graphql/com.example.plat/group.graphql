@@ -54,6 +54,7 @@ query SeeGroup($id: String!) {
         }
       }
     }
+    userCount
     feeds {
       id
       user {
