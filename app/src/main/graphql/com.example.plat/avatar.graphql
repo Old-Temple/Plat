@@ -2,7 +2,6 @@
 query SeeAvatar($userId: String!) {
   seeAvatar(userId: $userId) {
     userId
-    color
     headUrl
     headId
     bodyUrl
@@ -28,20 +27,19 @@ query SeeAvatar($userId: String!) {
 }
 
 # Mustations
-mutation CreateAvatar($color: String!) {
-  createAvatar(color: $color) {
+mutation CreateAvatar {
+  createAvatar {
     ok
     error
   }
 }
 
 mutation EditAvatar(
-  $color: String
   $headId: String
   $bodyId: String
   $legId: String
 ) {
-  editAvatar(color: $color, headId: $headId, bodyId: $bodyId, legId: $legId) {
+  editAvatar(headId: $headId, bodyId: $bodyId, legId: $legId) {
     ok
     error
   }

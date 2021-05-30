@@ -28,7 +28,6 @@ query SeeGroup($id: String!) {
       profilePhoto
       avatar {
         userId
-        color
         headUrl
         headId
         bodyUrl

@@ -23,13 +23,13 @@ class StoreThemaItems(override val image:String, override val text:String): Stor
 class StoreAvatarItems(override val image:String, override val text:String):StoreItems()
 class StoreMyListItems(override val image:String, override val text:String):StoreItems()
 
-class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):BaseAdapter(){
+class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_furniture, null)
 
         val image = view.findViewById<TextView>(R.id.imageOfStoreSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchFurniture)
-        val item = items[position]
+        val item = items?.get(position)
 
         view.findViewById<LinearLayout>(R.id.storeFurnitureItem).setOnClickListener { view ->
 
@@ -37,18 +37,23 @@ class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val it
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item?.file
+        text.text = item?.itemName
 
         return view
     }
 
     override fun getCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else {
+            return 0
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        return items[position]
+    override fun getItem(position: Int): SeeTypeQuery.ItemInfo? {
+        return items?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -56,14 +61,14 @@ class StoreFurnitureAdapter(val fragment: Fragment, val context: Context, val it
     }
 }
 
-class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
+class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_thema, null)
 
         val image = view.findViewById<TextView>(R.id.imageOfStoreSearchThema)
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchThema)
-        val item = items[position]
+        val item = items?.get(position)
 
         view.findViewById<LinearLayout>(R.id.storeThemaItem).setOnClickListener { view ->
 
@@ -71,18 +76,23 @@ class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items:
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item?.file
+        text.text = item?.itemName
 
         return view
     }
 
     override fun getCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else {
+            return 0
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        return items[position]
+    override fun getItem(position: Int): SeeTypeQuery.ItemInfo? {
+        return items?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -90,14 +100,14 @@ class StoreThemaAdapter(val fragment: Fragment, val context: Context, val items:
     }
 }
 
-class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
+class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_avatar, null)
 
         val image = view.findViewById<TextView>(R.id.imageOfStoreSearchAvatar)
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchAvatar)
-        val item = items[position]
+        val item = items?.get(position)
 
         view.findViewById<LinearLayout>(R.id.storeAvatarItem).setOnClickListener { view ->
             getItem(position)
@@ -105,19 +115,23 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item?.file
+        text.text = item?.itemName
 
         return view
     }
 
     override fun getCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else {
+            return 0
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        Log.d("AAAA", items[position].toString())
-        return items[position]
+    override fun getItem(position: Int): SeeTypeQuery.ItemInfo? {
+        return items?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -125,14 +139,14 @@ class StoreAvatarAdapter(val fragment: Fragment, val context: Context, val items
     }
 }
 
-class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: ArrayList<StoreItems>):
+class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_mylist, null)
 
         val image = view.findViewById<TextView>(R.id.imageOfStoreSearchMyList)
         val text = view.findViewById<TextView>(R.id.textOfStoreSearchMyList)
-        val item = items[position]
+        val item = items?.get(position)
 
         view.findViewById<LinearLayout>(R.id.storeMylistItem).setOnClickListener { view ->
 
@@ -140,18 +154,23 @@ class StoreMyListAdapter(val fragment: Fragment, val context: Context, val items
             makedialogbuyitems.show(fragment.childFragmentManager.beginTransaction(), makedialogbuyitems.tag)
         }
 
-        image.text = item.image
-        text.text = item.text
+        image.text = item?.file
+        text.text = item?.itemName
 
         return view
     }
 
     override fun getCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else {
+            return 0
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        return items[position]
+    override fun getItem(position: Int): SeeTypeQuery.ItemInfo? {
+        return items?.get(position)
     }
 
     override fun getItemId(position: Int): Long {

@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
-class DialogBuyItems(val item:StoreItems) : DialogFragment() {
+class DialogBuyItems(val item:SeeTypeQuery.ItemInfo?) : DialogFragment() {
 //    fun onCreate() {
 //        super.onCreate(savedInstanceState)
 //    }
@@ -25,8 +25,8 @@ class DialogBuyItems(val item:StoreItems) : DialogFragment() {
         val name = view.findViewById<TextView>(R.id.buyItemName)
         val image = view.findViewById<TextView>(R.id.buyItemImage)
 
-        name.text = item.text
-        image.text = item.image
+        name.text = item?.itemName
+        image.text = item?.file
 
         view.findViewById<Button>(R.id.btnbuyItembuy).setOnClickListener { view ->
             //todo : 구매버튼

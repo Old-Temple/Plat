@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridView
+import android.widget.Toast
 
 /**
  * A simple [Fragment] subclass.
  * Use the [StoreCategoryFurniture.newInstance] factory method to
  * create an instance of this fragment.
  */
-class StoreCategoryFurniture : Fragment() {
+class StoreCategoryFurniture(val list: List<SeeTypeQuery.ItemInfo>?) : Fragment() {
     //todo : 스토어 가구 목록
     fun newInstance(): Fragment {
-        return StoreCategoryFurniture()
+        return StoreCategoryFurniture(list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +29,17 @@ class StoreCategoryFurniture : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val list = loadItems()
         val view: View = inflater.inflate(R.layout.fragment_store_category_furniture, null)
         val storeFurnitureListView = view.findViewById<GridView>(R.id.storeFurnitureGridView)
+
         val storeFurnitureAdapter = StoreFurnitureAdapter(this, activity!!, list)
 
         storeFurnitureListView.adapter = storeFurnitureAdapter
+
+//        storeFurnitureListView.verticalScrollbarPosition = view.scrollBarSize
+//        if (storeFurnitureListView.verticalScrollbarPosition == view.scrollBarSize){
+//            Toast.makeText(context, storeFurnitureListView.verticalScrollbarPosition.toString(), Toast.LENGTH_LONG).show()
+//        }
 
         return view
     }
@@ -69,10 +75,10 @@ class StoreCategoryFurniture : Fragment() {
     }
 }
 
-class StoreCategoryThema : Fragment() {
+class StoreCategoryThema(val list: List<SeeTypeQuery.ItemInfo>?) : Fragment() {
     // todo : 스토어 테마 목록임
     fun newInstance(): Fragment {
-        return StoreCategoryThema()
+        return StoreCategoryThema(list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +90,6 @@ class StoreCategoryThema : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val list = loadItems()
         val view: View = inflater.inflate(R.layout.fragment_store_category_thema, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeThemaGridView)
         val adapter = StoreThemaAdapter(this, activity!!, list)
@@ -126,7 +131,7 @@ class StoreCategoryThema : Fragment() {
     }
 }
 
-class StoreCategoryAvatar : Fragment() {
+class StoreCategoryAvatar(val list: List<SeeTypeQuery.ItemInfo>?) : Fragment() {
     //todo : 스토어 아바타 목록
     final val head = 0
     final val body = 1
@@ -134,7 +139,7 @@ class StoreCategoryAvatar : Fragment() {
 
 
     fun newInstance(): Fragment {
-        return StoreCategoryAvatar()
+        return StoreCategoryAvatar(list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,7 +151,6 @@ class StoreCategoryAvatar : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var list = loadItems(head)
         val view: View = inflater.inflate(R.layout.fragment_store_category_avatar, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeAvatarGridView)
 
@@ -158,17 +162,14 @@ class StoreCategoryAvatar : Fragment() {
         gridView.adapter = adapter
 
         btnBody.setOnClickListener { view ->
-            list = loadItems(body)
             val adapter = StoreAvatarAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
         btnHead.setOnClickListener { view ->
-            list = loadItems(head)
             val adapter = StoreAvatarAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
         btnShoes.setOnClickListener { view ->
-            list = loadItems(shoes)
             val adapter = StoreAvatarAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
@@ -219,7 +220,7 @@ class StoreCategoryAvatar : Fragment() {
     }
 }
 
-class StoreCategoryMylist : Fragment() {
+class StoreCategoryMylist(val list: List<SeeTypeQuery.ItemInfo>?) : Fragment() {
     // todo : 스토어의 마이 리스트 항목
 
     final val furniture = 0
@@ -227,7 +228,7 @@ class StoreCategoryMylist : Fragment() {
     final val thema = 2
 
     fun newInstance(): Fragment {
-        return StoreCategoryMylist()
+        return StoreCategoryMylist(list)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -239,7 +240,6 @@ class StoreCategoryMylist : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var list = loadItems(furniture)
         val view: View = inflater.inflate(R.layout.fragment_store_category_mylist, container, false)
         val gridView = view.findViewById<GridView>(R.id.storeMyListGridView)
 
@@ -251,17 +251,14 @@ class StoreCategoryMylist : Fragment() {
         gridView.adapter = adapter
 
         btnFurniture.setOnClickListener { view ->
-            list = loadItems(furniture)
             val adapter = StoreMyListAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
         btnThema.setOnClickListener { view ->
-            list = loadItems(thema)
             val adapter = StoreMyListAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
         btnAvatar.setOnClickListener { view ->
-            list = loadItems(avatar)
             val adapter = StoreMyListAdapter(this, activity!!, list)
             gridView.adapter = adapter
         }
