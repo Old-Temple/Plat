@@ -250,11 +250,9 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             //todo: 캐릭터 동적생성
             fun cha_maker(): View {
                 val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
-<<<<<<< HEAD
                 //크기설정
-=======
+
                //todo: 크기설정
->>>>>>> parent of 53f44f95 ([영현] 참조할 부분 주석 달아 놓음)
                 val character_capsule_lp =
                     ConstraintLayout.LayoutParams(fromDpToPx(view.context, 100),fromDpToPx(view.context, 150))
                 //todo: 제약, 마진설정
@@ -580,10 +578,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             fragmentTransactionListener.commit()
         }
     }
-<<<<<<< HEAD
-
-
-
 
     fun loadPlat(){
         //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
@@ -598,8 +592,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
     //todo : 리스트 프래그먼트 뷰
-=======
->>>>>>> parent of 53f44f95 ([영현] 참조할 부분 주석 달아 놓음)
     class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -618,10 +610,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
 class MainChildPlat() : Fragment(){
 
@@ -642,11 +630,7 @@ class MainChildPlat() : Fragment(){
 
 
 //todo : 리스트프래그먼트 어댑터, 리스트 받아서 그 리스트의 수만큼 아이템 만들어줌
-=======
 //todo : 테스트 때문에 매개변수 잠시 바꿈 추후 수정
->>>>>>> parent of 53f44f95 ([영현] 참조할 부분 주석 달아 놓음)
-=======
->>>>>>> parent of ad59497f ([영현] 테스트용 리스트 생성)
 class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatListAdapter.ViewHolder {
