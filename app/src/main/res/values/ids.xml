@@ -158,6 +158,7 @@
     <item type="id" name="shose_moving6" />
 
 
-
+    <item type="id" name="default_group_theme" />
+    <item type="id" name="default_avatar_face" />" />
 
 </resources>

@@ -140,9 +140,11 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%뷰그리는곳~
-    class MainChildPlat(val data : SeeGroupQuery.SeeGroup) : Fragment(){
+    //
+    class MainChildPlat(val data : SeeGroupQuery.SeeGroup?) : Fragment(){
 
-        //val cha_num = data.user //캐릭터 수-1
+        val cha_num = (data?.userCount ?: 0) - 1//캐릭터 수-1
+       // val cha_num = 5//캐릭터 수-1
         val fun_num = 20 //가구 수 -1
 
         var k = 0 // 애니메이션 for 문에 필요한 변수
@@ -151,10 +153,10 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         var diry = 0f //캐릭터 이동위한 y
 
         //쓰레드 돌리기 위한 변수
-        var handler1 = Handler()
-        var handler2: Handler = Handler()
-        var handler3 = Handler()
-        var handler4 = Handler()
+//        var handler1 = Handler()
+//        var handler2: Handler = Handler()
+//        var handler3 = Handler()
+//        var handler4 = Handler()
         var runnable: Runnable = Runnable {}
         //지연 함수
 
@@ -187,6 +189,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         var tempID_plat_funiture : Int = 0
         var tempwidth : Int = 0  // 캐릭터와 가구 충돌조절변수 - 가로
         var tempheight : Int = 0 // 캐릭터와 가구 충돌조절변수 - 세로
+        var tempID_background_img : Int = 0
 
         //움직임 위한 각 캐릭터 신발 배열 *************************************
         var character_shose_moving1 = java.util.ArrayList<Drawable?>()
@@ -231,9 +234,9 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             tempwidth =  fromDpToPx(activity!!, 30)
             tempheight =  fromDpToPx(activity!!, 60)
 
-
+            //Log.d("inplat", data.toString())
             ////////////////////////////
-            val fun_arys_flat = resources.obtainTypedArray(R.array.funi_arys_plat)
+            //val fun_arys_flat = resources.obtainTypedArray(R.array.funi_arys_plat)
 
             ///////////////////
 
@@ -263,13 +266,13 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 }
                 when (temp_shosemoving_ID){
                     0-> {
-                        character_shose_moving1.add(getDrawable(activity!!, R.drawable.shose_pink_1))
-                        character_shose_moving2.add(getDrawable(activity!!, R.drawable.shose_pink_2))
+                        //character_shose_moving1.add(getDrawable(activity!!, R.drawable.shose_pink_1))
+                       // character_shose_moving2.add(getDrawable(activity!!, R.drawable.shose_pink_2))
 
                     }
                     1->{
-                        character_shose_moving1.add(getDrawable(activity!!, R.drawable.gray_shose_1))
-                        character_shose_moving2.add(getDrawable(activity!!, R.drawable.gray_shose_2))
+                       // character_shose_moving1.add(getDrawable(activity!!, R.drawable.gray_shose_1))
+                       // character_shose_moving2.add(getDrawable(activity!!, R.drawable.gray_shose_2))
                     }
                 }
             }
@@ -292,7 +295,15 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             //가구 동적생성
             for(i in 0..fun_num){
                 //임시로 이미지 깔아둠. [나중에 지워야함]
-                plat_root.setBackgroundResource(R.drawable.grass_background)
+
+                var temp = data?.theme
+                tempID_background_img = getResources().getIdentifier(
+                    temp,
+                    "drawable", activity!!.packageName
+                )
+
+                //plat_root.setBackgroundResource(R.drawable.grass_background)
+                plat_root.setBackgroundResource(tempID_background_img)
 
 
                 fun funiture_maker(): View {
@@ -393,9 +404,9 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 tooltip_text[i] = cha_capsule[i]?.findViewById(R.id.tootip_text)
                 like_button[i] = cha_capsule[i]?.findViewById(R.id.like_button)
 
-                head[i]?.setBackgroundResource(R.drawable.head_shy)
-                body[i]?.setBackgroundResource(R.drawable.body)
-
+                head[i]?.setBackgroundResource(IdMaker(data?.users?.get(i)?.avatar?.headId.toString()))
+                //body[i]?.setBackgroundResource(R.drawable.body)
+                Log.d("AAA", head[i].toString())
 
                 // 옷입히는거 작동되는지 확인위함 [나중에 삭제될것]
                 if(i%2==0){
@@ -406,12 +417,12 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 }
                 when (temp_shosemoving_ID){
                     0-> {
-                        body[i]?.setBackgroundResource(R.drawable.body_belt_skirt)
+                       // body[i]?.setBackgroundResource(R.drawable.body_belt_skirt)
 
                     }
                     1->{
 
-                        body[i]?.setBackgroundResource(R.drawable.body_skirt)
+                      //  body[i]?.setBackgroundResource(R.drawable.body_skirt)
                     }
                 }
 
@@ -425,18 +436,20 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             // 배열에 가구 넣어서 조건 맞는거 가져오기
             //임시로 0번 배열에 index0
             ////todo: 이것도 임시확인, [나중에 지워질것]
-            flat_funiture_areas[0]?.setBackgroundResource(fun_arys_flat.getResourceId(0, -1))
+            //flat_funiture_areas[0]?.setBackgroundResource(fun_arys_flat.getResourceId(0, -1))
 
             //todo: 이것도 임시확인, [나중에 지워질것]
             for(i in 0..20){
-                flat_funiture_areas[i]?.setBackgroundResource(R.drawable.tree)
+              //  flat_funiture_areas[i]?.setBackgroundResource(R.drawable.tree)
             }
 
 
-            val thread1 = AnimThread()
+
+
+            //val thread1 = AnimThread()
             val thread2 = movecha()
             val thread3 = crash()
-            thread1.start()
+           // thread1.start()
             thread2.start()
             thread3.start()
 
@@ -457,6 +470,17 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             return view
         }
 
+
+    //, index : Int?
+    fun IdMaker (name : String? ) : Int{
+        val my_res : Int = resources.getIdentifier(
+            name,
+            "drawable", activity!!.packageName
+        )
+
+        return my_res
+    }
+
         private fun fromDpToPx(context: Context, dp: Int): Int {
             return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
@@ -474,6 +498,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
         // 걷는 모션
         inner class AnimThread : Thread() {
+            var handler1 = Handler()
             override fun run() {
                 var index = 1
                 while (true) {
@@ -504,6 +529,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
         //  이동
         inner class movecha : Thread() {
+            var handler2: Handler = Handler()
             val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             override fun run() {
                 while (true) {
@@ -532,6 +558,8 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
         //  이동 x,y
         fun imagemove(image1: FrameLayout, posix: Float, posiy: Float, duration1: Long) {
+
+            var handler3 = Handler()
             runnable = object : Runnable {
                 override fun run() {
                     ObjectAnimator.ofFloat(image1, "translationX", posix).apply {
@@ -556,6 +584,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         var flags = arrayOfNulls<Int>(16)
         //  가구, 아바타 충돌->알파값 변경
         inner class crash : Thread() {
+            var handler4 = Handler()
             override fun run() {
                 while (true) {
                     for (a in 0..15) {
@@ -581,6 +610,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 
                     handler4.post {
+
                         for (i in 0..15) {
                             if (flags[i] == 1) {
                                 flat_funiture_areas[i]?.setAlpha(0.4F)
@@ -708,7 +738,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                             apolloClient.query(SeeGroupQuery(group?.id.toString())).await()
 
                         val data = response.data?.seeGroup
-
+                        Log.d("onclick", data.toString())
                         loadPlat(mainFragment, data)
                     }
 
@@ -736,11 +766,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
 }
 
-fun loadPlat(fragment: Fragment, data: SeeGroupQuery.SeeGroup){
+fun loadPlat(fragment: Fragment, data: SeeGroupQuery.SeeGroup?){
     //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
+    Log.d("loadPlat", data?.toString())
+
     val fragmentTransactionListener: FragmentTransaction = fragment.childFragmentManager.beginTransaction()
-    fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
+     fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
+
     fragmentTransactionListener.commit()
 }
 

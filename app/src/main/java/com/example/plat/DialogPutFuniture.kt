@@ -49,8 +49,8 @@ class DialogPutFragment : DialogFragment() {
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
         //todo : 가구 이미지 담기위한 임시배열
-        val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
-        val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
+        //val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
+        //val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange().newInstance())
 
 
@@ -62,7 +62,7 @@ class DialogPutFragment : DialogFragment() {
         for(i in 0..fun_num){
             //todo : 배경 이미지 간격 맞추느라 임시로 갖다놓은 이미지 [지워질친구]
             val funiture_put_root:ConstraintLayout = view.findViewById(R.id.funiture_put_root)
-            funiture_put_root.setBackgroundResource(R.drawable.grass_background)
+            //funiture_put_root.setBackgroundResource(R.drawable.grass_background)
 
             //todo : 가구 동적생성 하기위한 함수
             fun funiture_maker(): View {

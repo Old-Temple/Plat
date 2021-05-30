@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <resources>
+    <!--
     <integer-array name="funi_imgs">
         <item>@drawable/empty_item</item>
         <item>@drawable/non_empty_item</item>
@@ -16,4 +19,6 @@
         <item>@drawable/fn_flower_table</item>
 
     </integer-array>
+-->
+
 </resources>
