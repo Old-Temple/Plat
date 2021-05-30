@@ -103,6 +103,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_main, null)
         //todo : 리스트 프래그먼트의 정보 받아오는 함수
         loadPlatList()
+        loadPlat()
         val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
         // 글쓰기버튼
         mainWriteButton.setOnClickListener{ view ->
@@ -112,15 +113,15 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         // 가구 배치하는 임시버튼 [이후에 변수명 바꿔야할것]
         val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
         tempGoFuniturePut.setOnClickListener{ view ->
-          val makePutFragment = DialogPutFragment()
-          makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
+            val makePutFragment = DialogPutFragment()
+            makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
         }
 
         // 옷갈아입는 임시버튼
         val tempGoChangeCloth = view.findViewById<Button>(R.id.tempGoChangeCloth)
         tempGoChangeCloth.setOnClickListener{ view ->
-          val makeChangeFragment = DialogChangeCloth()
-          makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
+            val makeChangeFragment = DialogChangeCloth()
+            makeChangeFragment.show(childFragmentManager.beginTransaction(), makeChangeFragment.tag)
         }
 
         view.findViewById<Button>(R.id.makePlat).setOnClickListener { view ->
@@ -250,7 +251,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             //캐릭터 동적생성
             fun cha_maker(): View {
                 val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
-               //크기설정
+                //크기설정
                 val character_capsule_lp =
                     ConstraintLayout.LayoutParams(fromDpToPx(view.context, 100),fromDpToPx(view.context, 150))
                 //제약, 마진설정
@@ -508,7 +509,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 0 -> {
                     if (cha_bundle[k]!!.getY() + diry >= 0f && cha_bundle[k]!!.getY() + diry <= fromDpToPx(
                             view.context,
-                        1800)
+                            1800)
                     ) {
                         dirx = 0f
                         diry = -(random.nextInt(2) + 1) * 50f
@@ -578,6 +579,21 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
+
+
+
+    fun loadPlat(){
+        //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
+
+            val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransactionListener.replace(R.id.plat_fragment_root, MainChildPlat())
+            fragmentTransactionListener.commit()
+
+    }
+
+
+
+
     //todo : 리스트 프래그먼트 뷰
     class MainChildPlatList(val list: List<SeeUserGroupsQuery.Group>?) : Fragment(){
         val mylist = listOf<SeeUserGroupsQuery.Group>(
@@ -617,6 +633,26 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
     }
 }
 
+
+
+class MainChildPlat() : Fragment(){
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View = inflater.inflate(R.layout.fragment_main_child_plat, null)
+
+        val platlistView2 = view.findViewById<FrameLayout>(R.id.PlatFrame)
+
+        platlistView2.addView(view)
+
+        return view
+    }
+}
+
+
 //todo : 리스트프래그먼트 어댑터, 리스트 받아서 그 리스트의 수만큼 아이템 만들어줌
 class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.Adapter<PlatListAdapter.ViewHolder>(){
 
@@ -648,3 +684,5 @@ class PlatListAdapter(val items: List<SeeUserGroupsQuery.Group>?): RecyclerView.
         }
     }
 }
+
+
