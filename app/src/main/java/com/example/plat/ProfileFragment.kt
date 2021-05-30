@@ -66,14 +66,14 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
 
             //fragment 호출
             val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransactionListener.replace(R.id.profileChildMeLayout, ProfileChildMe(profile))
+            fragmentTransactionListener.replace(R.id.profileChildMeLayout, ProfileChildMe(mainActivity, profile))
             fragmentTransactionListener.commit()
 
             return@launch
         }
     }
 
-    class ProfileChildMe(val profile: Profile?) : Fragment() {
+    class ProfileChildMe(val mainActivity: MainActivity, val profile: Profile?) : Fragment() {
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -89,6 +89,11 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
                 "Follower : " + profile?.followersCount.toString()
             view.findViewById<TextView>(R.id.profileFollowingCount).text =
                 "Following : " + profile?.followingsCount.toString()
+
+            view.findViewById<LinearLayout>(R.id.profileChildMeLayout).setOnClickListener { view ->
+                val dialogEditProfile = DialogEditProfile(mainActivity, profile?.userName, profile?.firstName, profile?.lastName)
+                dialogEditProfile.show(childFragmentManager.beginTransaction(), dialogEditProfile.tag)
+            }
 
             return view
         }
