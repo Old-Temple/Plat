@@ -34,7 +34,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     val userName = PlatPrefs.prefs.getValue("userName","")
-
+    var clickedName : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -98,11 +98,8 @@ class MainActivity : AppCompatActivity() {
 
                             val temp: Response<SeeItemQuery.Data> =
                                 apolloClient.query(SeeItemQuery(i.id)).await()
-                            val test = temp.data?.seeItem
                             val tempValue = temp.data?.seeItem?.itemInfo?.typeId
 
-
-                            Log.d("AAA", tempValue.toString())
                             if (tempValue == "furniture") {
                                 furnitures.add(temp.data?.seeItem!!)
                             } else if (tempValue == "theme") {

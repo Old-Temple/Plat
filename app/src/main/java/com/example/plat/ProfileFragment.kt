@@ -106,7 +106,6 @@ class ProfileFragment(val mainActivity: MainActivity) : Fragment() {
                 apolloClient.query(SeeProfileQuery(userName)).await()
 
             val feeds: List<SeeProfileQuery.Feed>? = response.data?.seeProfile?.feeds
-            Log.d("AAA", feeds.toString())
 
             //fragment 호출
             val fragmentTransactionListener: FragmentTransaction = childFragmentManager.beginTransaction()

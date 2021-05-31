@@ -12,6 +12,7 @@ import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import com.bumptech.glide.load.engine.Resource
+import kotlinx.android.synthetic.main.fragment_store.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,6 +73,8 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
                 replaceFragment(StoreCategoryAvatar(headlist, bodylist, leglist).newInstance())
             }
         }
+
+        btnFuniture.callOnClick()
         return view
     }
 

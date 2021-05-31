@@ -776,7 +776,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             fun bind(group: SeeUserGroupsQuery.Group?){
                 v.item_plat_list.text = group?.title.toString()
                 v.setOnClickListener {
-                    Log.d("ASD", group?.toString())
+                    mainActivity.clickedName = group?.id.toString()
                     scope.launch {
                         val response : Response<SeeGroupQuery.Data> =
                             apolloClient.query(SeeGroupQuery(group?.id.toString())).await()

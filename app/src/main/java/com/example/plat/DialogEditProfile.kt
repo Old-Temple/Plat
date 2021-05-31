@@ -1,7 +1,9 @@
 package com.example.plat
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
@@ -24,6 +27,7 @@ class DialogEditProfile(
     val lastName : String?
 ) : DialogFragment() {
 
+    val REQUEST_CODE = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,12 +46,24 @@ class DialogEditProfile(
         view.findViewById<Button>(R.id.btnEditSubmit).setOnClickListener {
             val apolloClient = apolloClient(mainActivity.applicationContext)
             val scope = CoroutineScope(Dispatchers.IO)
+            val userNameText = userName.text.toString()
+            var firstNameText = firstName.text.toString()
+            var lastNameText = lastName.text.toString()
+            if (userNameText == ""){
+                userName.text = null
+            }
+            if (firstNameText == ""){
+                firstNameText = this.firstName!!
+            }
+            if (lastNameText == ""){
+                lastNameText = this.lastName!!
+            }
             scope.launch {
                 val response : Response<EditProfileMutation.Data> =
                     apolloClient.mutate(EditProfileMutation(
                         userName = Input.fromNullable(userName.text.toString()),
-                        firstName = Input.fromNullable(firstName.text.toString()),
-                        lastName = Input.fromNullable(lastName.text.toString()),
+                        firstName = Input.fromNullable(firstNameText),
+                        lastName = Input.fromNullable(lastNameText),
                         bio = Input.fromNullable(bio.isChecked().toString())
                     )).await()
 
@@ -55,14 +71,68 @@ class DialogEditProfile(
                     errorMessage.text = response.data?.editProfile?.error.toString()
                 }
                 else {
+                    if (userNameText != ""){
+                        PlatPrefs.prefs.setValue("userName",userNameText)
+                    }
                     dismiss()
                 }
             }
         }
 
         view.findViewById<Button>(R.id.btnEditCancle).setOnClickListener {
-            dismiss()
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(intent, REQUEST_CODE)
+            Log.d("AAA", intent.data?.path.toString())
         }
         return view
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("AAA", "1")
+        if (requestCode == REQUEST_CODE){
+            Log.d("AAA", "2")
+            if (resultCode == AppCompatActivity.RESULT_OK){
+                Log.d("AAA", "3")
+
+                val temp = data?.data?.let {
+                    mainActivity
+                        .applicationContext
+                        .contentResolver.openInputStream(it)
+                }
+                val img = BitmapFactory.decodeStream(temp)
+                temp?.close()
+
+                Log.d("AAA", (data?.data!!).toString())
+                Log.d("AAA", data?.data!!.toString())
+//                val apolloClient = apolloClient(mainActivity.applicationContext)
+//                val scope = CoroutineScope(Dispatchers.IO)
+//                scope.launch{
+//                    val response : Response<EditProfileMutation.Data> =
+//                        apolloClient.mutate(EditProfileMutation(
+//                            profilePhoto = File(img)
+//                        )).await()
+//
+//                    Log.d("AAA", "end")
+//                }
+            }
+        }
+    }
+
+//    @Suppress("DEPRECATION")
+//    @SuppressLint("Recycle")
+//    fun getPath(uri: Uri) : String {
+//        val projection : Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+//        Log.d("AAA", uri.toString())
+//        val cursor = context?.contentResolver?.query(uri, projection, null, null, null)
+//        mainActivity.startManagingCursor(cursor)
+//        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+//        cursor?.moveToFirst()
+//        Log.d("cursor", cursor.toString())
+//        Log.d("column", columnIndex.toString())
+//        return cursor!!.getString(columnIndex!!)
+//    }
+
 }
+
