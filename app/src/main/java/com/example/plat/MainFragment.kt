@@ -24,11 +24,14 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.list_item_plat_list.view.*
 import kotlinx.android.synthetic.main.plat_funiture.*
+import kotlinx.android.synthetic.main.character_bundle.*
 import java.util.*
 import kotlin.collections.ArrayList
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.character_bundle.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +44,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
     val userName = PlatPrefs.prefs.getValue("userName", "")
     val apolloClient = apolloClient(mainActivity.applicationContext)
+    val scope = CoroutineScope(Dispatchers.IO)
 
 
 
@@ -65,11 +69,32 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
         // 가구 배치하는 임시버튼 [이후에 변수명 바꿔야할것]
         val tempGoFuniturePut = view.findViewById<Button>(R.id.tempGoFuniturePut)
-        tempGoFuniturePut.setOnClickListener{ view ->
-            val makePutFragment = DialogPutFragment()
-            makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
-        }
+        tempGoFuniturePut.setOnClickListener { view ->
+            scope.launch {
+                val items: Response<SeeUserItemsQuery.Data> =
+                    apolloClient.query(SeeUserItemsQuery(userName)).await()
 
+                val list = items.data?.seeProfile?.items
+                val furnitures = mutableListOf<SeeItemQuery.SeeItem>()
+                if (list != null) {
+                    for (item in list) {
+                        val result: Response<SeeItemQuery.Data> =
+                            apolloClient.query(SeeItemQuery(item.id)).await()
+
+                        val itemType = result.data?.seeItem?.itemInfo?.typeId
+
+                        if (itemType == "furniture") {
+                            furnitures.add(result.data?.seeItem!!)
+                        }
+                    }
+                }
+                val makePutFragment = DialogPutFragment(mainActivity, furnitures)
+
+
+
+                makePutFragment.show(childFragmentManager.beginTransaction(), makePutFragment.tag)
+            }
+        }
         // 옷갈아입는 임시버튼
         val tempGoChangeCloth = view.findViewById<Button>(R.id.tempGoChangeCloth)
         tempGoChangeCloth.setOnClickListener{ view ->
@@ -139,12 +164,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         }
     }
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%뷰그리는곳~
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%뷰그리는곳~
     //
     class MainChildPlat(val data : SeeGroupQuery.SeeGroup?) : Fragment(){
 
         val cha_num = (data?.userCount ?: 0) - 1//캐릭터 수-1
-       // val cha_num = 5//캐릭터 수-1
+
+
+        // val cha_num = 5//캐릭터 수-1
         val fun_num = 20 //가구 수 -1
 
         var k = 0 // 애니메이션 for 문에 필요한 변수
@@ -165,12 +192,15 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         var cha_capsule = arrayOfNulls<FrameLayout>(6)
         var tooltip = arrayOfNulls<ImageView>(6)
         var tooltip_text = arrayOfNulls<TextView>(6)
+        var tooltip_title = arrayOfNulls<TextView>(6)
         var like_button = arrayOfNulls<Button>(6)
         var cha_bundle = arrayOfNulls<FrameLayout>(6)
         var head = arrayOfNulls<ImageView>(6)
         var body = arrayOfNulls<ImageView>(6)
         var shose = arrayOfNulls<ImageView>(6)
-
+        var shose_left = java.util.ArrayList<Drawable?>()
+        var shose_right = java.util.ArrayList<Drawable?>()
+        var feed_img = arrayOfNulls<ImageView>(6)
         var flat_funiture_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
 
 
@@ -227,10 +257,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
+            Log.d("CCC",cha_num.toString())
             val view: View = inflater.inflate(R.layout.fragment_main_child_plat, null)
+            val plat_root  = view.findViewById<FrameLayout>(R.id.plat_root)
+            val plat_root_fun  = view.findViewById<ConstraintLayout>(R.id.funiture_root)
+            val plat_root_fun2  = view.findViewById<ConstraintLayout>(R.id.i_funiture_root)
 
-            val platlistView2 = view.findViewById<FrameLayout>(R.id.plat_root)
-
+            //val platlistView2 = view.findViewById<FrameLayout>(R.id.plat_root)
+            //val plat_root_fun = view.findViewById<ConstraintLayout>(R.id.i_funiture_root)
             tempwidth =  fromDpToPx(activity!!, 30)
             tempheight =  fromDpToPx(activity!!, 60)
 
@@ -267,12 +301,12 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 when (temp_shosemoving_ID){
                     0-> {
                         //character_shose_moving1.add(getDrawable(activity!!, R.drawable.shose_pink_1))
-                       // character_shose_moving2.add(getDrawable(activity!!, R.drawable.shose_pink_2))
+                        // character_shose_moving2.add(getDrawable(activity!!, R.drawable.shose_pink_2))
 
                     }
                     1->{
-                       // character_shose_moving1.add(getDrawable(activity!!, R.drawable.gray_shose_1))
-                       // character_shose_moving2.add(getDrawable(activity!!, R.drawable.gray_shose_2))
+                        // character_shose_moving1.add(getDrawable(activity!!, R.drawable.gray_shose_1))
+                        // character_shose_moving2.add(getDrawable(activity!!, R.drawable.gray_shose_2))
                     }
                 }
             }
@@ -289,7 +323,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
             //////////////////////////////////////////////////////////////////////////////////////////////
 
-            val plat_root:FrameLayout = view.findViewById(R.id.plat_root)
+
             val inflater = activity!!.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             //가구 동적생성
@@ -308,7 +342,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
 
                 fun funiture_maker(): View {
                     // 동적생성
-                    val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_funiture_area, false) as FrameLayout
+                    val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_root_fun, false) as FrameLayout
                     // 크기설정
                     val plat_funiture_lp =
                         ConstraintLayout.LayoutParams(fromDpToPx(view.context, 70), fromDpToPx(view.context, 70))
@@ -339,147 +373,158 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                     funiture_margin_top += fromDpToPx(view.context.applicationContext,50)
 
                 }
-                platlistView2.addView(funiture_maker())
+               // val plat_root_fun = view.findViewById<ConstraintLayout>(R.id.i_funiture_root)
+                plat_root_fun.addView(funiture_maker())
                 flat_funiture_areas[i] = view.findViewById(tempID_plat_funiture)
                 funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
-
-
+                //flat_funiture_areas[i]?.setBackgroundResource(IdMaker(data?.items?.get(i)?.id?.toString()))
 
             }
             /*
             서버에서 불러옴
             aaa = List<dddddd.sdf>
              */
+
             for (i in 0..cha_num) {
                 // 배열하려는 모양 설정
 
-
                 //캐릭터 동적생성
+
+                //캐릭터 배치계산
                 fun cha_maker(): View {
-                    val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root, false) as FrameLayout
+                    val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root_fun, false) as FrameLayout
                     //크기설정
                     val character_capsule_lp =
-                        ConstraintLayout.LayoutParams(fromDpToPx(view.context, 100),fromDpToPx(view.context, 150))
+                        ConstraintLayout.LayoutParams(fromDpToPx(view.context, 150),fromDpToPx(view.context, 200))
                     //제약, 마진설정
                     character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                     character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                    character_capsule_lp.topMargin = fromDpToPx(view.context, bundle_margin_top)
-                    character_capsule_lp.marginStart = fromDpToPx(view.context, bundle_margin_start)
+                    character_capsule_lp.topMargin = fromDpToPx(view.context.applicationContext,bundle_margin_top)
+                    character_capsule_lp.marginStart = fromDpToPx(view.context.applicationContext,bundle_margin_start)
+                    Log.d("UUU",character_capsule_lp.marginStart.toString())
                     // binding.cardViews.setLayoutParams(layoutParams)
-
                     character_capsule.layoutParams = character_capsule_lp
-                    tempID_bundle_capsule = getResources().getIdentifier(
-                        "bundle_capsule_" + (i),
-                        "id", activity!!.packageName
-                    )
-                    character_capsule.setId(tempID_bundle_capsule)
+                    character_capsule.setId(IdMakeForIndex_temp("bundle_capsule_", i))
 
                     return character_capsule
-
-
-
                 }
-                //캐릭터 배치계산
-                if(i%2==0){
 
+                if(i%2==0){
                     bundle_margin_start = fromDpToPx(view.context.applicationContext,26)
                 }
 
                 if(i%2==0 && i!=0){
                     bundle_margin_top += fromDpToPx(view.context.applicationContext,52)
-
                 }
-                platlistView2.addView(cha_maker())
+
+                plat_root_fun2.addView(cha_maker())
 
                 bundle_margin_start += fromDpToPx(view.context.applicationContext,53)
 
                 // 이미지 불러올때 편하게 하려고 배열에 다 담아놓음
-                cha_capsule[i] = view.findViewById(tempID_bundle_capsule)
+
+                cha_capsule[i] = view.findViewById(IdMakeForIndex_temp("bundle_capsule_", i))
                 cha_bundle[i] = cha_capsule[i]?.findViewById(R.id.character_bundle)
                 head[i] = cha_capsule[i]?.findViewById(R.id.head)
                 body[i] = cha_capsule[i]?.findViewById(R.id.body)
                 shose[i] = cha_capsule[i]?.findViewById(R.id.shose)
                 tooltip[i] = cha_capsule[i]?.findViewById(R.id.tooltip)
                 tooltip_text[i] = cha_capsule[i]?.findViewById(R.id.tootip_text)
+                tooltip_title[i] = cha_capsule[i]?.findViewById(R.id.tootip_title)
                 like_button[i] = cha_capsule[i]?.findViewById(R.id.like_button)
-
+                feed_img[i] = cha_capsule[i]?.findViewById(R.id.feedimbg)
                 head[i]?.setBackgroundResource(IdMaker(data?.users?.get(i)?.avatar?.headId.toString()))
-                //body[i]?.setBackgroundResource(R.drawable.body)
-                Log.d("AAA", head[i].toString())
+                body[i]?.setBackgroundResource(IdMaker(data?.users?.get(i)?.avatar?.bodyId.toString()))
+                shose_left.add(getDrawable(activity!!,IdMakerforLeg(data?.users?.get(i)?.avatar?.legId.toString(),"_left")))
+                shose_right.add(getDrawable(activity!!,IdMakerforLeg(data?.users?.get(i)?.avatar?.legId.toString(),"_right")))
+
+                Log.d("HHH", head[i].toString())
+                val user_feeds : MutableList<SeeGroupQuery.Feed>? = mutableListOf()
+
+                if(data?.feeds!!.size !=0){
+                    tooltip[i]?.setVisibility(View.VISIBLE)
+                    like_button[i]?.setVisibility(View.VISIBLE)
+                    feed_img[i]?.setVisibility(View.VISIBLE)
+                    for(y in 0..data?.feeds!!.size -1){
+                        if(data?.feeds!!.size == 0) {
+                            break
+                        }
+                        var feed = data?.feeds.get(y)
+                        if(data?.users?.get(i)!!.id == feed.user.id) {
+                            user_feeds?.add(feed)
+                        }
+                    }
+                    val recentFeed = user_feeds?.last()
+                    tooltip_text[i]?.setText(recentFeed?.caption)
+
+                    tooltip_title[i]?.setText(recentFeed?.title)
+                    //body[i]?.setBackgroundResource(R.drawable.body)
+
+                    Glide.with(view).load(recentFeed?.file).into(view.findViewById<ImageView>(R.id.feedimbg))
+
+                }
+
+
 
                 // 옷입히는거 작동되는지 확인위함 [나중에 삭제될것]
-                if(i%2==0){
-                    temp_shosemoving_ID = 0
-                }
-                else{
-                    temp_shosemoving_ID = 1
-                }
-                when (temp_shosemoving_ID){
-                    0-> {
-                       // body[i]?.setBackgroundResource(R.drawable.body_belt_skirt)
-
-                    }
-                    1->{
-
-                      //  body[i]?.setBackgroundResource(R.drawable.body_skirt)
-                    }
-                }
 
 
             }
 
 
-            //백에서 보유가구값 받아와서??
 
 
-            // 배열에 가구 넣어서 조건 맞는거 가져오기
-            //임시로 0번 배열에 index0
-            ////todo: 이것도 임시확인, [나중에 지워질것]
-            //flat_funiture_areas[0]?.setBackgroundResource(fun_arys_flat.getResourceId(0, -1))
-
-            //todo: 이것도 임시확인, [나중에 지워질것]
-            for(i in 0..20){
-              //  flat_funiture_areas[i]?.setBackgroundResource(R.drawable.tree)
-            }
-
-
-
-
-            //val thread1 = AnimThread()
+            val thread1 = AnimThread()
             val thread2 = movecha()
             val thread3 = crash()
-           // thread1.start()
+            thread1.start()
             thread2.start()
             thread3.start()
-
-
-
-
-
-
-
-
-
-
-
 
 
 //        platlistView2.addView(view)
 
             return view
         }
+        fun IdMakeForIndex (name : String? , index : Int ) : Int{
+            val my_res : Int = resources.getIdentifier(
+                name + index,
+                "drawable", activity!!.packageName
+            )
+
+            return my_res
+        }
 
 
-    //, index : Int?
-    fun IdMaker (name : String? ) : Int{
-        val my_res : Int = resources.getIdentifier(
-            name,
-            "drawable", activity!!.packageName
-        )
+        fun IdMakeForIndex_temp (name : String? , index : Int ) : Int{
+            val my_res : Int = resources.getIdentifier(
+                name + index,
+                "id", activity!!.packageName
+            )
 
-        return my_res
-    }
+            return my_res
+        }
+
+        //, index : Int?
+        fun IdMaker (name : String? ) : Int{
+            val my_res : Int = resources.getIdentifier(
+                name,
+                "drawable", activity!!.packageName
+            )
+
+            return my_res
+        }
+
+
+        fun IdMakerforLeg (name : String?, side : String?) : Int{
+            val my_res : Int = resources.getIdentifier(
+                name + side,
+                "drawable", activity!!.packageName
+            )
+
+            return my_res
+        }
 
         private fun fromDpToPx(context: Context, dp: Int): Int {
             return TypedValue.applyDimension(
@@ -503,15 +548,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                 var index = 1
                 while (true) {
 
-
                     handler1.post {
-                        for(j in 0..5){
+                        for(j in 0..cha_num){
                             if(index%2==0){
-                                val drawable = character_shose_moving1[j]
+                                val drawable = shose_left[j]
                                 shose[j]?.setImageDrawable(drawable)
                             }
                             else{
-                                val drawable = character_shose_moving2[j]
+                                val drawable = shose_right[j]
                                 shose[j]?.setImageDrawable(drawable)
                             }
 
@@ -738,7 +782,6 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                             apolloClient.query(SeeGroupQuery(group?.id.toString())).await()
 
                         val data = response.data?.seeGroup
-                        Log.d("onclick", data.toString())
                         loadPlat(mainFragment, data)
                     }
 
@@ -772,10 +815,8 @@ fun loadPlat(fragment: Fragment, data: SeeGroupQuery.SeeGroup?){
     Log.d("loadPlat", data?.toString())
 
     val fragmentTransactionListener: FragmentTransaction = fragment.childFragmentManager.beginTransaction()
-     fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
+    fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
 
     fragmentTransactionListener.commit()
 }
-
-
 

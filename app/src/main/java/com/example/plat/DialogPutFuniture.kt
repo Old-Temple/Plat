@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Color.*
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,8 +19,14 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 //todo : 아이템이 먼저 터치되고 장소가 터치되는지 확인 위함
 var funi_flag =0
 
@@ -28,7 +35,14 @@ var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21)
 var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
 var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
 
-class DialogPutFragment : DialogFragment() {
+class DialogPutFragment(val mainActivity: MainActivity, val furnitures : MutableList<SeeItemQuery.SeeItem>?) : DialogFragment() {
+
+    val apolloClient = apolloClient(mainActivity.applicationContext)
+
+    object a{
+        var items = mutableListOf<SeeItemQuery.SeeItem>()
+    }
+    val userName = PlatPrefs.prefs.getValue("userName","")
     //todo: 가구 배치 위한 변수들
     val fun_num = 20
     var funiture_margin_top = 50
@@ -51,7 +65,7 @@ class DialogPutFragment : DialogFragment() {
         //todo : 가구 이미지 담기위한 임시배열
         //val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
         //val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
-        replaceFragment(WarehouseCategoryFurnitureChange().newInstance())
+        replaceFragment(WarehouseCategoryFurnitureChange(furnitures).newInstance())
 
 
         btnClose.setOnClickListener { view ->
@@ -115,8 +129,17 @@ class DialogPutFragment : DialogFragment() {
             plat_funiture_button_Difuni[i]?.setOnClickListener {
 
                 if (funi_flag == 1) {
+                    val scope = CoroutineScope(Dispatchers.IO)
 
-                    plat_funiture_put_areas_Difuni[i]?.setBackgroundColor(RED)
+                    scope.launch {
+                       // val result: Response<PlaceItemMutation.Data> =
+                           // apolloClient.mutate(PlaceItemMutation(groupId = "", itemId = "", grid =)).await()
+
+
+                    }
+
+                    Log.d("BBB",itemData?.itemInfo?.id.toString())
+                    plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
                     plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
                     temp_view?.setBackgroundColor(0)
 
@@ -158,6 +181,15 @@ class DialogPutFragment : DialogFragment() {
             context.resources.displayMetrics
         )
             .toInt()
+    }
+
+    fun IdMaker (name : String? ) : Int{
+        val my_res : Int = resources.getIdentifier(
+            name,
+            "drawable", activity!!.packageName
+        )
+
+        return my_res
     }
 
 }

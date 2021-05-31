@@ -160,5 +160,9 @@
 
     <item type="id" name="default_group_theme" />
     <item type="id" name="default_avatar_face" />" />
+    <item type="id" name="avatar_body_basicbelt01" />"
+    <item type="id" name="default_avatar_body" />"
+    <item type="id" name="furniture_basictree01" />"
+    <item type="id" name="avatar_leg_basicsocks01" />"
 
 </resources>

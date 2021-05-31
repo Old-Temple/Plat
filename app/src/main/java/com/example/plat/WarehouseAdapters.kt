@@ -1,6 +1,7 @@
 package com.example.plat
 
 import android.content.Context
+import android.graphics.Color.RED
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,31 +9,38 @@ import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class WarehouseFurnitureAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>):
+class WarehouseFurnitureAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>?):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
 
         val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
-        val item = items[position]
+        val item = items?.get(position)
 
         view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem).setOnClickListener{ view ->
             //todo : 여기 가구 작업
+
+
         }
 
-        image.text = item.itemInfo?.file
-        text.text = item.itemInfo?.itemName
+        image.text = item?.itemInfo?.file
+        text.text = item?.itemInfo?.itemName
 
         return view
     }
 
     override fun getCount(): Int {
-        return items.size
+        if (items != null) {
+            return items.size
+        }
+        else{
+            return 0
+        }
     }
 
-    override fun getItem(position: Int): Any {
-        return items[position]
+    override fun getItem(position: Int): SeeItemQuery.SeeItem? {
+        return items?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
