@@ -88,7 +88,8 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
                         }
                     }
                 }
-                val makePutFragment = DialogPutFragment(mainActivity, furnitures)
+
+                val makePutFragment = DialogPutFragment(mainActivity,  furnitures)
 
 
 

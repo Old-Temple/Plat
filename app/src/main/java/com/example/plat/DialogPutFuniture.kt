@@ -36,9 +36,6 @@ var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
 var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
 
 class DialogPutFragment(val mainActivity: MainActivity, val furnitures : MutableList<SeeItemQuery.SeeItem>?) : DialogFragment() {
-
-    val apolloClient = apolloClient(mainActivity.applicationContext)
-
     object a{
         var items = mutableListOf<SeeItemQuery.SeeItem>()
     }
@@ -58,6 +55,10 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+
+        val groupId = mainActivity.clickedName
+        val apolloClient = apolloClient(mainActivity.applicationContext)
+
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
 
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
@@ -131,16 +132,23 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
                 if (funi_flag == 1) {
                     val scope = CoroutineScope(Dispatchers.IO)
 
+                    Log.d("AQQ", groupId)
+                    Log.d("AQQ", itemData?.itemInfo?.id.toString())
+                    Log.d("AQQ", i.toString())
+
+
                     scope.launch {
-                       // val result: Response<PlaceItemMutation.Data> =
-                           // apolloClient.mutate(PlaceItemMutation(groupId = "", itemId = "", grid =)).await()
+                        val result: Response<PlaceItemMutation.Data> =
+                            apolloClient.mutate(PlaceItemMutation(groupId = groupId, itemId = itemData?.itemInfo?.id.toString(), grid = i)).await()
 
-
+                        if(result.data?.placeItem?.ok == true) {
+                            plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
+                            plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
+                            temp_view?.setBackgroundColor(0)
+                        } else {
+                            Log.d("aaa", result.data?.placeItem?.error.toString())
+                        }
                     }
-
-                    Log.d("BBB",itemData?.itemInfo?.id.toString())
-                    plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
-                    plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
                     temp_view?.setBackgroundColor(0)
 
                     funi_flag = 0
