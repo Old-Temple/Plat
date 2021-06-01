@@ -3198,7 +3198,7 @@
                   "defaultValue": null
                 },
                 {
-                  "name": "posId",
+                  "name": "grid",
                   "description": null,
                   "type": {
                     "kind": "NON_NULL",
@@ -3608,6 +3608,22 @@
                   "defaultValue": null
                 }
               ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "MutationResponse",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteUser",
+              "description": null,
+              "args": [],
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

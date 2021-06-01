@@ -186,8 +186,8 @@ mutation PlaceItem($groupId: String!, $itemId: String!, $grid: Int!) {
   }
 }
 
-mutation RemoveItem($groupId: String!, $posId: Int!) {
-  removeItem(groupId: $groupId, posId: $posId) {
+mutation RemoveItem($groupId: String!, $grid: Int!) {
+  removeItem(groupId: $groupId, grid: $grid) {
     ok
     error
   }
