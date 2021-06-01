@@ -12,6 +12,9 @@ android {
 
     apollo {
         generateKotlinModels.set(true)
+        customTypeMapping = [
+                "Upload" : "com.apollographql.apollo.api.FileUpload"
+        ]
     }
 
     defaultConfig {

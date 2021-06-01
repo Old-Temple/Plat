@@ -108,14 +108,13 @@ class DialogEditProfile(
                 }
                 val img = BitmapFactory.decodeStream(temp)
                 temp?.close()
-                Log.d("AAAABS", absolutelyPath(data?.data!!).toString())
-                val apolloClient = apolloClient(mainActivity.applicationContext)
+                Log.d("AAAABS", absolutelyPath(data?.data!!))
+                val apolloClient = mainActivity.apolloClient
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch{
                     val response : Response<EditProfileMutation.Data> =
-                        apolloClient.mutate(EditProfileMutation(
-                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data?.data!!)))
-                        )).await()
+                        apolloClient?.mutate(EditProfileMutation(
+                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data.data!!)))))!!.await()
                 }
             }
         }
