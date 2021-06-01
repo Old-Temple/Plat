@@ -32,7 +32,7 @@ class DialogEditProfile(
     val firstName : String?,
     val lastName : String?
 ) : DialogFragment() {
-
+    var imgSrc = ""
     val REQUEST_CODE = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +86,10 @@ class DialogEditProfile(
         }
 
         view.findViewById<Button>(R.id.btnEditCancle).setOnClickListener {
+            dismiss()
+        }
+
+        view.findViewById<Button>(R.id.btnEditImage).setOnClickListener{
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_PICK
@@ -95,26 +99,22 @@ class DialogEditProfile(
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d("AAA", "1")
         if (requestCode == REQUEST_CODE){
-            Log.d("AAA", "2")
             if (resultCode == AppCompatActivity.RESULT_OK){
-                Log.d("AAA", "3")
-
                 val temp = data?.data?.let {
                     mainActivity
                         .applicationContext
                         .contentResolver.openInputStream(it)
                 }
-                val img = BitmapFactory.decodeStream(temp)
                 temp?.close()
-                Log.d("AAAABS", absolutelyPath(data?.data!!))
+                imgSrc = absolutelyPath(data?.data!!)
+                view!!.findViewById<TextView>(R.id.editImageSource).text = imgSrc
                 val apolloClient = mainActivity.apolloClient
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch{
                     val response : Response<EditProfileMutation.Data> =
                         apolloClient?.mutate(EditProfileMutation(
-                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data.data!!)))))!!.await()
+                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data?.data!!)))))!!.await()
                 }
             }
         }
