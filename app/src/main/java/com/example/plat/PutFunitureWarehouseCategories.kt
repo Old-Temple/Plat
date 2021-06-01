@@ -33,3 +33,14 @@ class WarehouseCategoryFurnitureChange(val furnitures : MutableList<SeeItemQuery
         return view
     }
 }
+
+//class putFurniturePlat (val mainActivity: MainActivity) : Fragment() {
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        val view: View = inflater.inflate(R.layout.fragment_funiture_put_child_plat, null)
+//
+//    }
+//}

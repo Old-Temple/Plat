@@ -44,8 +44,7 @@ class DialogWarehouse(
             replaceFragment(WarehouseCategoryAvatar(heads, bodys, legs).newInstance())
         }
        btnClose.setOnClickListener { view ->
-//            flag.mainFlag = 1
-//            dismiss()
+            dismiss()
         }
 
         return view.rootView

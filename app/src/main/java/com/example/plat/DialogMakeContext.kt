@@ -2,7 +2,6 @@ package com.example.plat
 
 import android.content.Intent
 import android.database.Cursor
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +14,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.apollographql.apollo.api.FileUpload
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response

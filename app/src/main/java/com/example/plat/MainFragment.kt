@@ -168,7 +168,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%뷰그리는곳~
     //
-    class MainChildPlat(val data : SeeGroupQuery.SeeGroup?) : Fragment(){
+    class MainChildPlat(val mainActivity: MainActivity, val data : SeeGroupQuery.SeeGroup?) : Fragment(){
 
         val cha_num = (data?.userCount ?: 0) - 1//캐릭터 수-1
 
@@ -203,7 +203,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
         var shose_left = java.util.ArrayList<Drawable?>()
         var shose_right = java.util.ArrayList<Drawable?>()
         var feed_img = arrayOfNulls<ImageView>(6)
-        var flat_funiture_areas = arrayOfNulls<FrameLayout>(21) //plat 가구 들어있는 배열
+        var flat_funiture_areas = arrayOfNulls<ImageView>(21) //plat 가구 들어있는 배열
 
 
         // ID값 부여 변수*****************************************
@@ -344,7 +344,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
                 fun funiture_maker(): View {
                     // 동적생성
-                    val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_root_fun, false) as FrameLayout
+                    val plat_funiture = inflater.inflate(R.layout.plat_funiture, plat_root_fun, false) as ImageView
                     // 크기설정
                     val plat_funiture_lp =
                         ConstraintLayout.LayoutParams(fromDpToPx(view.context, 70), fromDpToPx(view.context, 70))
@@ -380,7 +380,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                 flat_funiture_areas[i] = view.findViewById(tempID_plat_funiture)
                 funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
-                //flat_funiture_areas[i]?.setBackgroundResource(IdMaker(data?.items?.get(i)?.id?.toString()))
+//                flat_funiture_areas[i]?.setBackgroundResource(IdMaker(data?.items?.get(i)?.id?.toString()))
 
             }
             /*
@@ -492,6 +492,22 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
 
 //        platlistView2.addView(view)
+            val images = mutableListOf<String?>()
+            val scope = CoroutineScope(Dispatchers.IO)
+            val apolloClient = apolloClient(mainActivity.applicationContext)
+            val job = scope.launch {
+                for (i in data?.objectPositions!!){
+                    val image : Response<SeeItemQuery.Data> =
+                        apolloClient.query(SeeItemQuery(i.objectId)).await()
+                    images.add(image.data?.seeItem?.itemInfo?.file)
+                }
+            }
+            while (job.isActive == true){
+                continue
+            }
+            for (i in 0 until data?.objectPositions!!.size){
+                Glide.with(view).load(images[i]).into(flat_funiture_areas[data?.objectPositions.get(i).grid]!!)
+            }
 
             return view
         }
@@ -751,6 +767,8 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
         }
 
+
+
     }
 
 
@@ -791,7 +809,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                             apolloClient.query(SeeGroupQuery(group?.id.toString())).await()
 
                         val data = response.data?.seeGroup
-                        loadPlat(mainFragment, data)
+                        loadPlat(mainActivity, mainFragment, data)
                     }
 
                     // 플랏렌더 함수 호출 (item?.id)
@@ -818,13 +836,13 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
 }
 
-fun loadPlat(fragment: Fragment, data: SeeGroupQuery.SeeGroup?){
+fun loadPlat(mainActivity: MainActivity, fragment: Fragment, data: SeeGroupQuery.SeeGroup?){
     //코루틴 안에서 정보를 받아온 후에 프래그먼트 뷰 시킴
 
     Log.d("loadPlat", data?.toString())
 
     val fragmentTransactionListener: FragmentTransaction = fragment.childFragmentManager.beginTransaction()
-    fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(data))
+    fragmentTransactionListener.replace(R.id.scroll_root, MainFragment.MainChildPlat(mainActivity, data))
 
     fragmentTransactionListener.commit()
 }
