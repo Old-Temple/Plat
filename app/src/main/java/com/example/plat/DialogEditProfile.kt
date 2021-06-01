@@ -112,9 +112,8 @@ class DialogEditProfile(
                 val apolloClient = mainActivity.apolloClient
                 val scope = CoroutineScope(Dispatchers.IO)
                 scope.launch{
-                    val response : Response<EditProfileMutation.Data> =
-                        apolloClient?.mutate(EditProfileMutation(
-                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data?.data!!)))))!!.await()
+                    apolloClient?.mutate(EditProfileMutation(
+                        profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data?.data!!)))))!!.await()
                 }
             }
         }
