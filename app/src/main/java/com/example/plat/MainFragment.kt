@@ -315,7 +315,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
             ////////////////////////////// 동적생성에 필요한 변수////////////////////////////////////////
 
             var bundle_margin_top = 20
-            var bundle_margin_start = 1
+            var bundle_margin_start = 0
 
             var funiture_margin_top = 50
             var funiture_margin_start = 0
@@ -399,27 +399,33 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                     //제약, 마진설정
                     character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                     character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                    character_capsule_lp.topMargin = fromDpToPx(view.context.applicationContext,bundle_margin_top)
-                    character_capsule_lp.marginStart = fromDpToPx(view.context.applicationContext,bundle_margin_start)
-                    Log.d("UUU",character_capsule_lp.marginStart.toString())
+                    character_capsule_lp.topMargin = bundle_margin_top
+                    character_capsule_lp.marginStart = bundle_margin_start
+
                     // binding.cardViews.setLayoutParams(layoutParams)
                     character_capsule.layoutParams = character_capsule_lp
                     character_capsule.setId(IdMakeForIndex_temp("bundle_capsule_", i))
-
+                    Log.d("KKK",character_capsule_lp.marginStart.toString())
                     return character_capsule
                 }
 
-                if(i%2==0){
-                    bundle_margin_start = fromDpToPx(view.context.applicationContext,26)
+
+                if(i%2==0 || i==0){
+                    bundle_margin_start = fromDpToPx(view.context.applicationContext,56)
                 }
 
                 if(i%2==0 && i!=0){
-                    bundle_margin_top += fromDpToPx(view.context.applicationContext,52)
+                    bundle_margin_top += fromDpToPx(view.context.applicationContext,82)
                 }
+
+                if(i==0){
+                    bundle_margin_start = fromDpToPx(view.context.applicationContext,56)
+                }
+
 
                 plat_root_fun2.addView(cha_maker())
 
-                bundle_margin_start += fromDpToPx(view.context.applicationContext,53)
+                bundle_margin_start += fromDpToPx(view.context.applicationContext,153)
 
                 // 이미지 불러올때 편하게 하려고 배열에 다 담아놓음
 

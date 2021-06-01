@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@ var funi_flag =0
 var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21)
 var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
 var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
-
+var plat_funiture_img_Difuni = arrayOfNulls<ImageView>(21)
 object furniture {
     var url : String? = null
 }
@@ -65,14 +66,16 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
 
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
-
+        val putOk = view.findViewById<Button>(R.id.put_ok)
         //todo : 가구 이미지 담기위한 임시배열
         //val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
         //val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange(furnitures).newInstance())
 
 
+
         btnClose.setOnClickListener { view ->
+
             dismiss()
         }
 
@@ -123,7 +126,7 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
 
             plat_funiture_button_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.funiture_put_bt)
             plat_funiture_xbutton_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.xButton)
-
+            plat_funiture_img_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.funiture_img)
             plat_funiture_put_areas_Difuni[i]?.setBackgroundColor(YELLOW)
 
         }
@@ -132,10 +135,19 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         for(i in 0..20) {
             plat_funiture_button_Difuni[i]?.setOnClickListener {
 
-//                Glide.with(view).load(furniture.url).into(plat_funiture_button_Difuni[i])
-
-                Toast.makeText(context, furniture.url.toString(), Toast.LENGTH_LONG).show()
                 if (funi_flag == 1) {
+
+                    plat_funiture_img_Difuni[i]?.setVisibility(View.VISIBLE)
+                    plat_funiture_img_Difuni[i]?.let { it1 ->
+                        Glide.with(view).load(furniture.url).into(
+                            it1
+                        )
+                    }
+                   // plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
+                    plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
+                    temp_view?.setBackgroundColor(0)
+
+                    Toast.makeText(context, furniture.url.toString(), Toast.LENGTH_LONG).show()
                     val scope = CoroutineScope(Dispatchers.IO)
 
                     val groupId = mainActivity.clickedName
@@ -166,18 +178,32 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
             }
         }
 //class SetItemFragment(String = itemData?.itemInfo?.id.toString() 받기) {
-//    plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
-//    plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
-//    temp_view?.setBackgroundColor(0)
+//
 //}
 
 //*************************************************************
-            //todo : x버튼 누르면 삭제 -> 0부터 20번까지 다 써야하는데 편한방법 찾아야함
-        plat_funiture_xbutton_Difuni[0]?.setOnClickListener {
-            //삭제
 
-            plat_funiture_put_areas_Difuni[0]?.setBackgroundColor(YELLOW)
-            plat_funiture_xbutton_Difuni[0]?.setVisibility(View.INVISIBLE)
+
+      for (i in 0..fun_num){
+            plat_funiture_xbutton_Difuni[i]?.setOnClickListener {
+                plat_funiture_img_Difuni[i]?.setVisibility(View.INVISIBLE)
+              plat_funiture_xbutton_Difuni[i]?.setVisibility(View.INVISIBLE)
+
+                val scope = CoroutineScope(Dispatchers.IO)
+                val groupId = mainActivity.clickedName
+                scope.launch {
+                    val result: Response<RemoveItemMutation.Data> =
+                        apolloClient.mutate(RemoveItemMutation(groupId = groupId, grid = i)).await()
+
+                    if(result.data?.placeItem?.ok == true) {
+                        Log.d("AAQ", itemData?.itemInfo?.id.toString())
+
+                    } else {
+                        Log.d("aaa", result.data?.placeItem?.error.toString())
+                    }
+                }
+      }
+
 
 
         }
