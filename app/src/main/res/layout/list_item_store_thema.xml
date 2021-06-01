@@ -9,37 +9,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/edge">
+        android:background="@drawable/edge"
+        android:padding="7dp">
 
-        <FrameLayout
+        <ImageView
+            android:id="@+id/imageOfStoreSearchThema"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="3dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp">
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="@drawable/edge"
+            android:layout_marginVertical="5dp"/>
 
-            <TextView
-                android:id="@+id/imageOfStoreSearchThema"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/edge"/>
-
-        </FrameLayout>
-
-        <FrameLayout
+        <TextView
+            android:id="@+id/textOfStoreSearchThema"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="3dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="10dp">
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@drawable/edge"
+            android:layout_marginBottom="5dp"/>
 
-            <TextView
-                android:id="@+id/textOfStoreSearchThema"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:background="@drawable/edge"/>
-        </FrameLayout>
     </LinearLayout>
 </FrameLayout>

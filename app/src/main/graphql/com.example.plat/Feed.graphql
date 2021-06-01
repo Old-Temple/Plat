@@ -107,6 +107,9 @@ mutation UploadFeed(
   $groupId: String!
 ) {
   uploadFeed(file: $file, title: $title, caption: $caption, groupId: $groupId) {
+    feed {
+      id
+    }
     ok
     error
   }

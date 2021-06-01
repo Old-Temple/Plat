@@ -44,7 +44,7 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
 
                 val result : List<SeeTypeQuery.ItemInfo>? = response.data?.seeType?.itemInfos
 
-                replaceFragment(StoreCategoryFurniture(result).newInstance())
+                replaceFragment(StoreCategoryFurniture(mainActivity, result).newInstance())
             }
         }
         btnThema.setOnClickListener { view ->
@@ -54,7 +54,7 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
 
                 val result : List<SeeTypeQuery.ItemInfo>? = response.data?.seeType?.itemInfos
 
-                replaceFragment(StoreCategoryThema(result).newInstance())
+                replaceFragment(StoreCategoryThema(mainActivity, result).newInstance())
             }
         }
         btnAvatar.setOnClickListener { view ->
@@ -70,7 +70,7 @@ class StoreFragment(val mainActivity: MainActivity) : Fragment() {
                 val bodylist : List<SeeTypeQuery.ItemInfo>? = body.data?.seeType?.itemInfos
                 val leglist : List<SeeTypeQuery.ItemInfo>? = leg.data?.seeType?.itemInfos
 
-                replaceFragment(StoreCategoryAvatar(headlist, bodylist, leglist).newInstance())
+                replaceFragment(StoreCategoryAvatar(mainActivity, headlist, bodylist, leglist).newInstance())
             }
         }
 

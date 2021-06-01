@@ -81,6 +81,7 @@ query SeeGroup($id: String!) {
     objectPositions {
       id
       objectId
+      itemInfoId
       owner
       grid
     }

@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class DialogBuyItems(val item:SeeTypeQuery.ItemInfo?) : DialogFragment() {
-//    fun onCreate() {
-//        super.onCreate(savedInstanceState)
-//    }
+class DialogBuyItems(val mainActivity: MainActivity, val item:SeeTypeQuery.ItemInfo?) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,15 +25,24 @@ class DialogBuyItems(val item:SeeTypeQuery.ItemInfo?) : DialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_dialog_buy_items, container, false)
-        //todo : 아이템 구매창
         val name = view.findViewById<TextView>(R.id.buyItemName)
-        val image = view.findViewById<TextView>(R.id.buyItemImage)
+        val image = view.findViewById<ImageView>(R.id.buyItemImage)
 
         name.text = item?.itemName
-        image.text = item?.file
+        Glide.with(view).load(item?.file).into(image)
 
         view.findViewById<Button>(R.id.btnbuyItembuy).setOnClickListener { view ->
-            //todo : 구매버튼
+            val scope = CoroutineScope(Dispatchers.IO)
+            scope.launch {
+                val response : Response<BuyItemMutation.Data> =
+                    mainActivity.apolloClient?.mutate(BuyItemMutation(item?.id!!))!!.await()
+                if (response.data?.buyItem?.error != null){
+                    name.text = response.data?.buyItem?.error
+                }
+                else{
+                    dismiss()
+                }
+            }
         }
 
         view.findViewById<Button>(R.id.btnbuyItemCancle).setOnClickListener{ view ->

@@ -59,6 +59,7 @@ class DialogMakeContext(val mainActivity: MainActivity) : DialogFragment() {
                         groupId = mainActivity.clickedName,
                         file = Input.fromNullable(FileUpload("image/jpeg", imgSrc))
                     )).await()
+                apolloClient.mutate(DetectFeedsLifeMutation(response.data?.uploadFeed?.feed?.id.toString())).await()
                 if (response.data?.uploadFeed?.error != null){
                     view.findViewById<TextView>(R.id.editErrorMessage).text = response.data?.uploadFeed?.error
                 }

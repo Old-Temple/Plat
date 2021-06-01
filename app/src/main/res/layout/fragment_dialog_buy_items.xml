@@ -21,7 +21,7 @@
             android:textSize="20sp"
             android:gravity="center"/>
 
-        <TextView
+        <ImageView
             android:id="@+id/buyItemImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
@@ -52,7 +52,9 @@
                 android:layout_weight="1"
                 android:text="취소"
                 android:layout_margin="5dp"/>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
