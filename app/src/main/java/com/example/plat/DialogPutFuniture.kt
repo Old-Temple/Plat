@@ -56,7 +56,6 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        val groupId = mainActivity.clickedName
         val apolloClient = apolloClient(mainActivity.applicationContext)
 
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
@@ -132,19 +131,19 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
                 if (funi_flag == 1) {
                     val scope = CoroutineScope(Dispatchers.IO)
 
+                    val groupId = mainActivity.clickedName
                     Log.d("AQQ", groupId)
-                    Log.d("AQQ", itemData?.itemInfo?.id.toString())
+                    Log.d("AQQ", itemData?.itemId.toString())
                     Log.d("AQQ", i.toString())
 
 
                     scope.launch {
                         val result: Response<PlaceItemMutation.Data> =
-                            apolloClient.mutate(PlaceItemMutation(groupId = groupId, itemId = itemData?.itemInfo?.id.toString(), grid = i)).await()
+                            apolloClient.mutate(PlaceItemMutation(groupId = groupId, itemId = itemData?.itemId.toString(), grid = i)).await()
 
                         if(result.data?.placeItem?.ok == true) {
-                            plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
-                            plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
-                            temp_view?.setBackgroundColor(0)
+                            Log.d("AAQ", itemData?.itemInfo?.id.toString())
+
                         } else {
                             Log.d("aaa", result.data?.placeItem?.error.toString())
                         }
@@ -159,6 +158,11 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
 
             }
         }
+//class SetItemFragment(String = itemData?.itemInfo?.id.toString() 받기) {
+//    plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
+//    plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
+//    temp_view?.setBackgroundColor(0)
+//}
 
 //*************************************************************
             //todo : x버튼 누르면 삭제 -> 0부터 20번까지 다 써야하는데 편한방법 찾아야함
