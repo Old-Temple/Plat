@@ -1,8 +1,12 @@
 package com.example.plat
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.ApolloClient
@@ -14,6 +18,7 @@ import kotlinx.android.synthetic.main.plat_funiture.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.RuntimeException
 import java.util.*
 
 /**
@@ -30,10 +35,13 @@ class MainActivity : AppCompatActivity() {
     val userName = PlatPrefs.prefs.getValue("userName","")
     var clickedName : String = ""
     var apolloClient : ApolloClient? = null
+    val PERMISSION_REQEUST_CODE = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        checkPermisson() //퍼미션 체크
 
         apolloClient = apolloClient(applicationContext)
         val scope = CoroutineScope(Dispatchers.IO)
@@ -131,6 +139,13 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransactionListener: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransactionListener.replace(R.id.frameLayout, fragment)
         fragmentTransactionListener.commit()
+    }
+
+    fun checkPermisson(){
+        if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQEUST_CODE)
+        }
     }
 }
 
