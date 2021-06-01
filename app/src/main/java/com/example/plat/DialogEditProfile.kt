@@ -1,8 +1,12 @@
 package com.example.plat
 
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +17,14 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import com.apollographql.apollo.api.FileUpload
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 
 class DialogEditProfile(
     val mainActivity: MainActivity,
@@ -82,9 +88,8 @@ class DialogEditProfile(
         view.findViewById<Button>(R.id.btnEditCancle).setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
+            intent.action = Intent.ACTION_PICK
             startActivityForResult(intent, REQUEST_CODE)
-            Log.d("AAA", intent.data?.path.toString())
         }
         return view
     }
@@ -103,36 +108,30 @@ class DialogEditProfile(
                 }
                 val img = BitmapFactory.decodeStream(temp)
                 temp?.close()
-
-                Log.d("AAA", (data?.data!!).toString())
-                Log.d("AAA", data?.data!!.toString())
-//                val apolloClient = apolloClient(mainActivity.applicationContext)
-//                val scope = CoroutineScope(Dispatchers.IO)
-//                scope.launch{
-//                    val response : Response<EditProfileMutation.Data> =
-//                        apolloClient.mutate(EditProfileMutation(
-//                            profilePhoto = File(img)
-//                        )).await()
-//
-//                    Log.d("AAA", "end")
-//                }
+                Log.d("AAAABS", absolutelyPath(data?.data!!).toString())
+                val apolloClient = apolloClient(mainActivity.applicationContext)
+                val scope = CoroutineScope(Dispatchers.IO)
+                scope.launch{
+                    val response : Response<EditProfileMutation.Data> =
+                        apolloClient.mutate(EditProfileMutation(
+                            profilePhoto = Input.fromNullable(FileUpload("image/jpeg", absolutelyPath(data?.data!!)))
+                        )).await()
+                }
             }
         }
     }
+    @Suppress("DEPRECATION")
+    fun absolutelyPath(path: Uri): String {
 
-//    @Suppress("DEPRECATION")
-//    @SuppressLint("Recycle")
-//    fun getPath(uri: Uri) : String {
-//        val projection : Array<String> = arrayOf(MediaStore.Images.Media.DATA)
-//        Log.d("AAA", uri.toString())
-//        val cursor = context?.contentResolver?.query(uri, projection, null, null, null)
-//        mainActivity.startManagingCursor(cursor)
-//        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-//        cursor?.moveToFirst()
-//        Log.d("cursor", cursor.toString())
-//        Log.d("column", columnIndex.toString())
-//        return cursor!!.getString(columnIndex!!)
-//    }
+        val proj: Array<String> = arrayOf(MediaStore.MediaColumns.DATA)
+        val c: Cursor = mainActivity.contentResolver.query(path, proj, null, null, null)!!
+        val index = c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+        c.moveToFirst()
+
+        val result = c.getString(index)
+
+        return result
+    }
 
 }
 
