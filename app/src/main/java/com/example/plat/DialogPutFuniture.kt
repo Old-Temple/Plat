@@ -60,7 +60,6 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         val apolloClient = apolloClient(mainActivity.applicationContext)
 
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
-
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
         //todo : 가구 이미지 담기위한 임시배열

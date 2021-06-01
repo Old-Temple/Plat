@@ -64,7 +64,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         val mainWriteButton = view.findViewById<Button>(R.id.mainWriteButton)
         // 글쓰기버튼
         mainWriteButton.setOnClickListener{ view ->
-            val makeContext = DialogMakeContext()
+            val makeContext = DialogMakeContext(mainActivity)
             makeContext.show(childFragmentManager.beginTransaction(), makeContext.tag)
         }
         // 가구 배치하는 임시버튼 [이후에 변수명 바꿔야할것]
