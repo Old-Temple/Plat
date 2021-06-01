@@ -151,9 +151,6 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
                     val scope = CoroutineScope(Dispatchers.IO)
 
                     val groupId = mainActivity.clickedName
-                    Log.d("AQQ", groupId)
-                    Log.d("AQQ", itemData?.itemId.toString())
-                    Log.d("AQQ", i.toString())
 
 
                     scope.launch {
@@ -192,14 +189,15 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
                 val scope = CoroutineScope(Dispatchers.IO)
                 val groupId = mainActivity.clickedName
                 scope.launch {
+                    Log.d("RSGroupName", groupId)
                     val result: Response<RemoveItemMutation.Data> =
                         apolloClient.mutate(RemoveItemMutation(groupId = groupId, grid = i)).await()
-
+                    Log.d("RS", result.data?.removeItem.toString())
                     if(result.data?.removeItem?.ok == true) {
-                        Log.d("AAQ", itemData?.itemInfo?.id.toString())
+                        Log.d("RS", "true")
 
                     } else {
-                        Log.d("aaa", result.data?.removeItem?.error.toString())
+                        Log.d("RS", result.data?.removeItem?.error.toString())
                     }
                 }
       }
