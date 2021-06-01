@@ -74,6 +74,13 @@ class LoginActivity : AppCompatActivity() {
                     PlatPrefs.prefs.setValue("id", me.data?.me?.id.toString())
                     PlatPrefs.prefs.setValue("userName", me.data?.me?.userName.toString())
 
+                    val avatarCheck : Response<SeeAvatarQuery.Data> =
+                        apolloClient.query(SeeAvatarQuery(PlatPrefs.prefs.getValue("id", ""))).await()
+
+                    if (avatarCheck.data?.seeAvatar == null){
+                        apolloClient.mutate(CreateAvatarMutation()).await()
+                    }
+
                     finishAcitivy()
                 }
                 else{
@@ -86,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
             createAccount.show(supportFragmentManager, createAccount.tag)
         }
     }
+
     fun finishAcitivy(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

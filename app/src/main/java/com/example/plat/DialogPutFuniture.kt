@@ -21,6 +21,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
 import kotlinx.coroutines.CoroutineScope
@@ -34,6 +35,10 @@ var funi_flag =0
 var plat_funiture_put_areas_Difuni = arrayOfNulls<FrameLayout>(21)
 var plat_funiture_button_Difuni = arrayOfNulls<Button>(21)
 var plat_funiture_xbutton_Difuni = arrayOfNulls<Button>(21)
+
+object furniture {
+    var url : String? = null
+}
 
 class DialogPutFragment(val mainActivity: MainActivity, val furnitures : MutableList<SeeItemQuery.SeeItem>?) : DialogFragment() {
     object a{
@@ -59,7 +64,6 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         val apolloClient = apolloClient(mainActivity.applicationContext)
 
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
-
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
         //todo : 가구 이미지 담기위한 임시배열
@@ -128,6 +132,9 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         for(i in 0..20) {
             plat_funiture_button_Difuni[i]?.setOnClickListener {
 
+//                Glide.with(view).load(furniture.url).into(plat_funiture_button_Difuni[i])
+
+                Toast.makeText(context, furniture.url.toString(), Toast.LENGTH_LONG).show()
                 if (funi_flag == 1) {
                     val scope = CoroutineScope(Dispatchers.IO)
 

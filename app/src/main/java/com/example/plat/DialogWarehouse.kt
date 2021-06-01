@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 
+
+//todo 취소버튼 삭제할 것
 class DialogWarehouse(
     val furnitures : MutableList<SeeItemQuery.SeeItem>,
     val themas : MutableList<SeeItemQuery.SeeItem>,
@@ -42,6 +44,7 @@ class DialogWarehouse(
             replaceFragment(WarehouseCategoryAvatar(heads, bodys, legs).newInstance())
         }
         btnClose.setOnClickListener { view ->
+            flag.mainFlag = 1
             dismiss()
         }
 

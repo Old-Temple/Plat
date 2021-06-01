@@ -17,6 +17,7 @@ var temp_view: View? = null
 var itemData : SeeItemQuery.SeeItem? = null
 //var groupId:
 
+
 class PutFunitureWarehouseFurnitureItems(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>?):
     BaseAdapter(){
 
@@ -31,6 +32,8 @@ class PutFunitureWarehouseFurnitureItems(val context: Context, val items: Mutabl
 
         // todo : 가구 아이템창 터치되었는지 확인위한 flag
         image.setOnClickListener{ view ->
+
+            furniture.url = item?.itemInfo?.file.toString()
 
             Toast.makeText(context, "토스트 메세지 띄우기 입니다.", Toast.LENGTH_SHORT).show()
 
