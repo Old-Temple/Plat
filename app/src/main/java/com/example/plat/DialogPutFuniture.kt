@@ -40,8 +40,8 @@ var plat_funiture_img_Difuni = arrayOfNulls<ImageView>(21)
 object furniture {
     var url : String? = null
 }
-
-class DialogPutFragment(val mainActivity: MainActivity, val furnitures : MutableList<SeeItemQuery.SeeItem>?) : DialogFragment() {
+//todo : 아까 거기에 맞춰서 인자 추가해줘얗ㅁ
+class DialogPutFragment(val mainActivity: MainActivity, val furnitures : MutableList<SeeItemQuery.SeeItem>?, val groupObjPosition : List<SeeGroupQuery.ObjectPosition>?) : DialogFragment() {
     object a{
         var items = mutableListOf<SeeItemQuery.SeeItem>()
     }
@@ -51,6 +51,8 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
     var funiture_margin_top = 50
     var funiture_margin_start = 0
     var tempID_plat_funiture : Int = 0
+
+    //val aaaa = groupObjPosition?.get(0)!!.grid
 
 
     @SuppressLint("ServiceCast", "CutPasteId")
@@ -66,16 +68,16 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
 
         val view = inflater.inflate(R.layout.fragment_funiture_put, container, false)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
-        val putOk = view.findViewById<Button>(R.id.put_ok)
+
         //todo : 가구 이미지 담기위한 임시배열
         //val fun_imgs = resources.obtainTypedArray(R.array.funi_imgs)
         //val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange(furnitures).newInstance())
-
-        btnClose.setOnClickListener{
+        view.findViewById<Button>(R.id.put_ok).setOnClickListener {
             flag.mainFlag = 1
             dismiss()
         }
+
 
         btnClose.setOnClickListener { view ->
 
@@ -124,7 +126,7 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
             }
             funiture_put_root.addView(funiture_maker())
 
-            //todo : 나중에 편하게 쓰려고 가구랑 버튼들 배열에 넣어놓음
+            // : 나중에 편하게 쓰려고 가구랑 버튼들 배열에 넣어놓음
             plat_funiture_put_areas_Difuni[i] = view.findViewById(tempID_plat_funiture)
             funiture_margin_start += fromDpToPx(view.context.applicationContext,50)
 
@@ -137,70 +139,39 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
             //plat_funiture_img_Difuni[i]?.setBackgroundResource()
 
         }
+         val funi_list = mutableListOf<SeeGroupQuery.ObjectPosition>()//gridid?
+        for(position in groupObjPosition!!){
+            funi_list.add(position)
+        }
+
+        for(i in 0..fun_num){
+            for(j in 0..funi_list.size){
+                if (i == funi_list[j].grid){
+                    val scope = CoroutineScope(Dispatchers.IO)
+                    scope.launch {
+                        val response : Response<SeeItemQuery.Data> =
+                            apolloClient.query(SeeItemQuery(funi_list[j].itemInfoId)).await()
+                        //id 값을 넣어서 파일을 가져옴
+                        Glide.with(view).load(response.data?.seeItem?.itemInfo?.file)
+                            .into(plat_funiture_img_Difuni[i]!!)
+                        plat_funiture_xbutton_Difuni[i]?.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
 
 
-//        for(i in 0..20) {
-//            var groupData = mainActivity.groupData
-//            var objectPos = groupData[0]?.objectPositions
-//            var range = objectPos?.size
-//            if (range != null) {
-//                if(range > 0) {
-//                    for(j in 0..range!!-1){
-//                        if(i == objectPos?.get(j)?.grid) {
-//                            // SeeItemQuery(objectPOs.get(j).objectId
-//                            // resul.itemInfo.file
-//                        }
-//                    }
-//                }
-//            }
-//
-//            //groupData[0].
-//            //{for j in }
-//
-//            if(원래 들어있는게 확인되면){
-//                plat_funiture_img_Difuni[i]?.setVisibility(View.VISIBLE)
-//                plat_funiture_img_Difuni[i]?.let { it1 ->
-//                    Glide.with(view).load(furniture.url).into(
-//                        it1
-//                    )
-//                }
-//                // plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
-//                plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
-//                temp_view?.setBackgroundColor(0)
-//
-//                Toast.makeText(context, furniture.url.toString(), Toast.LENGTH_LONG).show()
-//                val scope = CoroutineScope(Dispatchers.IO)
-//
-//                val groupId = mainActivity.clickedName
-//
-//
-//                scope.launch {
-//                    val result: Response<PlaceItemMutation.Data> =
-//                        apolloClient.mutate(PlaceItemMutation(groupId = groupId, itemId = itemData?.itemId.toString(), grid = i)).await()
-//
-//                    if(result.data?.placeItem?.ok == true) {
-//                        Log.d("AAQ", itemData?.itemInfo?.id.toString())
-//
-//                    } else {
-//                        Log.d("aaa", result.data?.placeItem?.error.toString())
-//                    }
-//                }
-//                temp_view?.setBackgroundColor(0)
-//
-//                funi_flag = 0
-//
-//
-//            }
-//        }
+
+
 
         //todo : ex)아이템창 터치 확인(flag) 하고 가구 0번째 배열 터치하면 임시로 색 변화(후에 이미지로 교체)
-        for(i in 0..20) {
+        for(i in 0..fun_num) {
 
             plat_funiture_button_Difuni[i]?.setOnClickListener {
 
                 if (funi_flag == 1) {
 
-                    plat_funiture_img_Difuni[i]?.setVisibility(View.VISIBLE)
+                    plat_funiture_img_Difuni[i]?.visibility = View.VISIBLE
                     plat_funiture_img_Difuni[i]?.let { it1 ->
                         Glide.with(view).load(furniture.url).into(
                             it1

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     var apolloClient : ApolloClient? = null
     val PERMISSION_REQEUST_CODE = 1234
     var groupData : MutableList<SeeUserGroupsQuery.Group?> = mutableListOf()
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

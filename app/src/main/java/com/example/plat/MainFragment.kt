@@ -71,9 +71,12 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
             scope.launch {
                 val items: Response<SeeUserItemsQuery.Data> =
                     apolloClient?.query(SeeUserItemsQuery(userName))!!.await()
+                val groupQ: Response<SeeGroupQuery.Data> =
+                    apolloClient?.query(SeeGroupQuery(mainActivity.clickedName)).await()
 
                 val list = items.data?.seeProfile?.items
                 val furnitures = mutableListOf<SeeItemQuery.SeeItem>()
+                val groupObjPositions = groupQ.data?.seeGroup?.objectPositions
                 if (list != null) {
                     for (item in list) {
                         val result: Response<SeeItemQuery.Data> =
@@ -86,8 +89,8 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                         }
                     }
                 }
-
-                val makePutFragment = DialogPutFragment(mainActivity,  furnitures)
+                //todo: 쿼리문->seegroup 전체를 다 보낸다. 요 위에서 같이보내면됨
+                val makePutFragment = DialogPutFragment(mainActivity, furnitures, groupObjPositions)
 
 
 
