@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.plat_funiture.*
 import kotlinx.android.synthetic.main.character_bundle.*
 import java.util.*
 import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.ApolloMutationCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
 import com.bumptech.glide.Glide
@@ -471,7 +472,23 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
                     Glide.with(view).load(recentFeed?.file).into(view.findViewById<ImageView>(R.id.feedimbg))
 
+
+                    like_button[i]?.setOnClickListener {
+                        like_button[i]?.getBackground()?.setAlpha(100);
+                        val apolloClient = apolloClient(mainActivity.applicationContext)
+                        val scope = CoroutineScope(Dispatchers.IO)
+                        scope.launch {
+                            var like : Response<LikeFeedMutation.Data> =
+                                apolloClient.mutate(LikeFeedMutation(recentFeed!!.id)).await()
+                            if(like.data?.likeFeed?.ok == true){
+                                var detect : Response<DetectFeedsLifeMutation.Data> =
+                                    apolloClient.mutate(DetectFeedsLifeMutation(recentFeed?.id)).await()
+                            }
+
+                        }
+                    }
                 }
+
 
 
 
@@ -549,6 +566,9 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
             return my_res
         }
+
+
+
 
         private fun fromDpToPx(context: Context, dp: Int): Int {
             return TypedValue.applyDimension(
