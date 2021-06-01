@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 class WarehouseFurnitureAdapter(val context: Context, val items: MutableList<SeeItemQuery.SeeItem>?):
     BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
 
-        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
+        val image = view.findViewById<ImageView>(R.id.imageOfWarehouseSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
         val item = items?.get(position)
 
@@ -24,7 +26,7 @@ class WarehouseFurnitureAdapter(val context: Context, val items: MutableList<See
 
         }
 
-        image.text = item?.itemInfo?.file
+        Glide.with(view).load(item?.itemInfo?.file).into(image)
         text.text = item?.itemInfo?.itemName
 
         return view
@@ -53,7 +55,7 @@ class WarehouseThemaAdapter(val context: Context, val items: MutableList<SeeItem
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_thema, null)
 
-        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchThema)
+        val image = view.findViewById<ImageView>(R.id.imageOfWarehouseSearchThema)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchThema)
         val item = items[position]
 
@@ -61,7 +63,7 @@ class WarehouseThemaAdapter(val context: Context, val items: MutableList<SeeItem
             //todo : 테마 아이템 클릭 리스너
         }
 
-        image.text = item.itemInfo?.file
+        Glide.with(view).load(item.itemInfo?.file).into(image)
         text.text = item.itemInfo?.itemName
 
         return view
@@ -85,7 +87,7 @@ class WarehouseAvatarAdapter(val context: Context, val items: MutableList<SeeIte
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_avatar, null)
 
-        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchAvatar)
+        val image = view.findViewById<ImageView>(R.id.imageOfWarehouseSearchAvatar)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchAvatar)
         val item = items[position]
 
@@ -94,7 +96,7 @@ class WarehouseAvatarAdapter(val context: Context, val items: MutableList<SeeIte
 
         }
 
-        image.text = item.itemInfo?.file
+        Glide.with(view).load(item.itemInfo?.file).into(image)
         text.text = item.itemInfo?.itemName
 
         return view

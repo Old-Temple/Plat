@@ -12,14 +12,15 @@
         android:background="@drawable/edge">
 
 
-        <TextView
+        <ImageView
             android:id="@+id/imageOfWarehouseSearchAvatar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:textSize="15sp"
-            android:background="@drawable/edge"/>
+            android:background="@drawable/edge"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/textOfWarehouseSearchAvatar"
@@ -28,6 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="15sp"
-            android:background="@drawable/edge"/>
+            android:background="@drawable/edge"
+            android:layout_marginBottom="5dp"/>
     </LinearLayout>
 </FrameLayout>

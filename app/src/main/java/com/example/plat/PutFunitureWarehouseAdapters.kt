@@ -7,11 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 
 var temp_view: View? = null
 var itemData : SeeItemQuery.SeeItem? = null
@@ -24,7 +22,7 @@ class PutFunitureWarehouseFurnitureItems(val context: Context, val items: Mutabl
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_warehouse_furniture, null)
 
-        val image = view.findViewById<TextView>(R.id.imageOfWarehouseSearchFurniture)
+        val image = view.findViewById<ImageView>(R.id.imageOfWarehouseSearchFurniture)
         val text = view.findViewById<TextView>(R.id.textOfWarehouseSearchFurniture)
         val aaa = view.findViewById<LinearLayout>(R.id.warehouseFurnitureItem)
         val item = items?.get(position)
@@ -58,7 +56,7 @@ class PutFunitureWarehouseFurnitureItems(val context: Context, val items: Mutabl
 
         }
 
-        image.text = item?.itemInfo?.file
+        Glide.with(view).load(item?.itemInfo?.file).into(image)
         text.text = item?.itemInfo?.itemName
 
         return view
