@@ -195,11 +195,11 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
                     val result: Response<RemoveItemMutation.Data> =
                         apolloClient.mutate(RemoveItemMutation(groupId = groupId, grid = i)).await()
 
-                    if(result.data?.placeItem?.ok == true) {
+                    if(result.data?.removeItem?.ok == true) {
                         Log.d("AAQ", itemData?.itemInfo?.id.toString())
 
                     } else {
-                        Log.d("aaa", result.data?.placeItem?.error.toString())
+                        Log.d("aaa", result.data?.removeItem?.error.toString())
                     }
                 }
       }
