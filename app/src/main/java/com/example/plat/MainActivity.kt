@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
     var clickedName : String = ""
     var apolloClient : ApolloClient? = null
     val PERMISSION_REQEUST_CODE = 1234
-
+    var groupData : MutableList<SeeUserGroupsQuery.Group?> = mutableListOf()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -78,6 +79,9 @@ class MainActivity : AppCompatActivity() {
             while (true){
                 if (flag.mainFlag != 0){
                     flag.mainFlag = 0
+
+
+
                     replaceFragment(MainFragment(this@MainActivity))
                 }
             }

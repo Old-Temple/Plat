@@ -43,9 +43,9 @@ class DialogWarehouse(
         btnAvatar.setOnClickListener { view ->
             replaceFragment(WarehouseCategoryAvatar(heads, bodys, legs).newInstance())
         }
-        btnClose.setOnClickListener { view ->
-            flag.mainFlag = 1
-            dismiss()
+       btnClose.setOnClickListener { view ->
+//            flag.mainFlag = 1
+//            dismiss()
         }
 
         return view.rootView

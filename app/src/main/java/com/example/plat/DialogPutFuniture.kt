@@ -72,13 +72,17 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
         //val fun_arys = resources.obtainTypedArray(R.array.funi_arys)
         replaceFragment(WarehouseCategoryFurnitureChange(furnitures).newInstance())
 
-
+        btnClose.setOnClickListener{
+            flag.mainFlag = 1
+            dismiss()
+        }
 
         btnClose.setOnClickListener { view ->
 
             dismiss()
         }
 
+        val groupData = mainActivity.groupData
 
         for(i in 0..fun_num){
             //todo : 배경 이미지 간격 맞추느라 임시로 갖다놓은 이미지 [지워질친구]
@@ -129,10 +133,69 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
             plat_funiture_img_Difuni[i] = plat_funiture_put_areas_Difuni[i]?.findViewById(R.id.funiture_img)
             plat_funiture_put_areas_Difuni[i]?.setBackgroundColor(YELLOW)
 
+
+            //plat_funiture_img_Difuni[i]?.setBackgroundResource()
+
         }
+
+
+//        for(i in 0..20) {
+//            var groupData = mainActivity.groupData
+//            var objectPos = groupData[0]?.objectPositions
+//            var range = objectPos?.size
+//            if (range != null) {
+//                if(range > 0) {
+//                    for(j in 0..range!!-1){
+//                        if(i == objectPos?.get(j)?.grid) {
+//                            // SeeItemQuery(objectPOs.get(j).objectId
+//                            // resul.itemInfo.file
+//                        }
+//                    }
+//                }
+//            }
+//
+//            //groupData[0].
+//            //{for j in }
+//
+//            if(원래 들어있는게 확인되면){
+//                plat_funiture_img_Difuni[i]?.setVisibility(View.VISIBLE)
+//                plat_funiture_img_Difuni[i]?.let { it1 ->
+//                    Glide.with(view).load(furniture.url).into(
+//                        it1
+//                    )
+//                }
+//                // plat_funiture_put_areas_Difuni[i]?.setBackgroundResource(IdMaker(itemData?.itemInfo?.id.toString()))
+//                plat_funiture_xbutton_Difuni[i]?.setVisibility(View.VISIBLE)
+//                temp_view?.setBackgroundColor(0)
+//
+//                Toast.makeText(context, furniture.url.toString(), Toast.LENGTH_LONG).show()
+//                val scope = CoroutineScope(Dispatchers.IO)
+//
+//                val groupId = mainActivity.clickedName
+//
+//
+//                scope.launch {
+//                    val result: Response<PlaceItemMutation.Data> =
+//                        apolloClient.mutate(PlaceItemMutation(groupId = groupId, itemId = itemData?.itemId.toString(), grid = i)).await()
+//
+//                    if(result.data?.placeItem?.ok == true) {
+//                        Log.d("AAQ", itemData?.itemInfo?.id.toString())
+//
+//                    } else {
+//                        Log.d("aaa", result.data?.placeItem?.error.toString())
+//                    }
+//                }
+//                temp_view?.setBackgroundColor(0)
+//
+//                funi_flag = 0
+//
+//
+//            }
+//        }
 
         //todo : ex)아이템창 터치 확인(flag) 하고 가구 0번째 배열 터치하면 임시로 색 변화(후에 이미지로 교체)
         for(i in 0..20) {
+
             plat_funiture_button_Difuni[i]?.setOnClickListener {
 
                 if (funi_flag == 1) {
@@ -174,6 +237,10 @@ class DialogPutFragment(val mainActivity: MainActivity, val furnitures : Mutable
 
             }
         }
+
+
+
+
 //class SetItemFragment(String = itemData?.itemInfo?.id.toString() 받기) {
 //
 //}
