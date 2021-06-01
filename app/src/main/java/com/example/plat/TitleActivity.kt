@@ -28,8 +28,6 @@ class TitleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
 
-        PlatPrefs.prefs.deleteValue()
-
         Timer().schedule(1000){
             goMain()
         }

@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -26,7 +25,6 @@ import kotlinx.android.synthetic.main.list_item_plat_list.view.*
 import kotlinx.android.synthetic.main.plat_funiture.*
 import kotlinx.android.synthetic.main.character_bundle.*
 import java.util.*
-import kotlin.collections.ArrayList
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
@@ -40,10 +38,10 @@ import kotlinx.coroutines.launch
  * A simple [Fragment] subclass.
  * 메인화면
  */
-class MainFragment(val mainActivity: MainActivity) : Fragment() {
+class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
     val userName = PlatPrefs.prefs.getValue("userName", "")
-    val apolloClient = apolloClient(mainActivity.applicationContext)
+    val apolloClient = mainActivity.apolloClient
     val scope = CoroutineScope(Dispatchers.IO)
 
 
@@ -72,14 +70,14 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         tempGoFuniturePut.setOnClickListener { view ->
             scope.launch {
                 val items: Response<SeeUserItemsQuery.Data> =
-                    apolloClient.query(SeeUserItemsQuery(userName)).await()
+                    apolloClient?.query(SeeUserItemsQuery(userName))!!.await()
 
                 val list = items.data?.seeProfile?.items
                 val furnitures = mutableListOf<SeeItemQuery.SeeItem>()
                 if (list != null) {
                     for (item in list) {
                         val result: Response<SeeItemQuery.Data> =
-                            apolloClient.query(SeeItemQuery(item.id)).await()
+                            apolloClient?.query(SeeItemQuery(item.id))!!.await()
 
                         val itemType = result.data?.seeItem?.itemInfo?.typeId
 
@@ -123,7 +121,7 @@ class MainFragment(val mainActivity: MainActivity) : Fragment() {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             val response : Response<SeeUserGroupsQuery.Data> =
-                apolloClient.query(SeeUserGroupsQuery(userName)).await()
+                apolloClient?.query(SeeUserGroupsQuery(userName))!!.await()
 
             val groupList = response.data?.seeProfile?.groups
 

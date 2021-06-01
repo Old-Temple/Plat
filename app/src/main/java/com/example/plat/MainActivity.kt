@@ -1,19 +1,8 @@
 package com.example.plat
 
-import android.animation.ObjectAnimator
-import android.content.Context
-import android.graphics.drawable.Drawable
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.ApolloClient
@@ -31,15 +20,22 @@ import java.util.*
  * 메인화면
  * 버튼 이벤트는 추후 작성함
  */
+object flag {
+    var mainFlag = 0
+}
+
+//todo 네비게이션 좀 고쳐야 함
 class MainActivity : AppCompatActivity() {
 
     val userName = PlatPrefs.prefs.getValue("userName","")
     var clickedName : String = ""
+    var apolloClient : ApolloClient? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val apolloClient = apolloClient(applicationContext)
+        apolloClient = apolloClient(applicationContext)
         val scope = CoroutineScope(Dispatchers.IO)
             //네비게이션 버튼 클릭 리스너
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -70,6 +66,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        scope.launch {
+            while (true){
+                if (flag.mainFlag != 0){
+                    flag.mainFlag = 0
+                    replaceFragment(MainFragment(this@MainActivity))
+                }
+            }
+        }
+
         //초기 설정
         bottomNavigation.selectedItemId = R.id.actionMain
 
@@ -84,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             warehouse.setOnClickListener { view ->
                 scope.launch {
                     val response : Response<SeeUserItemsQuery.Data> =
-                        apolloClient.query(SeeUserItemsQuery(userName)).await()
+                        apolloClient?.query(SeeUserItemsQuery(userName))!!.await()
 
                     val list = response.data?.seeProfile?.items
                     val furnitures = mutableListOf<SeeItemQuery.SeeItem>()
@@ -97,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                         for (i in list){
 
                             val temp: Response<SeeItemQuery.Data> =
-                                apolloClient.query(SeeItemQuery(i.id)).await()
+                                apolloClient?.query(SeeItemQuery(i.id))!!.await()
                             val tempValue = temp.data?.seeItem?.itemInfo?.typeId
 
                             if (tempValue == "furniture") {
