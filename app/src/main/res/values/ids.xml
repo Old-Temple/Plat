@@ -146,6 +146,13 @@
     <item type="id" name="plat_funiture_put_area_21" />
 
 
+    <item type="id" name="cha_name_0" />
+    <item type="id" name="cha_name_1" />
+    <item type="id" name="cha_name_2" />
+    <item type="id" name="cha_name_3" />
+    <item type="id" name="cha_name_4" />
+    <item type="id" name="cha_name_5" />
+
 
     <dimen name="tempwidth">15</dimen>
     <dimen name="tempheight">30</dimen>
@@ -165,6 +172,7 @@
     <item type="id" name="avatar_body_basicbelt01" />"
     <item type="id" name="default_avatar_body" />"
     <item type="id" name="furniture_basictree01" />"
-    <item type="id" name="avatar_leg_basicsocks01" />"
+    <item type="id" name="avatar_leg_basicsocks01" />
+
 
 </resources>

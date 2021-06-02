@@ -196,6 +196,7 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
         var tooltip = arrayOfNulls<ImageView>(6)
         var tooltip_text = arrayOfNulls<TextView>(6)
         var tooltip_title = arrayOfNulls<TextView>(6)
+        var avatar_name = arrayOfNulls<TextView>(6)
         var like_button = arrayOfNulls<Button>(6)
         var cha_bundle = arrayOfNulls<FrameLayout>(6)
         var head = arrayOfNulls<ImageView>(6)
@@ -396,10 +397,10 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
                 //캐릭터 배치계산
                 fun cha_maker(): View {
-                    val character_capsule = inflater.inflate(R.layout.character_bundle, plat_root_fun, false) as FrameLayout
+                    val character_capsule = inflater.inflate(R.layout.character_bundle, Bundle, false) as FrameLayout
                     //크기설정
                     val character_capsule_lp =
-                        ConstraintLayout.LayoutParams(fromDpToPx(view.context, 150),fromDpToPx(view.context, 200))
+                        ConstraintLayout.LayoutParams(fromDpToPx(view.context, 150),fromDpToPx(view.context, 220))
                     //제약, 마진설정
                     character_capsule_lp.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                     character_capsule_lp.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
@@ -442,13 +443,15 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                 tooltip_text[i] = cha_capsule[i]?.findViewById(R.id.tootip_text)
                 tooltip_title[i] = cha_capsule[i]?.findViewById(R.id.tootip_title)
                 like_button[i] = cha_capsule[i]?.findViewById(R.id.like_button)
+                avatar_name[i] = cha_capsule[i]?.findViewById(R.id.cha_name)
                 feed_img[i] = cha_capsule[i]?.findViewById(R.id.feedimbg)
                 head[i]?.setBackgroundResource(IdMaker(data?.users?.get(i)?.avatar?.headId.toString()))
                 body[i]?.setBackgroundResource(IdMaker(data?.users?.get(i)?.avatar?.bodyId.toString()))
                 shose_left.add(getDrawable(activity!!,IdMakerforLeg(data?.users?.get(i)?.avatar?.legId.toString(),"_left")))
                 shose_right.add(getDrawable(activity!!,IdMakerforLeg(data?.users?.get(i)?.avatar?.legId.toString(),"_right")))
+                Log.d("HHH",data?.users?.get(i)?.userName.toString())
+                avatar_name[i]?.setText(data?.users?.get(i)?.userName.toString())
 
-                Log.d("HHH", head[i].toString())
                 val user_feeds : MutableList<SeeGroupQuery.Feed>? = mutableListOf()
 
                 if(data?.feeds!!.size !=0){

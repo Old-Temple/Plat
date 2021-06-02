@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color.*
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,14 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.await
 import kotlinx.android.synthetic.main.fragment_funiture_put.*
 import kotlinx.android.synthetic.main.plat_funiture.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 var headflag =0
 
@@ -28,8 +35,8 @@ class DialogChangeCloth : DialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_dialog_change_cloth, container, false)
-        val btnThema = view.findViewById<Button>(R.id.btnWarehouseThema)
-        val btnAvatar = view.findViewById<Button>(R.id.btnWarehouseAvatar)
+        val btnThema = view.findViewById<Button>(R.id.btnWarehouseFurniture)
+        val btnAvatar = view.findViewById<Button>(R.id.btnStoreMylistAvatar)
         val btnClose = view.findViewById<Button>(R.id.btnwarehouseClose)
 
         //todo: 캐릭터 부위별 버튼
@@ -41,6 +48,13 @@ class DialogChangeCloth : DialogFragment() {
         val shose_xbutton = view.findViewById<Button>(R.id.shose_xbox)
 
         //todo : 임시로 색 변하게 해놓음. 나중에 이미지로 바뀌게 고쳐야함함
+        val funi_list = mutableListOf<SeeGroupQuery.ObjectPosition>()//gridid?
+
+
+
+
+
+
        head.setBackgroundColor(YELLOW)
         head.setOnClickListener {
 
@@ -74,9 +88,9 @@ class DialogChangeCloth : DialogFragment() {
         btnAvatar.setOnClickListener { view ->
             replaceFragment(ClothWarehouseCategoryAvatar().newInstance())
         }
-        btnClose.setOnClickListener { view ->
-            dismiss()
-        }
+//        btnClose.setOnClickListener { view ->
+//            dismiss()
+//        }
 
         return view.rootView
     }

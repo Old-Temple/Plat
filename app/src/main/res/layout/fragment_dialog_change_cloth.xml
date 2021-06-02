@@ -5,7 +5,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".DialogChangeCloth"
     >
 
@@ -152,53 +152,36 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnWarehouseAvatarHead"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/edge"
-                    android:text="머리"
-                    android:textColor="@color/colorPrimary" />
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnWarehouseAvatarBody"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/edge"
-                    android:text="몸"
-                    android:textColor="@color/colorPrimary" />
 
-                <Button
-                    android:id="@+id/btnWarehouseAvatarShoes"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/edge"
-                    android:text="신발"
-                    android:textColor="@color/colorPrimary" />
+
+                    <Button
+                        android:id="@+id/btnStoreMylistAvatar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:text="아바타"
+                        android:textColor="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <GridView
+                    android:id="@+id/storeMyListGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9"
+                    android:numColumns="2" />
 
             </LinearLayout>
-
-            <GridView
-                android:id="@+id/warehouseAvatarGridView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="9"
-                android:numColumns="2" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
