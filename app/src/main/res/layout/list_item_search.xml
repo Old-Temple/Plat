@@ -22,7 +22,7 @@
             android:paddingBottom="5dp">
 
     <!--        편의 구현상 ImageView 대신 TextView 사용함-->
-            <TextView
+            <ImageView
                 android:id="@+id/searchedImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"

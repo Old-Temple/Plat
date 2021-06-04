@@ -13,7 +13,12 @@ import android.widget.*
 import com.bumptech.glide.Glide
 
 
-class StoreFurnitureAdapter(val mainActivity: MainActivity, val fragment: Fragment, val context: Context, val items: List<SeeTypeQuery.ItemInfo>?):BaseAdapter(){
+class StoreFurnitureAdapter(
+    val mainActivity: MainActivity,
+    val fragment: Fragment,
+    val context: Context,
+    val items: List<SeeTypeQuery.ItemInfo>?)
+    :BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_store_furniture, null)
 

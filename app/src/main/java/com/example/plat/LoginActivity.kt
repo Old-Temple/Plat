@@ -24,13 +24,13 @@ class LoginActivity : AppCompatActivity() {
         val email:EditText = findViewById(R.id.editTextEmail)
         val pw:EditText = findViewById(R.id.editTextPW)
 
-        val apolloClient = apolloClient(applicationContext) //클라 생성
 
         var personalEmail = String()
 
         pw.visibility = View.INVISIBLE
         btn.visibility = View.INVISIBLE
 
+        val apolloClient = apolloClient(applicationContext) //클라 생성
         btnSubmit.setOnClickListener { view ->
             personalEmail = email.text.toString()
 

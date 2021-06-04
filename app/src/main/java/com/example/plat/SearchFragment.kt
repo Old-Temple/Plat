@@ -11,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentTransaction
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.await
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,11 +76,11 @@ class SearchListAdapter(val fragment: Fragment, val context: Context, var search
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_search, null)
 
         //각 리스트 내용
-        val image = view.findViewById<TextView>(R.id.searchedImage)
+        val image = view.findViewById<ImageView>(R.id.searchedImage)
         val text = view.findViewById<TextView>(R.id.searchedText)
         val item = searchedItems?.get(position)
 
-        image.text = item?.groupPhoto
+        Glide.with(view).load(item?.groupPhoto).into(image)
         text.text = item?.title
 
         //검색된 아이템 클릭 리스너

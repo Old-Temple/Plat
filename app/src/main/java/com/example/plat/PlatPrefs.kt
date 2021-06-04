@@ -18,7 +18,8 @@ class PlatPrefs : Application() {
 }
 
 class PreferenceUtil(context: Context){
-    private var prefs: SharedPreferences = context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
+    private var prefs: SharedPreferences =
+        context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
 
     fun getValue(key:String, defValue:String):String{
         return prefs.getString(key, defValue).toString()

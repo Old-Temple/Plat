@@ -65,6 +65,7 @@ query SeeGroup($id: String!) {
       file
       title
       caption
+      isLiked
       likesCount
       commentsCount
       isMine

@@ -79,9 +79,6 @@ class MainActivity : AppCompatActivity() {
             while (true){
                 if (flag.mainFlag != 0){
                     flag.mainFlag = 0
-
-
-
                     replaceFragment(MainFragment(this@MainActivity))
                 }
             }
@@ -140,15 +137,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment){
-        val fragmentTransactionListener: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragmentTransactionListener: FragmentTransaction =
+            supportFragmentManager.beginTransaction()
         fragmentTransactionListener.replace(R.id.frameLayout, fragment)
         fragmentTransactionListener.commit()
     }
 
     fun checkPermisson(){
-        if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat
+                .checkSelfPermission(applicationContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQEUST_CODE)
+            ActivityCompat
+                .requestPermissions(this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    PERMISSION_REQEUST_CODE)
         }
     }
 }

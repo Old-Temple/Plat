@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,19 +51,35 @@ class DialogMakeContext(val mainActivity: MainActivity) : DialogFragment() {
             val title = editTitle.text.toString()
 
             scope.launch {
-                val response : Response<UploadFeedMutation.Data> =
-                    apolloClient.mutate(UploadFeedMutation(
+                var response : Response<UploadFeedMutation.Data>
+                if (imgSrc != ""){
+                    response =
+                        apolloClient.mutate(UploadFeedMutation(
+                        file = Input.fromNullable(FileUpload("image/jpeg", imgSrc)),
                         title = title,
                         caption = Input.fromNullable(text),
-                        groupId = mainActivity.clickedName,
-                        file = Input.fromNullable(FileUpload("image/jpeg", imgSrc))
+                        groupId = mainActivity.clickedName
                     )).await()
-                apolloClient.mutate(DetectFeedsLifeMutation(response.data?.uploadFeed?.feed?.id.toString())).await()
+                }
+                else {
+                    response =
+                        apolloClient.mutate(UploadFeedMutation(
+                            title = title,
+                            caption = Input.fromNullable(text),
+                            groupId = mainActivity.clickedName
+                        )).await()
+                }
                 if (response.data?.uploadFeed?.error != null){
                     view.findViewById<TextView>(R.id.editErrorMessage).text = response.data?.uploadFeed?.error
                 }
                 else{
                     dismiss()
+                    val result = try {
+                        apolloClient.mutate(DetectFeedsLifeMutation(response.data?.uploadFeed?.feed?.id.toString())).await()
+                    } catch ( e: Exception ) {
+                        Log.d("RS", e.toString())
+                    }
+//                    Log.d("RS", result.data?.detectFeedsLife?.error)
                 }
             }
         }

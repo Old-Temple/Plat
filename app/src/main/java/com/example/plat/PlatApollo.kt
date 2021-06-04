@@ -41,7 +41,8 @@ fun apolloClient(context: Context): ApolloClient {
 
     instance =  ApolloClient.builder()
         .serverUrl("https://plat-backend.herokuapp.com")
-        .subscriptionTransportFactory(WebSocketSubscriptionTransport.Factory("wss://plat-backend.herokuapp.com", okHttpClient))
+        .subscriptionTransportFactory(WebSocketSubscriptionTransport
+            .Factory("wss://plat-backend.herokuapp.com", okHttpClient))
         .okHttpClient(okHttpClient)
         .build()
 

@@ -466,6 +466,9 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
                         if(data?.users?.get(i)!!.id == feed.user.id) {
                             user_feeds?.add(feed)
                         }
+                        if(feed.isLiked == true){
+                            like_button[i]!!.setBackgroundResource(R.drawable.like_button_gray)
+                        }
                     }
                     val recentFeed = user_feeds?.last()
                     tooltip_text[i]?.setText(recentFeed?.caption)
@@ -477,17 +480,21 @@ class MainFragment(val mainActivity : MainActivity) : Fragment() {
 
 
                     like_button[i]?.setOnClickListener {
-                        like_button[i]?.getBackground()?.setAlpha(100);
+                        like_button[i]?.setBackgroundResource(R.drawable.like_button_gray)
                         val apolloClient = apolloClient(mainActivity.applicationContext)
                         val scope = CoroutineScope(Dispatchers.IO)
                         scope.launch {
                             var like : Response<LikeFeedMutation.Data> =
                                 apolloClient.mutate(LikeFeedMutation(recentFeed!!.id)).await()
                             if(like.data?.likeFeed?.ok == true){
-                                var detect : Response<DetectFeedsLifeMutation.Data> =
+//                                var detect : Response<DetectFeedsLifeMutation.Data> =
+//                                    apolloClient.mutate(DetectFeedsLifeMutation(recentFeed?.id)).await()
+                                val result = try {
                                     apolloClient.mutate(DetectFeedsLifeMutation(recentFeed?.id)).await()
+                                } catch ( e: Exception ) {
+                                    Log.d("RS", e.toString())
+                                }
                             }
-
                         }
                     }
                 }
