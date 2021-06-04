@@ -20,11 +20,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="4"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <FrameLayout
@@ -34,8 +36,8 @@
 
                     <Button
                         android:id="@+id/head"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="end"
                         android:layout_marginEnd="10dp"
                         />
@@ -64,6 +66,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
 
@@ -80,8 +83,8 @@
 
                         <Button
                             android:id="@+id/body"
-                            android:layout_width="100dp"
-                            android:layout_height="150dp"
+                            android:layout_width="130dp"
+                            android:layout_height="200dp"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"/>
 
@@ -108,6 +111,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
 
@@ -124,8 +128,8 @@
 
                         <Button
                             android:id="@+id/shose"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"/>
 
@@ -155,34 +159,34 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+
+                <Button
+                    android:id="@+id/btnStoreMylistAvatar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-
-
-                    <Button
-                        android:id="@+id/btnStoreMylistAvatar"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/edge"
-                        android:text="아바타"
-                        android:textColor="@color/colorPrimary" />
-
-                </LinearLayout>
-
-                <GridView
-                    android:id="@+id/storeMyListGridView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="9"
-                    android:numColumns="2" />
+                    android:background="@drawable/edge"
+                    android:text="아바타"
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 
+            <GridView
+                android:id="@+id/storeMyListGridView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:numColumns="2" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
